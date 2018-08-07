@@ -19,24 +19,31 @@ android {
 }
 
 dependencies {
+
+    // base dependencies
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportVersion"
+
+    // Google play services
+    implementation "com.google.android.gms:play-services-analytics:$rootProject.googleAnalyticsVersion"
+    implementation "com.google.android.gms:play-services-ads:$rootProject.googleAdsVersion"
+
+    // 3rd party libraries
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licenseDialogVersion"
     implementation "com.google.zxing:core:$rootProject.zxingVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
-    implementation "com.google.android.gms:play-services-analytics:$rootProject.googleAnalyticsVersion"
-    implementation "com.google.android.gms:play-services-ads:$rootProject.googleAdsVersion"
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
 
-
+    // conflict resolution dependencies
     implementation "com.android.support:support-v4:$rootProject.supportVersion"
     implementation "com.android.support:animated-vector-drawable:$rootProject.supportVersion"
     implementation "com.android.support:exifinterface:$rootProject.supportVersion"
     implementation "com.android.support:customtabs:$rootProject.supportVersion"
 
-
+    // test dependencies
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
