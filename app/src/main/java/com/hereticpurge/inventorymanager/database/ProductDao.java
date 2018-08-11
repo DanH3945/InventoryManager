@@ -24,5 +24,6 @@ public interface ProductDao {
     @Delete
     void deleteSingleProduct(ProductItem productItem);
 
+    @Query("DELETE FROM ProductItem")
     void deleteAllProducts();
 }

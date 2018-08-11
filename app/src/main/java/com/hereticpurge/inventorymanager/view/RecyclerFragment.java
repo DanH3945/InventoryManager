@@ -29,10 +29,6 @@ public class RecyclerFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-
-
         super.onAttach(context);
     }
-
-
 }
