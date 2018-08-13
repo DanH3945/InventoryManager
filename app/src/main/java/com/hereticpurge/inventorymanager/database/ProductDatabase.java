@@ -20,7 +20,7 @@ public abstract class ProductDatabase extends RoomDatabase {
         return database;
     }
 
-    public static void clearInstance(){
+    public static void destroyInstance(){
         database = null;
     }
 
