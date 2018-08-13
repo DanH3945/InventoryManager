@@ -14,7 +14,7 @@ public abstract class ProductDatabase extends RoomDatabase {
     public static ProductDatabase getDatabase(Context context){
         if (database == null){
             database = Room.databaseBuilder(context.getApplicationContext(),
-                    ProductDatabase.class, "inventory-manager")
+                    ProductDatabase.class, "inventory_manager")
                     .build();
         }
         return database;
