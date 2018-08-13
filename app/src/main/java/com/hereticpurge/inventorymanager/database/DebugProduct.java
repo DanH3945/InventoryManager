@@ -5,6 +5,7 @@ public class DebugProduct {
     public static ProductItem getDebugProduct(){
         long barcode = Double.valueOf(Math.random() * 10000).longValue();
         long customId = Double.valueOf(Math.random() * 10000).longValue();
+        String imageLocation = "null"; // Placeholder
         String name = "Debug Item";
         String cost = "4.00";
         String retail = "9.99";
@@ -13,6 +14,6 @@ public class DebugProduct {
         boolean tracked = Math.random() * 10 < 5;
 
 
-        return new ProductItem(barcode, customId, name, cost, retail, currentStock, targetStock, tracked);
+        return new ProductItem(barcode, customId, imageLocation, name, cost, retail, currentStock, targetStock, tracked);
     }
 }

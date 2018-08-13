@@ -8,7 +8,6 @@ import android.arch.persistence.room.PrimaryKey;
 public class ProductItem {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
     public int id;
 
     @ColumnInfo(name = "barcode")
@@ -16,6 +15,9 @@ public class ProductItem {
 
     @ColumnInfo(name = "custom_id")
     public long customId;
+
+    @ColumnInfo(name = "image_location")
+    public String imageLocation;
 
     @ColumnInfo(name = "name")
     public String name;
@@ -37,6 +39,7 @@ public class ProductItem {
 
     public ProductItem(long barcode,
                        long customId,
+                       String imageLocation,
                        String name,
                        String cost,
                        String retail,
@@ -46,6 +49,7 @@ public class ProductItem {
 
         this.barcode = barcode;
         this.customId = customId;
+        this.imageLocation = imageLocation;
         this.name = name;
         this.cost = cost;
         this.retail = retail;
@@ -76,6 +80,14 @@ public class ProductItem {
 
     public void setCustomId(long customId) {
         this.customId = customId;
+    }
+
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     public String getName() {
