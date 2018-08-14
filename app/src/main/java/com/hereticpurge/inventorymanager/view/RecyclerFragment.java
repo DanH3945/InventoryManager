@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.RecyclerCallback;
 import com.hereticpurge.inventorymanager.database.ProductItem;
 import com.hereticpurge.inventorymanager.database.ProductViewModel;
 
@@ -25,6 +24,12 @@ public class RecyclerFragment extends Fragment {
     private RecyclerFragmentAdapter mAdapter;
 
     private RecyclerCallback mRecyclerCallback;
+
+    public static RecyclerFragment createFragment(RecyclerCallback recyclerCallback){
+        RecyclerFragment recyclerFragment = new RecyclerFragment();
+        recyclerFragment.setRecyclerCallback(recyclerCallback);
+        return recyclerFragment;
+    }
 
     @Nullable
     @Override
@@ -58,8 +63,12 @@ public class RecyclerFragment extends Fragment {
         mAdapter.updateList(productItems);
     }
 
-    public void setRecyclerCallback(RecyclerCallback recyclerCallback) {
-        this.mRecyclerCallback = recyclerCallback;
+    private void setRecyclerCallback(RecyclerCallback recyclerCallback){
+        mRecyclerCallback = recyclerCallback;
+    }
+
+    public interface RecyclerCallback {
+        void onItemSelected(int position);
     }
 
 }

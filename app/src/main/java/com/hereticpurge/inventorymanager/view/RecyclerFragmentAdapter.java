@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hereticpurge.inventorymanager.RecyclerCallback;
 import com.hereticpurge.inventorymanager.database.ProductItem;
 
 import java.util.List;
@@ -14,9 +13,9 @@ import java.util.List;
 public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragmentAdapter.ViewHolder> {
 
     private List<ProductItem> productItems;
-    private RecyclerCallback mCallback;
+    private RecyclerFragment.RecyclerCallback mCallback;
 
-    RecyclerFragmentAdapter(RecyclerCallback callback) {
+    RecyclerFragmentAdapter(RecyclerFragment.RecyclerCallback callback) {
         this.mCallback = callback;
     }
 

@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.database.ProductViewModel;
+import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 
-public class MainActivity extends AppCompatActivity implements RecyclerCallback {
+public class MainActivity extends AppCompatActivity {
 
     ProductViewModel mViewModel;
+
+    RecyclerFragment mRecyclerFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,6 +21,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerCallback 
         setContentView(R.layout.main_activity);
 
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+
+        mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragment.RecyclerCallback() {
+            @Override
+            public void onItemSelected(int position) {
+                MainActivity.this.onItemSelected(position);
+            }
+        });
+
     }
 
     @Override
@@ -26,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerCallback 
         super.onDestroy();
     }
 
-    @Override
     public void onItemSelected(int position) {
         // RecyclerView callback method to display the selected item.
     }
