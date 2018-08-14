@@ -9,6 +9,7 @@ import android.content.Context;
 public abstract class ProductDatabase extends RoomDatabase {
 
     private static ProductDatabase database;
+
     public abstract ProductDao productDao();
 
     public static ProductDatabase getDatabase(Context context){

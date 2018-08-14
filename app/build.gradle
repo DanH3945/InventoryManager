@@ -34,7 +34,10 @@ dependencies {
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licenseDialogVersion"
     implementation "com.google.zxing:core:$rootProject.zxingVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
+    // Room database libraries
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
 
     // conflict resolution dependencies
