@@ -25,28 +25,28 @@ public class ProductViewModel extends AndroidViewModel {
         return productList;
     }
 
-    public LiveData<ProductItem> getSingleProduct(String id){
+    public LiveData<ProductItem> getSingleProduct(String id) {
         return productDatabase.productDao().getProduct(id);
     }
 
-    public void addProduct(ProductItem productItem){
+    public void addProduct(ProductItem productItem) {
         new addProductItemAsyncTask(productDatabase).execute(productItem);
     }
 
-    public void deleteSingleProduct(ProductItem productItem){
-        new deleteSignleProductAsyncTask(productDatabase).execute(productItem);
+    public void deleteSingleProduct(ProductItem productItem) {
+        new deleteSingleProductAsyncTask(productDatabase).execute(productItem);
     }
 
-    public void deleteAllProducts(){
+    public void deleteAllProducts() {
         new deleteAllProductsAsyncTask(productDatabase).execute();
 
     }
 
-    private static class deleteSignleProductAsyncTask extends AsyncTask<ProductItem, Void, Void> {
+    private static class deleteSingleProductAsyncTask extends AsyncTask<ProductItem, Void, Void> {
 
         private ProductDatabase db;
 
-        deleteSignleProductAsyncTask(ProductDatabase productDatabase){
+        deleteSingleProductAsyncTask(ProductDatabase productDatabase) {
             db = productDatabase;
         }
 
@@ -57,11 +57,11 @@ public class ProductViewModel extends AndroidViewModel {
         }
     }
 
-    private static class deleteAllProductsAsyncTask extends AsyncTask<Void, Void, Void>{
+    private static class deleteAllProductsAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private ProductDatabase db;
 
-        deleteAllProductsAsyncTask(ProductDatabase productDatabase){
+        deleteAllProductsAsyncTask(ProductDatabase productDatabase) {
             db = productDatabase;
         }
 
@@ -72,13 +72,14 @@ public class ProductViewModel extends AndroidViewModel {
         }
     }
 
-    private static class addProductItemAsyncTask extends AsyncTask<ProductItem, Void, Void>{
+    private static class addProductItemAsyncTask extends AsyncTask<ProductItem, Void, Void> {
 
         ProductDatabase db;
 
-        addProductItemAsyncTask(ProductDatabase productDatabase){
+        addProductItemAsyncTask(ProductDatabase productDatabase) {
             db = productDatabase;
         }
+
         @Override
         protected Void doInBackground(ProductItem... productItems) {
             db.productDao().insertProductItem(productItems[0]);

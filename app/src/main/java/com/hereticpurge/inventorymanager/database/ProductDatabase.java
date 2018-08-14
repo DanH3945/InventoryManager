@@ -12,8 +12,8 @@ public abstract class ProductDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
 
-    public static ProductDatabase getDatabase(Context context){
-        if (database == null){
+    public static ProductDatabase getDatabase(Context context) {
+        if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(),
                     ProductDatabase.class, "inventory_manager")
                     .build();
@@ -21,7 +21,7 @@ public abstract class ProductDatabase extends RoomDatabase {
         return database;
     }
 
-    public static void destroyInstance(){
+    public static void destroyInstance() {
         database = null;
     }
 

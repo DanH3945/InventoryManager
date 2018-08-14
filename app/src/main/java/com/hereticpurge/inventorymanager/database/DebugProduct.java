@@ -2,7 +2,7 @@ package com.hereticpurge.inventorymanager.database;
 
 public class DebugProduct {
 
-    public static ProductItem getDebugProduct(){
+    public static ProductItem getDebugProduct() {
         long barcode = Double.valueOf(Math.random() * 10000).longValue();
         long customId = Double.valueOf(Math.random() * 10000).longValue();
         String imageLocation = "null"; // Placeholder
