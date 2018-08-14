@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hereticpurge.inventorymanager.database.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductItem;
 
 import java.util.List;
 

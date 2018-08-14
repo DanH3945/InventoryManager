@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.database.ProductItem;
-import com.hereticpurge.inventorymanager.database.ProductViewModel;
+import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
 
 import java.util.List;
 
