@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.database.ProductViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerCallback {
 
     ProductViewModel mViewModel;
 
@@ -24,5 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         ProductDatabase.destroyInstance();
         super.onDestroy();
+    }
+
+    @Override
+    public void onItemSelected(int position) {
+        // RecyclerView callback method to display the selected item.
     }
 }
