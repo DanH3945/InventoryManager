@@ -1,7 +1,5 @@
 package com.hereticpurge.inventorymanager.view;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,10 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.database.ProductItem;
-import com.hereticpurge.inventorymanager.database.ProductViewModel;
-
-import java.util.List;
 
 public class RecyclerFragment extends Fragment {
 
@@ -37,19 +31,9 @@ public class RecyclerFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        mAdapter = new RecyclerFragmentAdapter(mRecyclerCallback);
+        mAdapter = new RecyclerFragmentAdapter(this, mRecyclerCallback);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        ViewModelProviders.of(this)
-                .get(ProductViewModel.class)
-                .getProductList()
-                .observe(this, new Observer<List<ProductItem>>() {
-                    @Override
-                    public void onChanged(@Nullable List<ProductItem> productItems) {
-                        setProductItems(productItems);
-                    }
-                });
 
         return view;
     }
@@ -57,10 +41,6 @@ public class RecyclerFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-    }
-
-    private void setProductItems(List<ProductItem> productItems) {
-        mAdapter.updateList(productItems);
     }
 
     private void setRecyclerCallback(RecyclerCallback recyclerCallback){
