@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
+    <string name="search">Search</string>
 
 </resources>
