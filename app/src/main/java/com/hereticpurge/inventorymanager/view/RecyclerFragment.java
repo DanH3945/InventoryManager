@@ -38,11 +38,6 @@ public class RecyclerFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     private void setRecyclerCallback(RecyclerCallback recyclerCallback){
         mRecyclerCallback = recyclerCallback;
     }
