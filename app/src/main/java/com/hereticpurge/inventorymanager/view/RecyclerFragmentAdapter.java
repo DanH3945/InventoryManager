@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hereticpurge.inventorymanager.database.ProductItem;
-import com.hereticpurge.inventorymanager.database.ProductViewModel;
+import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
 
 import java.util.List;
 
