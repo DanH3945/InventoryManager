@@ -1,6 +1,6 @@
-package com.hereticpurge.inventorymanager.database;
+package com.hereticpurge.inventorymanager.model;
 
-public class DebugProduct {
+public class DebugProductItemFactory {
 
     public static ProductItem getDebugProduct() {
         long barcode = Double.valueOf(Math.random() * 10000).longValue();

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
-import com.hereticpurge.inventorymanager.database.ProductViewModel;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 
 public class MainActivity extends AppCompatActivity {

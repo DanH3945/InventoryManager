@@ -1,10 +1,12 @@
-package com.hereticpurge.inventorymanager.database;
+package com.hereticpurge.inventorymanager.model;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+
+import com.hereticpurge.inventorymanager.database.ProductDatabase;
 
 import java.util.List;
 
