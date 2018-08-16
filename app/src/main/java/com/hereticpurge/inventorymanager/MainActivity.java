@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.view.EditFragment;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void onProductSelected(int position) {
+    public void onProductSelected(int id) {
         // RecyclerView callback method to display the selected item.
     }
 
@@ -58,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         if (mRecyclerFragment == null){
             mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragment.RecyclerCallback() {
                 @Override
-                public void onItemSelected(int position) {
-                    onProductSelected(position);
+                public void onItemSelected(int id) {
+                    onProductSelected(id);
                 }
             });
         }

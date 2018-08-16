@@ -40,7 +40,7 @@ public class RecyclerFragment extends Fragment {
     }
 
     public interface RecyclerCallback {
-        void onItemSelected(int position);
+        void onItemSelected(int id);
     }
 
 }

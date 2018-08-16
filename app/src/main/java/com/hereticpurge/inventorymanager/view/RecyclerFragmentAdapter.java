@@ -45,7 +45,7 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.onItemSelected(i);
+                mCallback.onItemSelected(productItems.get(i).id);
             }
         });
     }
