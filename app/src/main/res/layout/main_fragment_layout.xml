@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/search_bar_layout"
         android:id="@+id/search_main"/>
 
-</FrameLayout>
+    <Button
+        style="@style/ButtonStyle"
+        android:id="@+id/main_fragment_btn_browse_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Browse Products"/>
+
+    <Button
+        style="@style/ButtonStyle"
+        android:id="@+id/main_fragment_btn_new_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Item"/>
+
+    <ImageButton
+        android:id="@+id/main_fragment_btn_browse_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/camera_24px"/>
+
+    <Button
+        style="@style/ButtonStyle"
+        android:id="@+id/main_fragment_btn_quick_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quick Stock Change"/>
+
+    <NumberPicker
+        android:id="@+id/main_fragment_number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
