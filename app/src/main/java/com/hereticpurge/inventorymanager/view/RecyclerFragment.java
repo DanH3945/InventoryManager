@@ -25,7 +25,7 @@ public class RecyclerFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.recycler_fragment_layout, container);
+        View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerFragmentAdapter adapter = new RecyclerFragmentAdapter(this, mRecyclerCallback);

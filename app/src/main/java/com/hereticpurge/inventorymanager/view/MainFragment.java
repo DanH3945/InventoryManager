@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hereticpurge.inventorymanager.R;
+
 public class MainFragment extends Fragment{
 
     public static MainFragment createFragment(){
@@ -17,7 +19,7 @@ public class MainFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_fragment_layout, container);
+        View view = inflater.inflate(R.layout.main_fragment_layout, container, false);
         return view;
     }
 }

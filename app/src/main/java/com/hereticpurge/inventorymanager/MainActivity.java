@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
 
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null){
-            Log.d(TAG, "onCreate: saved null");
             loadFragment(getMainFragment());
         }
 
