@@ -1,13 +1,18 @@
 package com.hereticpurge.inventorymanager;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.EditText;
 
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
@@ -17,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
+
+    private static final String TAG = "MainActivity";
+
+    private enum resultCodes {
+            BARCODE_SEARCH
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,12 +85,20 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onBarcodeSearch(long barcode) {
-
+                public void onBarcodeSearch() {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test_barcode);
+                    try {
+                        Result result = BarcodeReader.getBarcodeFromUser(bitmap);
+                        Log.d(TAG, "onBarcodeSearch: " + result.getText());
+                    } catch (NotFoundException e) {
+                        Log.d(TAG, "onBarcodeSearch: NOT FOUND EXCEPTION");
+                    } catch (NullPointerException e){
+                        Log.d(TAG, "onBarcodeSearch: NULL GET TEXT");
+                    }
                 }
 
                 @Override
-                public void onQuickStockPressed(long barcode, int value) {
+                public void onQuickStockPressed(int value) {
 
                 }
             });
@@ -88,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearch(View view) {
+        String query;
 
+        if (view instanceof EditText){
+            query = ((EditText) view).getText().toString();
+        } else {
+            Log.d(TAG, "onSearch: Pressed but couldn't recognize view type.");
+        }
     }
 }

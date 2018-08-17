@@ -51,7 +51,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.main_fragment_btn_browse_barcode:
-                mMainFragmentButtonListener.onBarcodeSearch(11);
+                mMainFragmentButtonListener.onBarcodeSearch();
                 break;
 
             case R.id.main_fragment_btn_new_product:
@@ -59,14 +59,14 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.main_fragment_btn_quick_change:
-                mMainFragmentButtonListener.onQuickStockPressed(11, mNumberPicker.getValue());
+                mMainFragmentButtonListener.onQuickStockPressed(mNumberPicker.getValue());
         }
     }
 
     public interface MainFragmentButtonListener{
         void onBrowseAllPressed();
         void onNewItemPressed();
-        void onBarcodeSearch(long barcode);
-        void onQuickStockPressed(long barcode, int value);
+        void onBarcodeSearch();
+        void onQuickStockPressed(int value);
     }
 }
