@@ -1,20 +1,19 @@
 package com.hereticpurge.inventorymanager;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
-import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ProductViewModel mViewModel;
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
@@ -23,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
-        mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null){
             loadFragment(getMainFragment());
@@ -64,8 +61,33 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getMainFragment(){
         if (mMainFragment == null){
-            mMainFragment = MainFragment.createFragment();
+            mMainFragment = MainFragment.createFragment(new MainFragment.MainFragmentButtonListener() {
+
+                @Override
+                public void onBrowseAllPressed() {
+                    loadFragment(getRecyclerFragment());
+                }
+
+                @Override
+                public void onNewItemPressed() {
+
+                }
+
+                @Override
+                public void onBarcodeSearch(long barcode) {
+
+                }
+
+                @Override
+                public void onQuickStockPressed(long barcode, int value) {
+
+                }
+            });
         }
         return mMainFragment;
+    }
+
+    public void onSearch(View view) {
+
     }
 }

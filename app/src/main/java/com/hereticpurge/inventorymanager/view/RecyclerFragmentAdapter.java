@@ -20,18 +20,8 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
     private List<ProductItem> productItems;
     private RecyclerCallback mCallback;
 
-    RecyclerFragmentAdapter(Fragment fragment, RecyclerCallback callback) {
+    RecyclerFragmentAdapter(RecyclerCallback callback) {
         this.mCallback = callback;
-
-        ViewModelProviders.of(fragment)
-                .get(ProductViewModel.class)
-                .getProductList()
-                .observe(fragment, new Observer<List<ProductItem>>() {
-                    @Override
-                    public void onChanged(@Nullable List<ProductItem> productItems) {
-                        updateList(productItems);
-                    }
-                });
     }
 
     @NonNull

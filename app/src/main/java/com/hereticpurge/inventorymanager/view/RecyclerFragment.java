@@ -1,5 +1,8 @@
 package com.hereticpurge.inventorymanager.view;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hereticpurge.inventorymanager.R;
+import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
+
+import java.util.List;
 
 public class RecyclerFragment extends Fragment {
 
@@ -18,7 +25,7 @@ public class RecyclerFragment extends Fragment {
 
     public static RecyclerFragment createFragment(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
-        recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerFragment, recyclerCallback);
+        recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerCallback);
         return recyclerFragment;
     }
 
@@ -32,5 +39,20 @@ public class RecyclerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        ViewModelProviders.of(this)
+                .get(ProductViewModel.class)
+                .getProductList()
+                .observe(this, new Observer<List<ProductItem>>() {
+                    @Override
+                    public void onChanged(@Nullable List<ProductItem> productItems) {
+                        mAdapter.updateList(productItems);
+                    }
+                });
     }
 }
