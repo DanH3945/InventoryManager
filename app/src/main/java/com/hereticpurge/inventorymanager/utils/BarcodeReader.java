@@ -1,4 +1,4 @@
-package com.hereticpurge.inventorymanager;
+package com.hereticpurge.inventorymanager.utils;
 
 import android.graphics.Bitmap;
 
@@ -13,7 +13,8 @@ import javax.annotation.Nullable;
 
 public class BarcodeReader {
 
-    public static @Nullable Result getBarcodeFromUser(Bitmap image) throws NotFoundException {
+    public static @Nullable
+    Result getBarcodeFromUser(Bitmap image) throws NotFoundException {
 
         int[] pixelArray = new int[image.getWidth()*image.getHeight()];
         image.getPixels(pixelArray, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());

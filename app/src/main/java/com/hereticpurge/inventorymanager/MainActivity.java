@@ -14,6 +14,7 @@ import com.google.zxing.BinaryBitmap;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
+import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragmentAdapter;
