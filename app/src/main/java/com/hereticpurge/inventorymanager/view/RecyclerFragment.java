@@ -14,11 +14,11 @@ import com.hereticpurge.inventorymanager.R;
 
 public class RecyclerFragment extends Fragment {
 
-    private RecyclerCallback mRecyclerCallback;
+    private RecyclerFragmentAdapter mAdapter;
 
-    public static RecyclerFragment createFragment(RecyclerCallback recyclerCallback){
+    public static RecyclerFragment createFragment(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
-        recyclerFragment.setRecyclerCallback(recyclerCallback);
+        recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerFragment, recyclerCallback);
         return recyclerFragment;
     }
 
@@ -28,19 +28,9 @@ public class RecyclerFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerFragmentAdapter adapter = new RecyclerFragmentAdapter(this, mRecyclerCallback);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
-
-    private void setRecyclerCallback(RecyclerCallback recyclerCallback){
-        mRecyclerCallback = recyclerCallback;
-    }
-
-    public interface RecyclerCallback {
-        void onItemSelected(int id);
-    }
-
 }

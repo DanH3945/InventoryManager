@@ -18,9 +18,9 @@ import java.util.List;
 public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragmentAdapter.ViewHolder> {
 
     private List<ProductItem> productItems;
-    private RecyclerFragment.RecyclerCallback mCallback;
+    private RecyclerCallback mCallback;
 
-    RecyclerFragmentAdapter(Fragment fragment, RecyclerFragment.RecyclerCallback callback) {
+    RecyclerFragmentAdapter(Fragment fragment, RecyclerCallback callback) {
         this.mCallback = callback;
 
         ViewModelProviders.of(fragment)
@@ -69,5 +69,9 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
+    }
+
+    public interface RecyclerCallback {
+        void onItemSelected(int id);
     }
 }

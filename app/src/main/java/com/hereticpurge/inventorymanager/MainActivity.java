@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.view.EditFragment;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
+import com.hereticpurge.inventorymanager.view.RecyclerFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
         // RecyclerView callback method to display the selected item.
     }
 
-    private void initUI(){
-
-    }
-
     private void loadFragment(Fragment fragment){
         getSupportFragmentManager()
                 .beginTransaction()
@@ -57,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getRecyclerFragment(){
         if (mRecyclerFragment == null){
-            mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragment.RecyclerCallback() {
+            mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragmentAdapter.RecyclerCallback() {
                 @Override
                 public void onItemSelected(int id) {
                     onProductSelected(id);
