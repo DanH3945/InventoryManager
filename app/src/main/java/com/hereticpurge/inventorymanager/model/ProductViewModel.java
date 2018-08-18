@@ -27,8 +27,12 @@ public class ProductViewModel extends AndroidViewModel {
         return productList;
     }
 
-    public LiveData<ProductItem> getSingleProduct(String id) {
-        return productDatabase.productDao().getProduct(id);
+    public LiveData<ProductItem> getProductById(String id) {
+        return productDatabase.productDao().getProductById(id);
+    }
+
+    public LiveData<ProductItem> getProductByBarcode(String barcode) {
+        return productDatabase.productDao().getProductByBarcode(barcode);
     }
 
     public void addProduct(ProductItem productItem) {

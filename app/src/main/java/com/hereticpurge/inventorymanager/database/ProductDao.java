@@ -18,7 +18,10 @@ public interface ProductDao {
     LiveData<List<ProductItem>> getProductList();
 
     @Query("SELECT * FROM ProductItem WHERE id = :id")
-    LiveData<ProductItem> getProduct(String id);
+    LiveData<ProductItem> getProductById(String id);
+
+    @Query("SELECT * FROM ProductItem WHERE barcode = :barcode")
+    LiveData<ProductItem> getProductByBarcode(String barcode);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertProductItem(ProductItem productItem);

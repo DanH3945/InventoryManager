@@ -143,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case BARCODE_QUICK_CHANGE:
+                if (resultCode == Activity.RESULT_OK) {
+
+                }
+                break;
 
             default:
                 Toast.makeText(this, R.string.activity_result_error, Toast.LENGTH_LONG).show();
