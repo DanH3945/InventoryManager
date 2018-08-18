@@ -62,6 +62,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    public int getNumberPickerValue(){
+        return mNumberPicker.getValue();
+    }
+
     public interface MainFragmentButtonListener{
         void onBrowseAllPressed();
         void onNewItemPressed();

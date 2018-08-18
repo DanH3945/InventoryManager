@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private Fragment getRecyclerFragment() {
+    private RecyclerFragment getRecyclerFragment() {
         if (mRecyclerFragment == null) {
             mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragmentAdapter.RecyclerCallback() {
                 @Override
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         return mRecyclerFragment;
     }
 
-    private Fragment getMainFragment() {
+    private MainFragment getMainFragment() {
         if (mMainFragment == null) {
             mMainFragment = MainFragment.createFragment(new MainFragment.MainFragmentButtonListener() {
 
@@ -145,27 +146,15 @@ public class MainActivity extends AppCompatActivity {
 
             case BARCODE_SEARCH:
                 if (resultCode == Activity.RESULT_OK) {
-                    onSearch(getBarcodeFromIntent(data));
+                    onSearch(BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)));
                 }
                 break;
 
             case BARCODE_QUICK_CHANGE:
                 if (resultCode == Activity.RESULT_OK) {
-                    try {
-                        int increment = ((NumberPicker) findViewById(R.id.main_fragment_number_picker))
-                                .getValue();
-
-                        String barcode = getBarcodeFromIntent(data);
-
-                        if (!barcode.equals("")){
-                            // TODO check to see if the database contains the item.
-                            ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
-                            productItem.setCurrentStock(productItem.getCurrentStock() + increment);
-                            viewModel.addProduct(productItem);
-                        }
-                    }  catch (NullPointerException e){
-                        Log.d(TAG, "onActivityResult: Database Error");
-                    }
+                    quickStockIncrement(
+                            BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)),
+                            getMainFragment().getNumberPickerValue());
                 }
                 break;
 
@@ -174,19 +163,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getBarcodeFromIntent(Intent intent) {
-        String returnString = "";
+    private Bitmap getBitmapFromIntent(Intent intent) {
+        if (intent != null &&
+                intent.hasExtra("data") &&
+                intent.getExtras().get("data") instanceof Bitmap) {
 
-        try {
-            Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
-            Result barcodeResult = BarcodeReader.decodeBitmap(bitmap);
-            returnString = barcodeResult.getText();
-        } catch (NullPointerException npe) {
-            Log.d(TAG, "getBarcodeFromIntent: Intent image unpacking error");
-        } catch (NotFoundException nfe) {
-            Toast.makeText(this, R.string.image_resolve_error, Toast.LENGTH_LONG).show();
+            return (Bitmap) intent.getExtras().get("data");
+        } else {
+            throw new Error(getResources().getString(R.string.image_unpack_error));
         }
+    }
 
-        return returnString;
+    void quickStockIncrement(String barcode, int value) {
+        try {
+            if (!barcode.equals("")) {
+                ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
+                productItem.setCurrentStock(productItem.getCurrentStock() + value);
+                viewModel.addProduct(productItem);
+            }
+        } catch (NullPointerException e) {
+            Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
+        }
     }
 }

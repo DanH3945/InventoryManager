@@ -7,5 +7,7 @@
     <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
     <string name="activity_result_error">Activity result error</string>
     <string name="image_resolve_error">Couldn\'t resolve barcode</string>
+    <string name="product_not_found_error">Product not found</string>
+    <string name="image_unpack_error">Couldn\'t unpack image</string>
 
 </resources>
