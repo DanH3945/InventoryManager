@@ -58,7 +58,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.main_fragment_btn_quick_change:
-                mMainFragmentButtonListener.onQuickStockPressed(mNumberPicker.getValue());
+                mMainFragmentButtonListener.onQuickChangePressed();
         }
     }
 
@@ -66,6 +66,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         void onBrowseAllPressed();
         void onNewItemPressed();
         void onBarcodeSearch();
-        void onQuickStockPressed(int value);
+        void onQuickChangePressed();
     }
 }

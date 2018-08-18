@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.google.zxing.NotFoundException;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onQuickStockPressed(int value) {
+                public void onQuickChangePressed() {
                     startCameraForResult(BARCODE_QUICK_CHANGE);
                 }
             });
@@ -135,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        switch (requestCode){
+        switch (requestCode) {
             case BARCODE_SEARCH:
-                if (resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     onSearch(getBarcodeFromIntent(data));
                 }
                 break;
@@ -148,16 +149,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getBarcodeFromIntent(Intent intent){
-        String returnString = "This is a test String";
+    private String getBarcodeFromIntent(Intent intent) {
+        String returnString = "";
 
         try {
             Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
             Result barcodeResult = BarcodeReader.decodeBitmap(bitmap);
             returnString = barcodeResult.getText();
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             Log.d(TAG, "getBarcodeFromIntent: Intent image unpacking error");
-        } catch (NotFoundException nfe){
+        } catch (NotFoundException nfe) {
             Toast.makeText(this, R.string.image_resolve_error, Toast.LENGTH_LONG).show();
         }
 
