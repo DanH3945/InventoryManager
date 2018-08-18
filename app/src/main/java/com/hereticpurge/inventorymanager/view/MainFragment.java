@@ -37,7 +37,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.main_fragment_btn_browse_barcode).setOnClickListener(this);
         view.findViewById(R.id.main_fragment_btn_new_product).setOnClickListener(this);
         view.findViewById(R.id.main_fragment_btn_quick_change).setOnClickListener(this);
-        view.findViewById(R.id.search_et).setOnClickListener(this);
 
         return view;
     }

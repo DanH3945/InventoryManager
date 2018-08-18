@@ -2,4 +2,10 @@
     <string name="app_name">Inventory Manager</string>
     <string name="search_prompt">Search</string>
 
+    // Errors
+
+    <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
+    <string name="activity_result_error">Activity result error</string>
+    <string name="image_resolve_error">Couldn\'t resolve barcode</string>
+
 </resources>

@@ -14,9 +14,9 @@ import javax.annotation.Nullable;
 public class BarcodeReader {
 
     public static @Nullable
-    Result getBarcodeFromUser(Bitmap image) throws NotFoundException {
+    Result decodeBitmap(Bitmap image) throws NotFoundException {
 
-        int[] pixelArray = new int[image.getWidth()*image.getHeight()];
+        int[] pixelArray = new int[image.getWidth() * image.getHeight()];
         image.getPixels(pixelArray, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
 
         RGBLuminanceSource luminanceSource = new RGBLuminanceSource(image.getWidth(), image.getHeight(), pixelArray);
