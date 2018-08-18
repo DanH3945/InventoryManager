@@ -7,7 +7,7 @@ import android.content.Context;
 
 import com.hereticpurge.inventorymanager.model.ProductItem;
 
-@Database(entities = {ProductItem.class}, version = 1)
+@Database(entities = {ProductItem.class}, version = 2)
 public abstract class ProductDatabase extends RoomDatabase {
 
     private static ProductDatabase database;

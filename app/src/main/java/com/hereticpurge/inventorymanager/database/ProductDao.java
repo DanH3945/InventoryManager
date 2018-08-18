@@ -18,7 +18,7 @@ public interface ProductDao {
     LiveData<List<ProductItem>> getProductList();
 
     @Query("SELECT * FROM ProductItem WHERE id = :id")
-    LiveData<ProductItem> getProductById(String id);
+    LiveData<ProductItem> getProductById(int id);
 
     @Query("SELECT * FROM ProductItem WHERE barcode = :barcode")
     LiveData<ProductItem> getProductByBarcode(String barcode);

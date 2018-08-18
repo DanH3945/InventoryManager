@@ -3,6 +3,7 @@ package com.hereticpurge.inventorymanager.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity
 public class ProductItem {
@@ -11,10 +12,10 @@ public class ProductItem {
     public int id;
 
     @ColumnInfo(name = "barcode")
-    public long barcode;
+    public String barcode;
 
     @ColumnInfo(name = "custom_id")
-    public long customId;
+    public String customId;
 
     @ColumnInfo(name = "image_location")
     public String imageLocation;
@@ -37,13 +38,13 @@ public class ProductItem {
     @ColumnInfo(name = "tracked")
     public boolean tracked;
 
-    public ProductItem(long barcode,
-                       long customId,
+    public ProductItem(String barcode,
+                       String customId,
                        String imageLocation,
-                       String name,
+                       @NonNull String name,
                        String cost,
                        String retail,
-                       int currentStock,
+                       @NonNull int currentStock,
                        int targetStock,
                        boolean tracked) {
 
@@ -66,19 +67,19 @@ public class ProductItem {
         this.id = id;
     }
 
-    public long getBarcode() {
+    public String getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(long barcode) {
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 
-    public long getCustomId() {
+    public String getCustomId() {
         return customId;
     }
 
-    public void setCustomId(long customId) {
+    public void setCustomId(String customId) {
         this.customId = customId;
     }
 

@@ -1,12 +1,11 @@
 package com.hereticpurge.inventorymanager;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,8 @@ import android.widget.Toast;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
+import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
 
+    private ProductViewModel viewModel;
+
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 200;
 
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        viewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null) {
             loadFragment(getMainFragment());
@@ -137,14 +142,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         switch (requestCode) {
+
             case BARCODE_SEARCH:
                 if (resultCode == Activity.RESULT_OK) {
                     onSearch(getBarcodeFromIntent(data));
                 }
                 break;
+
             case BARCODE_QUICK_CHANGE:
                 if (resultCode == Activity.RESULT_OK) {
+                    try {
+                        int increment = ((NumberPicker) findViewById(R.id.main_fragment_number_picker))
+                                .getValue();
 
+                        String barcode = getBarcodeFromIntent(data);
+
+                        if (!barcode.equals("")){
+                            // TODO check to see if the database contains the item.
+                            ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
+                            productItem.setCurrentStock(productItem.getCurrentStock() + increment);
+                            viewModel.addProduct(productItem);
+                        }
+                    }  catch (NullPointerException e){
+                        Log.d(TAG, "onActivityResult: Database Error");
+                    }
                 }
                 break;
 
