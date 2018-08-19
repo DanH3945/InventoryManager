@@ -1,6 +1,7 @@
 package com.hereticpurge.inventorymanager;
 
 import android.app.Activity;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,18 +11,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.view.DetailFragment;
+import com.hereticpurge.inventorymanager.view.EditFragment;
 import com.hereticpurge.inventorymanager.view.MainFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragment;
 import com.hereticpurge.inventorymanager.view.RecyclerFragmentAdapter;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment mMainFragment;
 
     private ProductViewModel viewModel;
+
+    private static final String INTENT_DATA_TAG = "data";
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 200;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(getMainFragment());
         }
-
     }
 
     @Override
@@ -57,16 +57,20 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void onProductSelected(int id) {
-        // RecyclerView callback method to display the selected item.
-    }
-
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
         getSupportFragmentManager().executePendingTransactions();
+    }
+
+    private DetailFragment getDetailFragment(ProductItem productItem){
+        return DetailFragment.createInstance(productItem);
+    }
+
+    private EditFragment getEditFragment(ProductItem productItem){
+        return EditFragment.createInstance(productItem);
     }
 
     private RecyclerFragment getRecyclerFragment() {
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onNewItemPressed() {
-
+                    loadFragment(getEditFragment(null));
                 }
 
                 @Override
@@ -118,13 +122,20 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onSearch: Couldn't recognize view type.  view is not a type of EditText");
             query = null;
         }
-        onSearch(query);
+        // TODO text based search functionality;
     }
 
-    public void onSearch(@Nullable String query) {
+    public void barcodeSearch(@Nullable String barcode) {
         // TODO search functionality
-        Log.d(TAG, "onSearch: got search params " + query);
+        LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
+        ProductItem productItem = productItemLiveData.getValue();
+        loadFragment(getDetailFragment(productItem));
+    }
 
+    public void onProductSelected(int id) {
+        LiveData<ProductItem> productItemLiveData = viewModel.getProductById(id);
+        ProductItem productItem = productItemLiveData.getValue();
+        loadFragment(getDetailFragment(productItem));
     }
 
     private void startCameraForResult(int requestCode) {
@@ -146,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
             case BARCODE_SEARCH:
                 if (resultCode == Activity.RESULT_OK) {
-                    onSearch(BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)));
+                    barcodeSearch(BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)));
                 }
                 break;
 
@@ -165,10 +176,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap getBitmapFromIntent(Intent intent) {
         if (intent != null &&
-                intent.hasExtra("data") &&
-                intent.getExtras().get("data") instanceof Bitmap) {
+                intent.hasExtra(INTENT_DATA_TAG) &&
+                intent.getExtras().get(INTENT_DATA_TAG) instanceof Bitmap) {
 
-            return (Bitmap) intent.getExtras().get("data");
+            return (Bitmap) intent.getExtras().get(INTENT_DATA_TAG);
         } else {
             throw new Error(getResources().getString(R.string.image_unpack_error));
         }
