@@ -5,8 +5,6 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/search_bar_layout"/>
-
     <Button
         style="@style/ButtonStyle"
         android:id="@+id/main_fragment_btn_browse_all"

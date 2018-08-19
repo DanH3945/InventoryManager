@@ -18,6 +18,7 @@ public abstract class ProductDatabase extends RoomDatabase {
         if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(),
                     ProductDatabase.class, "inventory_manager")
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return database;

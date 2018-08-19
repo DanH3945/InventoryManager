@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(getMainFragment());
         }
+
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.overflow_items);
     }
 
     @Override
@@ -126,10 +130,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void barcodeSearch(@Nullable String barcode) {
-        // TODO search functionality
-        LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
-        ProductItem productItem = productItemLiveData.getValue();
-        loadFragment(getDetailFragment(productItem));
+        if (barcode != null){
+            LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
+            ProductItem productItem = productItemLiveData.getValue();
+            loadFragment(getDetailFragment(productItem));
+        }
     }
 
     public void onProductSelected(int id) {

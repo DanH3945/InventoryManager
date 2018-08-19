@@ -32,7 +32,7 @@ public class BarcodeReader {
     }
 
     public static String getBarcodeFromBitmap(Context context, Bitmap bitmap) {
-        String returnString = "";
+        String returnString = null;
 
         try {
             Result barcodeResult = BarcodeReader.decodeBitmap(bitmap);
