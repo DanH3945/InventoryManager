@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
@@ -32,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment mMainFragment;
 
     private ProductViewModel viewModel;
-
-    private static final String INTENT_DATA_TAG = "data";
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 200;
@@ -160,16 +156,17 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
 
+            // TODO Move most of this crap into BarcodeReader
+
             case BARCODE_SEARCH:
                 if (resultCode == Activity.RESULT_OK) {
-                    barcodeSearch(BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)));
+                    barcodeSearch(BarcodeReader.getBarcode(this, data));
                 }
                 break;
 
             case BARCODE_QUICK_CHANGE:
                 if (resultCode == Activity.RESULT_OK) {
-                    quickStockIncrement(
-                            BarcodeReader.getBarcodeFromBitmap(this, getBitmapFromIntent(data)),
+                    quickStockIncrement(BarcodeReader.getBarcode(this, data),
                             getMainFragment().getNumberPickerValue());
                 }
                 break;
@@ -179,20 +176,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Bitmap getBitmapFromIntent(Intent intent) {
-        if (intent != null &&
-                intent.hasExtra(INTENT_DATA_TAG) &&
-                intent.getExtras().get(INTENT_DATA_TAG) instanceof Bitmap) {
-
-            return (Bitmap) intent.getExtras().get(INTENT_DATA_TAG);
-        } else {
-            throw new Error(getResources().getString(R.string.image_unpack_error));
-        }
-    }
-
     void quickStockIncrement(String barcode, int value) {
         try {
-            if (!barcode.equals("")) {
+            if (barcode != null) {
                 ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
                 productItem.setCurrentStock(productItem.getCurrentStock() + value);
                 viewModel.addProduct(productItem);

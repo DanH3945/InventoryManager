@@ -20,6 +20,8 @@ public class BarcodeReader {
 
     private static final String TAG = "BarcodeReader";
 
+    private static final String INTENT_DATA_TAG = "data";
+
     private static @Nullable
     Result decodeBitmap(Bitmap image) throws NotFoundException {
 
@@ -31,10 +33,10 @@ public class BarcodeReader {
         return new MultiFormatReader().decode(binaryBitmap);
     }
 
-    public static String getBarcodeFromBitmap(Context context, Bitmap bitmap) {
+    public static String getBarcode(Context context, Intent intent) {
         String returnString = null;
-
         try {
+            Bitmap bitmap = getBitmapFromIntent(intent);
             Result barcodeResult = BarcodeReader.decodeBitmap(bitmap);
             returnString = barcodeResult.getText();
         } catch (NullPointerException npe) {
@@ -44,5 +46,16 @@ public class BarcodeReader {
         }
 
         return returnString;
+    }
+
+    private static Bitmap getBitmapFromIntent(Intent intent) {
+        Bitmap bitmap = null;
+        if (intent != null &&
+                intent.hasExtra(INTENT_DATA_TAG) &&
+                intent.getExtras().get(INTENT_DATA_TAG) instanceof Bitmap) {
+
+            bitmap = (Bitmap) intent.getExtras().get(INTENT_DATA_TAG);
+        }
+        return bitmap;
     }
 }
