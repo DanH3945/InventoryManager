@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
     <string name="search_prompt">Barcode Search</string>
+    <string name="preferences">Preferences</string>
+    <string name="about">About</string>
+    <string name="add_debug_product">Add Debug Product</string>
+    <string name="add_debug_product_scan">Add Debug Product Scan</string>
 
     // Errors
 
@@ -9,9 +13,5 @@
     <string name="image_resolve_error">Couldn\'t resolve barcode</string>
     <string name="product_not_found_error">Product not found</string>
     <string name="image_unpack_error">Couldn\'t unpack image</string>
-    <string name="preferences">Preferences</string>
-    <string name="about">About</string>
-    <string name="add_debug_product">Add Debug Product</string>
-    <string name="add_debug_product_scan">Add Debug Product Scan</string>
 
 </resources>
