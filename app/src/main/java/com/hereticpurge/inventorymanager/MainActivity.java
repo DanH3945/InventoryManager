@@ -156,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
 
-            // TODO Move most of this crap into BarcodeReader
-
             case BARCODE_SEARCH:
                 if (resultCode == Activity.RESULT_OK) {
                     barcodeSearch(BarcodeReader.getBarcode(this, data));
