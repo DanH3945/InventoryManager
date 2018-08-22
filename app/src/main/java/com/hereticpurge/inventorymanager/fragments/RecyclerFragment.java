@@ -1,4 +1,4 @@
-package com.hereticpurge.inventorymanager.view;
+package com.hereticpurge.inventorymanager.fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;

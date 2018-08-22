@@ -18,11 +18,11 @@ import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.view.DetailFragment;
-import com.hereticpurge.inventorymanager.view.EditFragment;
-import com.hereticpurge.inventorymanager.view.MainFragment;
-import com.hereticpurge.inventorymanager.view.RecyclerFragment;
-import com.hereticpurge.inventorymanager.view.RecyclerFragmentAdapter;
+import com.hereticpurge.inventorymanager.fragments.DetailFragment;
+import com.hereticpurge.inventorymanager.fragments.EditFragment;
+import com.hereticpurge.inventorymanager.fragments.MainFragment;
+import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
+import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

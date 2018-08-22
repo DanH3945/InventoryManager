@@ -1,4 +1,4 @@
-package com.hereticpurge.inventorymanager.view;
+package com.hereticpurge.inventorymanager.fragments;
 
 import android.support.v4.app.Fragment;
 
