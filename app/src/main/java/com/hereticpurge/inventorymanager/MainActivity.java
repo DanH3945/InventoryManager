@@ -10,19 +10,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
-import com.hereticpurge.inventorymanager.model.ProductItem;
-import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
+import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +49,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.overflow_items);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow_items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
