@@ -3,7 +3,9 @@ package com.hereticpurge.inventorymanager;
 import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ClipData;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
+import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
@@ -58,8 +62,46 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.overflow_items, menu);
+
+        if (BuildConfig.DEBUG){
+            menu.findItem(R.id.menu_debug_generic_btn).setVisible(true);
+            menu.findItem(R.id.menu_debug_scan_btn).setVisible(true);
+            menu.findItem(R.id.menu_debug_clear_database).setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_about_btn:
+                Log.e(TAG, "onOptionsItemSelected: About Pressed");
+                break;
+
+            case R.id.menu_pref_btn:
+                Log.e(TAG, "onOptionsItemSelected: Preferences Pressed");
+                break;
+
+            case R.id.menu_debug_generic_btn:
+                Log.e(TAG, "onOptionsItemSelected: DEBUG Generic Pressed");
+                viewModel.addProduct(DebugProductItemFactory.getDebugProduct());
+                break;
+
+            case R.id.menu_debug_scan_btn:
+                Log.e(TAG, "onOptionsItemSelected: DEBUG Scan Pressed");
+                break;
+
+            case R.id.menu_debug_clear_database:
+                Log.e(TAG, "onOptionsItemSelected: Wipe Database Pressed");
+                viewModel.deleteAllProducts();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

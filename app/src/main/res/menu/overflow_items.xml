@@ -24,4 +24,10 @@
         android:visible="false"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_debug_clear_database"
+        android:title="@string/wipe_database"
+        android:visible="false"
+        app:showAsAction="never" />
+
 </menu>
