@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 200;
+    private static final int BARCODE_DEBUG = 1000;
 
     private static final String TAG = "MainActivity";
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.overflow_items, menu);
 
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             menu.findItem(R.id.menu_debug_generic_btn).setVisible(true);
             menu.findItem(R.id.menu_debug_scan_btn).setVisible(true);
             menu.findItem(R.id.menu_debug_clear_database).setVisible(true);
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_about_btn:
                 Log.e(TAG, "onOptionsItemSelected: About Pressed");
                 break;
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_debug_scan_btn:
+                startCameraForResult(BARCODE_DEBUG);
                 Log.e(TAG, "onOptionsItemSelected: DEBUG Scan Pressed");
                 break;
 
@@ -124,11 +127,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private DetailFragment getDetailFragment(ProductItem productItem){
+    private DetailFragment getDetailFragment(ProductItem productItem) {
         return DetailFragment.createInstance(productItem);
     }
 
-    private EditFragment getEditFragment(ProductItem productItem){
+    private EditFragment getEditFragment(ProductItem productItem) {
         return EditFragment.createInstance(productItem);
     }
 
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void barcodeSearch(@Nullable String barcode) {
-        if (barcode != null){
+        if (barcode != null) {
             LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
             loadFragment(getDetailFragment(productItem));
@@ -213,23 +216,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
+        Object dataObject = null;
+
+        if (data != null && data.hasExtra("data") && data.getExtras().containsKey("data")) {
+            dataObject = data.getExtras().get("data");
+        }
+
         switch (requestCode) {
 
             case BARCODE_SEARCH:
-                if (resultCode == Activity.RESULT_OK) {
-                    barcodeSearch(BarcodeReader.getBarcode(this, data));
+                if (dataObject instanceof Bitmap) {
+                    String barcode = BarcodeReader.getBarcode(this, (Bitmap) dataObject);
+                    if (barcode != null) {
+                        barcodeSearch(barcode);
+                    }
                 }
                 break;
 
             case BARCODE_QUICK_CHANGE:
-                if (resultCode == Activity.RESULT_OK) {
-                    quickStockIncrement(BarcodeReader.getBarcode(this, data),
-                            getMainFragment().getNumberPickerValue());
+                if (dataObject instanceof Bitmap) {
+                    String barcode = BarcodeReader.getBarcode(this, (Bitmap) dataObject);
+                    if (barcode != null) {
+                        quickStockIncrement(barcode, getMainFragment().getNumberPickerValue());
+                    }
                 }
                 break;
 
-            default:
-                Toast.makeText(this, R.string.activity_result_error, Toast.LENGTH_LONG).show();
+            case BARCODE_DEBUG:
+                if (dataObject instanceof Bitmap) {
+                    String barcode = BarcodeReader.getBarcode(this, (Bitmap) dataObject);
+                    if (barcode != null) {
+                        ProductItem productItem = DebugProductItemFactory.getDebugProduct(barcode);
+                        viewModel.addProduct(productItem);
+                    }
+                    break;
+                }
         }
     }
 

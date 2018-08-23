@@ -33,29 +33,14 @@ public class BarcodeReader {
         return new MultiFormatReader().decode(binaryBitmap);
     }
 
-    public static String getBarcode(Context context, Intent intent) {
+    public static @Nullable String getBarcode(Context context, Bitmap bitmap) {
         String returnString = null;
+
         try {
-            Bitmap bitmap = getBitmapFromIntent(intent);
-            Result barcodeResult = BarcodeReader.decodeBitmap(bitmap);
-            returnString = barcodeResult.getText();
-        } catch (NullPointerException npe) {
-            Log.d(TAG, "getBarcodeFromIntent: Intent image unpacking error");
-        } catch (NotFoundException nfe) {
+            returnString = decodeBitmap(bitmap).getText();
+        } catch (NotFoundException nfe){
             Toast.makeText(context, R.string.image_resolve_error, Toast.LENGTH_LONG).show();
         }
-
         return returnString;
-    }
-
-    private static Bitmap getBitmapFromIntent(Intent intent) {
-        Bitmap bitmap = null;
-        if (intent != null &&
-                intent.hasExtra(INTENT_DATA_TAG) &&
-                intent.getExtras().get(INTENT_DATA_TAG) instanceof Bitmap) {
-
-            bitmap = (Bitmap) intent.getExtras().get(INTENT_DATA_TAG);
-        }
-        return bitmap;
     }
 }
