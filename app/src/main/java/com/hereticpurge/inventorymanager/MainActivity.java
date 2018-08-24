@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private DetailFragment getDetailFragment(int id) {
-        return DetailFragment.createInstance(id);
+        return DetailFragment.createInstance(id, getSupportFragmentManager());
     }
 
     private EditFragment getEditFragment(ProductItem productItem) {
