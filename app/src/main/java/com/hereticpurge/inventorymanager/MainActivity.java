@@ -138,12 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerFragment getRecyclerFragment() {
         if (mRecyclerFragment == null) {
-            mRecyclerFragment = RecyclerFragment.createFragment(new RecyclerFragmentAdapter.RecyclerCallback() {
-                @Override
-                public void onItemSelected(int id) {
-                    onProductSelected(id);
-                }
-            });
+            mRecyclerFragment = RecyclerFragment.createFragment(this::onProductSelected);
         }
         return mRecyclerFragment;
     }

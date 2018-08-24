@@ -11,7 +11,7 @@ buildscript {
         picassoVersion = '2.71828'
         roomVersion = '1.1.1'
         googleAdsVersion = '15.0.1'
-        googleAnalyticsVersion = '16.0.1'
+        googleAnalyticsVersion = '16.0.3'
         constraintLayoutVersion = '1.1.2'
     }
     
