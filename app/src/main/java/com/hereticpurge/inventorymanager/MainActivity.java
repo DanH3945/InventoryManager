@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -249,18 +250,17 @@ public class MainActivity extends AppCompatActivity {
                         ProductItem productItem = DebugProductItemFactory.getDebugProduct(barcode);
                         viewModel.addProduct(productItem);
                     }
-                    break;
+
                 }
+                break;
         }
     }
 
-    void quickStockIncrement(String barcode, int value) {
+    void quickStockIncrement(@NonNull String barcode, int value) {
         try {
-            if (barcode != null) {
-                ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
-                productItem.setCurrentStock(productItem.getCurrentStock() + value);
-                viewModel.addProduct(productItem);
-            }
+            ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
+            productItem.setCurrentStock(productItem.getCurrentStock() + value);
+            viewModel.addProduct(productItem);
         } catch (NullPointerException e) {
             Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
         }

@@ -44,7 +44,7 @@ public class ProductItem {
                        @NonNull String name,
                        String cost,
                        String retail,
-                       @NonNull int currentStock,
+                       int currentStock,
                        int targetStock,
                        boolean tracked) {
 
