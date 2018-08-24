@@ -23,7 +23,7 @@ public class RecyclerFragment extends Fragment {
 
     private RecyclerFragmentAdapter mAdapter;
 
-    public static RecyclerFragment createFragment(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
+    public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
         recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerCallback);
         return recyclerFragment;

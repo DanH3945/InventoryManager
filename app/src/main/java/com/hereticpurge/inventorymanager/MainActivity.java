@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private DetailFragment getDetailFragment(ProductItem productItem) {
-        return DetailFragment.createInstance(productItem);
+    private DetailFragment getDetailFragment(int id) {
+        return DetailFragment.createInstance(id);
     }
 
     private EditFragment getEditFragment(ProductItem productItem) {
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerFragment getRecyclerFragment() {
         if (mRecyclerFragment == null) {
-            mRecyclerFragment = RecyclerFragment.createFragment(id -> onProductSelected(id));
+            mRecyclerFragment = RecyclerFragment.createInstance(id -> onProductSelected(id));
         }
         return mRecyclerFragment;
     }
@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onSearch: Couldn't recognize view type.  view is not a type of EditText");
             query = null;
         }
+        barcodeSearch(query);
         // TODO text based search functionality;
     }
 
@@ -183,14 +184,16 @@ public class MainActivity extends AppCompatActivity {
         if (barcode != null) {
             LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
-            loadFragment(getDetailFragment(productItem));
+            try {
+                loadFragment(getDetailFragment(productItem.getId()));
+            } catch (NullPointerException npe) {
+                productNotFoundErrorToast();
+            }
         }
     }
 
     public void onProductSelected(int id) {
-        LiveData<ProductItem> productItemLiveData = viewModel.getProductById(id);
-        ProductItem productItem = productItemLiveData.getValue();
-        loadFragment(getDetailFragment(productItem));
+        loadFragment(getDetailFragment(id));
     }
 
     private void startCameraForResult(int requestCode) {
@@ -253,7 +256,11 @@ public class MainActivity extends AppCompatActivity {
             productItem.setCurrentStock(productItem.getCurrentStock() + value);
             viewModel.addProduct(productItem);
         } catch (NullPointerException e) {
-            Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
+            productNotFoundErrorToast();
         }
+    }
+
+    private void productNotFoundErrorToast() {
+        Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
     }
 }

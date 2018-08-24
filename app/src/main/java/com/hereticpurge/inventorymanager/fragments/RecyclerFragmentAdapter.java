@@ -34,6 +34,7 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
         ProductItem productItem = productItems.get(i);
 
+        viewHolder.productId.setText(Integer.toString(productItem.getId()));
         viewHolder.productName.setText(productItem.getName());
         viewHolder.barcode.setText(productItem.getBarcode());
         viewHolder.currentStock.setText(Integer.toString(productItem.getCurrentStock()));
@@ -53,12 +54,14 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView productId;
         TextView productName;
         TextView barcode;
         TextView currentStock;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.productId = itemView.findViewById(R.id.rv_item_id);
             this.productName = itemView.findViewById(R.id.rv_item_name);
             this.barcode = itemView.findViewById(R.id.rv_item_barcode);
             this.currentStock = itemView.findViewById(R.id.rv_item_current_stock);
