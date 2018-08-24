@@ -1,12 +1,9 @@
 package com.hereticpurge.inventorymanager;
 
-import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -25,7 +22,6 @@ import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
-import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
 import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerFragment getRecyclerFragment() {
         if (mRecyclerFragment == null) {
-            mRecyclerFragment = RecyclerFragment.createFragment(this::onProductSelected);
+            mRecyclerFragment = RecyclerFragment.createFragment(id -> onProductSelected(id));
         }
         return mRecyclerFragment;
     }

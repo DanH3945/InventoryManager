@@ -38,12 +38,7 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
         viewHolder.barcode.setText(productItem.getBarcode());
         viewHolder.currentStock.setText(Integer.toString(productItem.getCurrentStock()));
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCallback.onItemSelected(productItems.get(i).id);
-            }
-        });
+        viewHolder.itemView.setOnClickListener(view -> mCallback.onItemSelected(productItems.get(i).id));
     }
 
     @Override

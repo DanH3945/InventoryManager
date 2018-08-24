@@ -48,11 +48,6 @@ public class RecyclerFragment extends Fragment {
         ViewModelProviders.of(this)
                 .get(ProductViewModel.class)
                 .getProductList()
-                .observe(this, new Observer<List<ProductItem>>() {
-                    @Override
-                    public void onChanged(@Nullable List<ProductItem> productItems) {
-                        mAdapter.updateList(productItems);
-                    }
-                });
+                .observe(this, productItems -> mAdapter.updateList(productItems));
     }
 }
