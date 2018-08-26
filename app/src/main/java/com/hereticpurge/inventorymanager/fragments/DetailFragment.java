@@ -1,5 +1,6 @@
 package com.hereticpurge.inventorymanager.fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -73,11 +74,15 @@ public class DetailFragment extends Fragment {
         @Override
         public Fragment getItem(int i) {
             DebugAssistant.callCheck("getItemCalled with param: " + i);
+
             return DetailDisplayFragment.createInstance(productItemList.get(i));
         }
 
         @Override
         public int getCount() {
+            DebugAssistant.callCheck("Get Count Called and returned: " +
+                    Integer.toString(productItemList == null ? 0 : productItemList.size()));
+
             return productItemList == null ? 0 : productItemList.size();
         }
 
