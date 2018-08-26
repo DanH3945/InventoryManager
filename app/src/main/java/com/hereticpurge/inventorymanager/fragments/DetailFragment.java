@@ -2,7 +2,9 @@ package com.hereticpurge.inventorymanager.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +20,10 @@ import android.widget.TextView;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class DetailFragment extends Fragment {
 
@@ -43,6 +47,7 @@ public class DetailFragment extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.detail_viewpager);
         mDetailPagerAdapter = new DetailPagerAdapter(fragmentManager);
         viewPager.setAdapter(mDetailPagerAdapter);
+        viewPager.setLayoutDirection(ViewPager.LAYOUT_DIRECTION_LTR);
 
         return view;
     }
@@ -67,6 +72,7 @@ public class DetailFragment extends Fragment {
 
         @Override
         public Fragment getItem(int i) {
+            DebugAssistant.callCheck("getItemCalled with param: " + i);
             return DetailDisplayFragment.createInstance(productItemList.get(i));
         }
 
@@ -109,6 +115,11 @@ public class DetailFragment extends Fragment {
             mProductCurrentStock.setText(Integer.toString(mProductItem.getCurrentStock()));
 
             return view;
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
         }
     }
 }

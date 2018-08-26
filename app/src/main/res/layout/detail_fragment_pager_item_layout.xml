@@ -8,16 +8,19 @@
     <TextView
         android:id="@+id/detail_product_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Product Name"/>
 
     <TextView
         android:id="@+id/detail_product_barcode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Product Barcode"/>
 
     <TextView
         android:id="@+id/detail_product_current_stock"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Product Stock"/>
 
 </LinearLayout>
