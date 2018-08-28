@@ -7,11 +7,11 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 
 public class EditFragment extends Fragment {
 
-    ProductItem productItem;
+    ProductItem mProductItem;
 
     public static EditFragment createInstance(@Nullable ProductItem productItem){
         EditFragment editFragment = new EditFragment();
-        editFragment.productItem = productItem;
+        editFragment.mProductItem = productItem;
         return editFragment;
     }
 }

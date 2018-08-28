@@ -11,11 +11,10 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragmentAdapter.ViewHolder> {
 
-    private List<ProductItem> productItems;
+    private List<ProductItem> mProductItemList;
     private RecyclerCallback mCallback;
 
     RecyclerFragmentAdapter(RecyclerCallback callback) {
@@ -32,34 +31,34 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
-        ProductItem productItem = productItems.get(i);
+        ProductItem productItem = mProductItemList.get(i);
 
         viewHolder.productId.setText(Integer.toString(productItem.getId()));
         viewHolder.productName.setText(productItem.getName());
         viewHolder.barcode.setText(productItem.getBarcode());
         viewHolder.currentStock.setText(Integer.toString(productItem.getCurrentStock()));
 
-        viewHolder.itemView.setOnClickListener(view -> mCallback.onItemSelected(productItems.get(i).id));
+        viewHolder.itemView.setOnClickListener(view -> mCallback.onItemSelected(mProductItemList.get(i).id));
     }
 
     @Override
     public int getItemCount() {
-        return productItems == null ? 0 : productItems.size();
+        return mProductItemList == null ? 0 : mProductItemList.size();
     }
 
     public void updateList(List<ProductItem> productItems) {
-        this.productItems = productItems;
+        this.mProductItemList = productItems;
         this.notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView productId;
-        TextView productName;
-        TextView barcode;
-        TextView currentStock;
+        private TextView productId;
+        private TextView productName;
+        private TextView barcode;
+        private TextView currentStock;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.productId = itemView.findViewById(R.id.rv_item_id);
             this.productName = itemView.findViewById(R.id.rv_item_name);

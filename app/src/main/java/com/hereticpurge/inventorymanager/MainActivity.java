@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
 
-    private ProductViewModel viewModel;
+    private ProductViewModel mViewModel;
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 200;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        viewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null) {
             loadFragment(getMainFragment());
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.menu_debug_generic_btn:
                 Log.e(TAG, "onOptionsItemSelected: DEBUG Generic Pressed");
-                viewModel.addProduct(DebugProductItemFactory.getDebugProduct());
+                mViewModel.addProduct(DebugProductItemFactory.getDebugProduct());
                 break;
 
             case R.id.menu_debug_scan_btn:
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.menu_debug_clear_database:
                 Log.e(TAG, "onOptionsItemSelected: Wipe Database Pressed");
-                viewModel.deleteAllProducts();
+                mViewModel.deleteAllProducts();
                 break;
 
         }
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private DetailFragment getDetailFragment(int id) {
-        return DetailFragment.createInstance(id, getSupportFragmentManager());
+        return DetailFragment.createInstance(id);
     }
 
     private EditFragment getEditFragment(ProductItem productItem) {
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void barcodeSearch(@Nullable String barcode) {
         if (barcode != null) {
-            LiveData<ProductItem> productItemLiveData = viewModel.getProductByBarcode(barcode);
+            LiveData<ProductItem> productItemLiveData = mViewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
             try {
                 loadFragment(getDetailFragment(productItem.getId()));
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     String barcode = BarcodeReader.getBarcode(this, (Bitmap) dataObject);
                     if (barcode != null) {
                         ProductItem productItem = DebugProductItemFactory.getDebugProduct(barcode);
-                        viewModel.addProduct(productItem);
+                        mViewModel.addProduct(productItem);
                     }
 
                 }
@@ -252,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
 
     void quickStockIncrement(@NonNull String barcode, int value) {
         try {
-            ProductItem productItem = viewModel.getProductByBarcode(barcode).getValue();
+            ProductItem productItem = mViewModel.getProductByBarcode(barcode).getValue();
             productItem.setCurrentStock(productItem.getCurrentStock() + value);
-            viewModel.addProduct(productItem);
+            mViewModel.addProduct(productItem);
         } catch (NullPointerException e) {
             productNotFoundErrorToast();
         }

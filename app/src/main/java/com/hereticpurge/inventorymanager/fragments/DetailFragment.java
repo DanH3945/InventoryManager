@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +15,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
+import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.List;
 
 public class DetailFragment extends Fragment {
 
-    static int initialId;
-
     DetailPagerAdapter mDetailPagerAdapter;
-    FragmentManager fragmentManager;
 
-    public static DetailFragment createInstance(int id, FragmentManager fragmentManager){
-        initialId = id;
+    public static DetailFragment createInstance(int id){
         DetailFragment detailFragment = new DetailFragment();
-        detailFragment.fragmentManager = fragmentManager;
         return detailFragment;
     }
 
@@ -41,9 +36,8 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
         ViewPager viewPager = view.findViewById(R.id.detail_viewpager);
-        mDetailPagerAdapter = new DetailPagerAdapter(fragmentManager);
+        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(mDetailPagerAdapter);
-        viewPager.setLayoutDirection(ViewPager.LAYOUT_DIRECTION_LTR);
 
         return view;
     }
@@ -58,9 +52,9 @@ public class DetailFragment extends Fragment {
                 .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
     }
 
-    private static class DetailPagerAdapter extends FragmentStatePagerAdapter {
+    private static class DetailPagerAdapter extends FragmentPagerAdapter {
 
-        List<ProductItem> productItemList;
+        List<ProductItem> mProductItemList;
 
         DetailPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -68,21 +62,23 @@ public class DetailFragment extends Fragment {
 
         @Override
         public Fragment getItem(int i) {
-            DebugAssistant.callCheck("getItemCalled with param: " + i);
-
-            return DetailDisplayFragment.createInstance(productItemList.get(i));
+//            DebugAssistant.callCheck("getItemCalled with param: " + i);
+//
+//            return DetailDisplayFragment.createInstance(mProductItemList.get(i));
+            return DetailDisplayFragment.createInstance(DebugProductItemFactory.getDebugProduct());
         }
 
         @Override
         public int getCount() {
-            DebugAssistant.callCheck("Get Count Called and returned: " +
-                    Integer.toString(productItemList == null ? 0 : productItemList.size()));
-
-            return productItemList == null ? 0 : productItemList.size();
+//            DebugAssistant.callCheck("Get Count Called and returned: " +
+//                    Integer.toString(mProductItemList == null ? 0 : mProductItemList.size()));
+//
+//            return mProductItemList == null ? 0 : mProductItemList.size();
+            return 3;
         }
 
         void updateList(List<ProductItem> productItemList){
-            this.productItemList = productItemList;
+            this.mProductItemList = productItemList;
             this.notifyDataSetChanged();
         }
     }

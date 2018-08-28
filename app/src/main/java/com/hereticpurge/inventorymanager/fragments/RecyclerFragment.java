@@ -1,6 +1,5 @@
 package com.hereticpurge.inventorymanager.fragments;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-
-import java.util.List;
 
 public class RecyclerFragment extends Fragment {
 
