@@ -111,6 +111,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1){
+            super.onBackPressed();
+        } else {
+            finish();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         ProductDatabase.destroyInstance();
         super.onDestroy();
@@ -120,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit();
         getSupportFragmentManager().executePendingTransactions();
     }
