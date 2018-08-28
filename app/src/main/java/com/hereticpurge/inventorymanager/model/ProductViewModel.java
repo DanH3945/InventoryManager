@@ -13,18 +13,15 @@ import java.util.List;
 public class ProductViewModel extends AndroidViewModel {
 
     private ProductDatabase productDatabase;
-    private final LiveData<List<ProductItem>> productList;
 
     public ProductViewModel(@NonNull Application application) {
         super(application);
 
         productDatabase = ProductDatabase.getDatabase(this.getApplication());
-
-        productList = productDatabase.productDao().getProductList();
     }
 
     public LiveData<List<ProductItem>> getProductList() {
-        return productList;
+        return productDatabase.productDao().getProductList();
     }
 
     public LiveData<ProductItem> getProductById(int id) {
