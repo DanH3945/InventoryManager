@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 
@@ -25,7 +24,10 @@ public class DetailFragment extends Fragment {
 
     DetailPagerAdapter mDetailPagerAdapter;
 
+    static int sInitialId;
+
     public static DetailFragment createInstance(int id){
+        sInitialId = id;
         DetailFragment detailFragment = new DetailFragment();
         return detailFragment;
     }
@@ -36,7 +38,9 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
         ViewPager viewPager = view.findViewById(R.id.detail_viewpager);
-        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager());
+
+        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), sInitialId, viewPager);
+
         viewPager.setAdapter(mDetailPagerAdapter);
 
         return view;
@@ -55,31 +59,33 @@ public class DetailFragment extends Fragment {
     private static class DetailPagerAdapter extends FragmentPagerAdapter {
 
         List<ProductItem> mProductItemList;
+        ViewPager mParentViewPager;
+        int mStartPosition;
 
-        DetailPagerAdapter(FragmentManager fragmentManager) {
+        DetailPagerAdapter(FragmentManager fragmentManager, int startPosition, ViewPager parentViewPager) {
             super(fragmentManager);
+            this.mStartPosition = startPosition;
+            this.mParentViewPager = parentViewPager;
         }
 
         @Override
         public Fragment getItem(int i) {
-//            DebugAssistant.callCheck("getItemCalled with param: " + i);
-//
-//            return DetailDisplayFragment.createInstance(mProductItemList.get(i));
-            return DetailDisplayFragment.createInstance(DebugProductItemFactory.getDebugProduct());
+            return DetailDisplayFragment.createInstance(mProductItemList.get(i));
         }
 
         @Override
         public int getCount() {
-//            DebugAssistant.callCheck("Get Count Called and returned: " +
-//                    Integer.toString(mProductItemList == null ? 0 : mProductItemList.size()));
-//
-//            return mProductItemList == null ? 0 : mProductItemList.size();
-            return 3;
+            return mProductItemList == null ? 0 : mProductItemList.size();
         }
 
         void updateList(List<ProductItem> productItemList){
             this.mProductItemList = productItemList;
             this.notifyDataSetChanged();
+
+            if (mStartPosition != -1 && mProductItemList.size() > 0){
+                mParentViewPager.setCurrentItem(mStartPosition);
+                mStartPosition = -1;
+            }
         }
     }
 
