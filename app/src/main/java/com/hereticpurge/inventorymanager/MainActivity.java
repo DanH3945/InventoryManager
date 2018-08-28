@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null) {
-            loadFragment(getMainFragment());
+            loadFragment(getMainFragment(), false, null);
         }
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -111,26 +112,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1){
-            super.onBackPressed();
-        } else {
-            finish();
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         ProductDatabase.destroyInstance();
         super.onDestroy();
     }
 
-    private void loadFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+    private void loadFragment(Fragment fragment, boolean addToBackStack, @Nullable String s) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+
+        if (addToBackStack){
+            transaction.addToBackStack(s);
+        }
+        transaction.commit();
         getSupportFragmentManager().executePendingTransactions();
     }
 
@@ -155,12 +149,17 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onBrowseAllPressed() {
-                    loadFragment(getRecyclerFragment());
+                    loadFragment(getRecyclerFragment(),
+                            true,
+                            null);
                 }
 
                 @Override
                 public void onNewItemPressed() {
-                    loadFragment(getEditFragment(null));
+                    loadFragment(
+                            getEditFragment(null),
+                            true,
+                            null);
                 }
 
                 @Override
@@ -195,7 +194,10 @@ public class MainActivity extends AppCompatActivity {
             LiveData<ProductItem> productItemLiveData = mViewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
             try {
-                loadFragment(getDetailFragment(productItem.getId()));
+                loadFragment(getDetailFragment(
+                        productItem.getId()),
+                        true,
+                        null);
             } catch (NullPointerException npe) {
                 productNotFoundErrorToast();
             }
@@ -203,7 +205,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onProductSelected(int id) {
-        loadFragment(getDetailFragment(id));
+        loadFragment(getDetailFragment(id),
+                true,
+                null);
     }
 
     private void startCameraForResult(int requestCode) {
