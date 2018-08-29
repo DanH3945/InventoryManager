@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private DetailFragment getDetailFragment(int id) {
+    private DetailFragment getNewDetailFragment(int id) {
         return DetailFragment.createInstance(id);
     }
 
@@ -194,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             LiveData<ProductItem> productItemLiveData = mViewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
             try {
-                loadFragment(getDetailFragment(
+                loadFragment(getNewDetailFragment(
                         productItem.getId()),
                         true,
                         null);
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onProductSelected(int id) {
-        loadFragment(getDetailFragment(id),
+        loadFragment(getNewDetailFragment(id),
                 true,
                 null);
     }
@@ -276,5 +278,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void productNotFoundErrorToast() {
         Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
+    }
+
+    public void onEditButtonPressed(ProductItem productItem){
+        DebugAssistant.callCheck("Edit pressed with barcode: " + productItem.getBarcode());
+        // loadFragment(getEditFragment(productItem), true, null);
     }
 }

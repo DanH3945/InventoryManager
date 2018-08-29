@@ -3,12 +3,15 @@ package com.hereticpurge.inventorymanager.fragments;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +20,21 @@ import android.widget.TextView;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.List;
 
 public class DetailFragment extends Fragment {
 
-    DetailPagerAdapter mDetailPagerAdapter;
+    private DetailPagerAdapter mDetailPagerAdapter;
 
-    ProductViewModel mViewModel;
+    private ProductViewModel mViewModel;
 
-    static int sInitialId;
+    private ViewPager mViewPager;
 
-    public static DetailFragment createInstance(int id){
+    private static int sInitialId;
+
+    public static DetailFragment createInstance(int id) {
         sInitialId = id;
         DetailFragment detailFragment = new DetailFragment();
         return detailFragment;
@@ -39,11 +45,9 @@ public class DetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
-        ViewPager viewPager = view.findViewById(R.id.detail_viewpager);
-
-        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), sInitialId, viewPager);
-
-        viewPager.setAdapter(mDetailPagerAdapter);
+        mViewPager = view.findViewById(R.id.detail_viewpager);
+        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), sInitialId, mViewPager);
+        mViewPager.setAdapter(mDetailPagerAdapter);
 
         mViewModel.getProductList()
                 .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
@@ -100,7 +104,7 @@ public class DetailFragment extends Fragment {
         TextView mProductBarcode;
         TextView mProductCurrentStock;
 
-        public static DetailDisplayFragment createInstance(ProductItem productItem){
+        public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
             detailDisplayFragment.mProductItem = productItem;
             return detailDisplayFragment;
