@@ -15,6 +15,7 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
@@ -32,10 +33,13 @@ public class DetailFragment extends Fragment {
 
     private ViewPager mViewPager;
 
+    private static DetailEditButtonCallback sDetailEditButtonCallback;
+
     private static int sInitialId;
 
-    public static DetailFragment createInstance(int id) {
+    public static DetailFragment createInstance(int id, DetailEditButtonCallback detailEditButtonCallback) {
         sInitialId = id;
+        sDetailEditButtonCallback = detailEditButtonCallback;
         DetailFragment detailFragment = new DetailFragment();
         return detailFragment;
     }
@@ -103,6 +107,7 @@ public class DetailFragment extends Fragment {
         TextView mProductName;
         TextView mProductBarcode;
         TextView mProductCurrentStock;
+        Button mEditButton;
 
         public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
@@ -123,6 +128,14 @@ public class DetailFragment extends Fragment {
             mProductBarcode.setText(mProductItem.getBarcode());
             mProductCurrentStock.setText(Integer.toString(mProductItem.getCurrentStock()));
 
+            mEditButton = view.findViewById(R.id.detail_button_edit);
+            mEditButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sDetailEditButtonCallback.editButtonPressed(mProductItem);
+                }
+            });
+
             return view;
         }
 
@@ -130,5 +143,9 @@ public class DetailFragment extends Fragment {
         public void onAttach(Context context) {
             super.onAttach(context);
         }
+    }
+
+    public interface DetailEditButtonCallback {
+        void editButtonPressed(ProductItem productItem);
     }
 }

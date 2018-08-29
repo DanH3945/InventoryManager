@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private DetailFragment getNewDetailFragment(int id) {
-        return DetailFragment.createInstance(id);
+        return DetailFragment.createInstance(id, productItem -> onEditButtonPressed(productItem));
     }
 
     private EditFragment getEditFragment(ProductItem productItem) {
@@ -281,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEditButtonPressed(ProductItem productItem){
-        DebugAssistant.callCheck("Edit pressed with barcode: " + productItem.getBarcode());
-        // loadFragment(getEditFragment(productItem), true, null);
+        loadFragment(getEditFragment(productItem), true, null);
     }
 }
