@@ -24,6 +24,8 @@ public class DetailFragment extends Fragment {
 
     DetailPagerAdapter mDetailPagerAdapter;
 
+    ProductViewModel mViewModel;
+
     static int sInitialId;
 
     public static DetailFragment createInstance(int id){
@@ -43,6 +45,9 @@ public class DetailFragment extends Fragment {
 
         viewPager.setAdapter(mDetailPagerAdapter);
 
+        mViewModel.getProductList()
+                .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
+
         return view;
     }
 
@@ -50,10 +55,8 @@ public class DetailFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        ViewModelProviders.of(this)
-                .get(ProductViewModel.class)
-                .getProductList()
-                .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
+        mViewModel = ViewModelProviders.of(this)
+                .get(ProductViewModel.class);
     }
 
     private static class DetailPagerAdapter extends FragmentPagerAdapter {

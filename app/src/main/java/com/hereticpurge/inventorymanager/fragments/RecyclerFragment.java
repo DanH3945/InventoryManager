@@ -19,6 +19,8 @@ public class RecyclerFragment extends Fragment {
 
     private RecyclerFragmentAdapter mAdapter;
 
+    private ProductViewModel mViewModel;
+
     public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
         recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerCallback);
@@ -34,6 +36,9 @@ public class RecyclerFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mViewModel.getProductList()
+                .observe(this, productItems -> mAdapter.updateList(productItems));
+
         return view;
     }
 
@@ -41,9 +46,8 @@ public class RecyclerFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        ViewModelProviders.of(this)
-                .get(ProductViewModel.class)
-                .getProductList()
-                .observe(this, productItems -> mAdapter.updateList(productItems));
+        mViewModel = ViewModelProviders.of(this)
+                .get(ProductViewModel.class);
+
     }
 }
