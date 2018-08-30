@@ -18,4 +18,8 @@
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 
+    <style name="EditFragmentEditTextStyle">
+        <item name="android:layout_marginTop">@dimen/edit_fragment_et_top_margin</item>
+    </style>
+
 </resources>

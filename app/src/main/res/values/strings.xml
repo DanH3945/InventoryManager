@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
+
+    // Error Strings
+    <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
+    <string name="activity_result_error">Activity result error</string>
+    <string name="image_resolve_error">Couldn\'t resolve barcode</string>
+    <string name="product_not_found_error">Product not found</string>
+    <string name="image_unpack_error">Couldn\'t unpack image</string>
+    <string name="number_error">Invalid Number Input</string>
+
+    // Appbar Strings
     <string name="search_prompt">Barcode Search</string>
     <string name="preferences">Preferences</string>
     <string name="about">About</string>
@@ -7,12 +17,10 @@
     <string name="add_debug_product_scan">Add Debug Product Scan</string>
     <string name="wipe_database">Wipe Database</string>
 
-    // Errors
 
-    <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
-    <string name="activity_result_error">Activity result error</string>
-    <string name="image_resolve_error">Couldn\'t resolve barcode</string>
-    <string name="product_not_found_error">Product not found</string>
-    <string name="image_unpack_error">Couldn\'t unpack image</string>
+    // Edit Fragment Button Strings
+    <string name="button_save_product_string">Save Product</string>
+
+    // Edit Fragment Text Hints
 
 </resources>

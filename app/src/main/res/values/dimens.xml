@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    // Button Dimensions
     <dimen name="button_text_size">12sp</dimen>
 
+    // Edit Fragment Dimensions
+    <dimen name="edit_fragment_constraint_margin">16dp</dimen>
+    <dimen name="edit_fragment_et_top_margin">16dp</dimen>
+    <dimen name="edit_fragment_et_big_field">280dp</dimen>
+    <dimen name="edit_fragment_et_small_field">120dp</dimen>
+
+    // Appbar Dimensions
     <dimen name="detail_image_height">160dp</dimen>
 </resources>
