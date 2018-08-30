@@ -1,12 +1,12 @@
 package com.hereticpurge.inventorymanager.utils;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class DebugAssistant {
 
     public static void nullityCheck(Object object){
-        String log = object == null ? "NULL" : "NOT NULL";
-        Log.e("NULLITY CHECK", "OBJECT IS: " + log);
+        Log.e("NULLITY CHECK", "OBJECT IS: " + (object == null ? "NULL" : "NOT NULL"));
     }
 
     public static void callCheck(String statement){
