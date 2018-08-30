@@ -60,6 +60,9 @@ public class EditFragment extends Fragment {
     }
 
     private void doSave(){
+        if (mProductItem == null){
+            mProductItem = new ProductItem();
+        }
         mProductItem.setName(mProductName.getText().toString());
 
         mViewModel.addProduct(mProductItem);

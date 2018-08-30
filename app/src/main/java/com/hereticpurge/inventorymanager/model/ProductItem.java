@@ -38,6 +38,18 @@ public class ProductItem {
     @ColumnInfo(name = "tracked")
     public boolean tracked;
 
+    public ProductItem(){
+        this("0000",
+                "0000",
+                "null",
+                "Default Product Name",
+                "0.00",
+                "0.00",
+                0,
+                0,
+                false);
+    }
+
     public ProductItem(String barcode,
                        String customId,
                        String imageLocation,
