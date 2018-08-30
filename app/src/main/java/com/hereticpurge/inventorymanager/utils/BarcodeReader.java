@@ -1,9 +1,7 @@
 package com.hereticpurge.inventorymanager.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.zxing.BinaryBitmap;

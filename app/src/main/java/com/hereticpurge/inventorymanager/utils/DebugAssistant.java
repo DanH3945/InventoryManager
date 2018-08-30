@@ -1,6 +1,5 @@
 package com.hereticpurge.inventorymanager.utils;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class DebugAssistant {
