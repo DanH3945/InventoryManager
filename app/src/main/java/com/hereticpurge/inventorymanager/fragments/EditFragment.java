@@ -132,8 +132,7 @@ public class EditFragment extends Fragment {
 
             case (BARCODE_RESULT):
                 if (dataObject instanceof Bitmap){
-                    String barcode = BarcodeReader.getBarcode(getContext(), BitmapFactory.decodeResource(getResources(), R.mipmap.test_barcode));
-                    // String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
+                    String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
                     checkProductNull();
                     mBarcode.setText(barcode);
                 }
