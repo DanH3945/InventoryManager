@@ -16,10 +16,6 @@ import javax.annotation.Nullable;
 
 public class BarcodeReader {
 
-    private static final String TAG = "BarcodeReader";
-
-    private static final String INTENT_DATA_TAG = "data";
-
     private static @Nullable
     Result decodeBitmap(Bitmap image) throws NotFoundException {
 

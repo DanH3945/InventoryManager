@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +27,12 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class MainActivity extends AppCompatActivity {
+
+    // TODO MOVE TO SHARED PREFERENCES
+    private static final String IMAGE_DIRECTORY = "images";
+    // TODO END
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;

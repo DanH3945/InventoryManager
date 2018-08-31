@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -17,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -24,7 +24,7 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
+import com.squareup.picasso.Picasso;
 
 public class EditFragment extends Fragment {
 
@@ -34,6 +34,10 @@ public class EditFragment extends Fragment {
 
     ImageButton mMainImageButton;
     ImageButton mBarcodeImageButton;
+
+    ImageView mMainImageView;
+
+    Bitmap mTempImage;
 
     private EditText mName;
     private EditText mBarcode;
@@ -70,6 +74,8 @@ public class EditFragment extends Fragment {
         mSaveButton = view.findViewById(R.id.edit_save_button);
         mSaveButton.setOnClickListener(v -> doSave());
 
+        mMainImageView = view.findViewById(R.id.edit_product_image_iv);
+
         mName = view.findViewById(R.id.edit_product_name_et);
         mBarcode = view.findViewById(R.id.edit_product_barcode_et);
         mCustomId = view.findViewById(R.id.edit_product_customid_et);
@@ -89,6 +95,7 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
+            loadImage(mProductItem.getImageLocation());
         }
 
         return view;
@@ -127,7 +134,7 @@ public class EditFragment extends Fragment {
 
             case (MAIN_IMAGE_RESULT):
                 if (dataObject instanceof Bitmap){
-                    // TODO IMAGE STORAGE
+
                 }
 
             case (BARCODE_RESULT):
@@ -140,6 +147,14 @@ public class EditFragment extends Fragment {
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void saveImage(Bitmap image){
+
+    }
+
+    private void loadImage(String imageLocation){
+        Picasso.get().load(imageLocation);
     }
 
     private void checkProductNull(){
