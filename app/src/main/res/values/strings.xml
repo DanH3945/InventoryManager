@@ -18,9 +18,17 @@
     <string name="wipe_database">Wipe Database</string>
 
 
-    // Edit Fragment Button Strings
+    // Edit Fragment Strings
     <string name="button_save_product_string">Save Product</string>
-
-    // Edit Fragment Text Hints
+    <string name="product_name">Product Name</string>
+    <string name="custom_id">Custom Id</string>
+    <string name="barcode">Barcode</string>
+    <string name="cost">Cost</string>
+    <string name="retail">Retail</string>
+    <string name="current_stock">Current Stock</string>
+    <string name="target_stock">Target Stock</string>
+    <string name="tracking">Tracking</string>
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
 
 </resources>

@@ -18,8 +18,9 @@
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 
-    <style name="EditFragmentEditTextStyle">
-        <item name="android:layout_marginTop">@dimen/edit_fragment_et_top_margin</item>
+    <style name="CameraButtonStyle">
+        <item name="android:src">@mipmap/camera_24px</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
 
 </resources>

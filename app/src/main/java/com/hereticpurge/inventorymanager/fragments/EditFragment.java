@@ -2,7 +2,11 @@ package com.hereticpurge.inventorymanager.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,18 +16,24 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class EditFragment extends Fragment {
 
     private ProductViewModel mViewModel;
 
     private ProductItem mProductItem;
+
+    ImageButton mMainImageButton;
+    ImageButton mBarcodeImageButton;
 
     private EditText mName;
     private EditText mBarcode;
@@ -37,6 +47,9 @@ public class EditFragment extends Fragment {
 
     private Button mSaveButton;
 
+    private static final int MAIN_IMAGE_RESULT = 200;
+    private static final int BARCODE_RESULT = 201;
+
     public static EditFragment createInstance(@Nullable ProductItem productItem){
         EditFragment editFragment = new EditFragment();
         editFragment.mProductItem = productItem;
@@ -47,6 +60,12 @@ public class EditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
+
+        mMainImageButton = view.findViewById(R.id.edit_product_main_image_camera_button);
+        mMainImageButton.setOnClickListener(v -> startCameraForResult(MAIN_IMAGE_RESULT));
+
+        mBarcodeImageButton = view.findViewById(R.id.edit_product_barcode_camera_button);
+        mBarcodeImageButton.setOnClickListener(v -> startCameraForResult(BARCODE_RESULT));
 
         mSaveButton = view.findViewById(R.id.edit_save_button);
         mSaveButton.setOnClickListener(v -> doSave());
@@ -84,11 +103,54 @@ public class EditFragment extends Fragment {
                 .get(ProductViewModel.class);
     }
 
-    private void doSave(){
+    private void startCameraForResult(int requestCode) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, requestCode);
+        } else {
+            Toast.makeText(getContext(),
+                    R.string.no_camera_app_error,
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Object dataObject = null;
+
+        if (data != null && data.hasExtra("data") && data.getExtras().containsKey("data")) {
+            dataObject = data.getExtras().get("data");
+        }
+
+        switch (requestCode){
+
+            case (MAIN_IMAGE_RESULT):
+                if (dataObject instanceof Bitmap){
+                    // TODO IMAGE STORAGE
+                }
+
+            case (BARCODE_RESULT):
+                if (dataObject instanceof Bitmap){
+                    String barcode = BarcodeReader.getBarcode(getContext(), BitmapFactory.decodeResource(getResources(), R.mipmap.test_barcode));
+                    // String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
+                    checkProductNull();
+                    mBarcode.setText(barcode);
+                }
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void checkProductNull(){
         if (mProductItem == null){
             mProductItem = new ProductItem();
         }
+    }
 
+    private void doSave(){
+        checkProductNull();
         try {
             mProductItem.setName(mName.getText().toString());
             mProductItem.setBarcode(mBarcode.getText().toString());

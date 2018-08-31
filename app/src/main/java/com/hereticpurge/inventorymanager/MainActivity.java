@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductViewModel mViewModel;
 
     private static final int BARCODE_SEARCH = 100;
-    private static final int BARCODE_QUICK_CHANGE = 200;
+    private static final int BARCODE_QUICK_CHANGE = 101;
     private static final int BARCODE_DEBUG = 1000;
 
     private static final String TAG = "MainActivity";
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, requestCode);
         } else {
-            Toast.makeText(MainActivity.this,
+            Toast.makeText(this,
                     R.string.no_camera_app_error,
                     Toast.LENGTH_LONG)
                     .show();
@@ -263,6 +263,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
