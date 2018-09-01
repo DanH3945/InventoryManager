@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,14 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.ImageSaver;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+
 public class EditFragment extends Fragment {
+
+    private static final String TAG = "EditFragment";
 
     private ProductViewModel mViewModel;
 
@@ -95,7 +101,7 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
-            loadImage(mProductItem.getImageLocation());
+            loadImage(mProductItem.getName());
         }
 
         return view;
@@ -134,7 +140,9 @@ public class EditFragment extends Fragment {
 
             case (MAIN_IMAGE_RESULT):
                 if (dataObject instanceof Bitmap){
-
+                    mTempImage = (Bitmap) dataObject;
+                    mMainImageView.setImageBitmap(mTempImage);
+                    break;
                 }
 
             case (BARCODE_RESULT):
@@ -142,6 +150,7 @@ public class EditFragment extends Fragment {
                     String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
                     checkProductNull();
                     mBarcode.setText(barcode);
+                    break;
                 }
 
             default:
@@ -149,12 +158,13 @@ public class EditFragment extends Fragment {
         }
     }
 
-    private void saveImage(Bitmap image){
-
-    }
-
-    private void loadImage(String imageLocation){
-        Picasso.get().load(imageLocation);
+    private void loadImage(String fileName){
+        try {
+            Picasso.get().load(new File(getContext().getExternalFilesDir(null),
+                    fileName)).into(mMainImageView);
+        } catch (NullPointerException npe){
+            Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
+        }
     }
 
     private void checkProductNull(){
@@ -175,6 +185,10 @@ public class EditFragment extends Fragment {
             mProductItem.setTargetStock(Integer.parseInt(mTargetStock.getText().toString()));
             mProductItem.setTracked(mTrackSwitch.isChecked());
 
+            if (mTempImage != null){
+                ImageSaver.saveImage(getContext(), mTempImage, mProductItem.getName());
+            }
+
             mViewModel.addProduct(mProductItem);
 
             try {
@@ -182,7 +196,7 @@ public class EditFragment extends Fragment {
                         (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doSave: Error Removing Soft Keyboard");
             }
 
             getActivity().onBackPressed();
