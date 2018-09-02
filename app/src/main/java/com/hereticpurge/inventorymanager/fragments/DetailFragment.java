@@ -29,14 +29,17 @@ public class DetailFragment extends Fragment {
 
     private ViewPager mViewPager;
 
-    private static DetailEditButtonCallback sDetailEditButtonCallback;
+    protected static int sCurrentPosition;
 
-    private static int sInitialId;
+    private DetailEditButtonCallback mDetailEditButtonCallback;
 
-    public static DetailFragment createInstance(int id, DetailEditButtonCallback detailEditButtonCallback) {
-        sInitialId = id;
-        sDetailEditButtonCallback = detailEditButtonCallback;
+    public static DetailFragment createInstance(int position, DetailEditButtonCallback detailEditButtonCallback) {
+        // The ViewPager position to bring into view when the fragment is loaded.
+        sCurrentPosition = position;
+
+
         DetailFragment detailFragment = new DetailFragment();
+        detailFragment.mDetailEditButtonCallback = detailEditButtonCallback;
         return detailFragment;
     }
 
@@ -46,8 +49,27 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
         mViewPager = view.findViewById(R.id.detail_viewpager);
-        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), sInitialId, mViewPager);
+        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mDetailEditButtonCallback, mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+                // do nothing
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                // Setting the current position to the currently selected page so that when
+                // the fragment is reloaded the last seen page will be brought into view.
+                sCurrentPosition = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+                // do nothing
+            }
+        });
 
         mViewModel.getProductList()
                 .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
@@ -65,19 +87,19 @@ public class DetailFragment extends Fragment {
 
     private static class DetailPagerAdapter extends FragmentPagerAdapter {
 
-        List<ProductItem> mProductItemList;
-        ViewPager mParentViewPager;
-        int mStartPosition;
+        private List<ProductItem> mProductItemList;
+        private DetailEditButtonCallback mDetailEditButtonCallback;
+        private ViewPager mParentViewPager;
 
-        DetailPagerAdapter(FragmentManager fragmentManager, int startPosition, ViewPager parentViewPager) {
+        DetailPagerAdapter(FragmentManager fragmentManager, DetailEditButtonCallback detailEditButtonCallback, ViewPager parentViewPager) {
             super(fragmentManager);
-            this.mStartPosition = startPosition;
-            this.mParentViewPager = parentViewPager;
+            mParentViewPager = parentViewPager;
+            mDetailEditButtonCallback = detailEditButtonCallback;
         }
 
         @Override
         public Fragment getItem(int i) {
-            return DetailDisplayFragment.createInstance(mProductItemList.get(i));
+            return DetailDisplayFragment.createInstance(mProductItemList.get(i), mDetailEditButtonCallback);
         }
 
         @Override
@@ -89,10 +111,7 @@ public class DetailFragment extends Fragment {
             this.mProductItemList = productItemList;
             this.notifyDataSetChanged();
 
-            if (mStartPosition != -1 && mProductItemList.size() > 0){
-                mParentViewPager.setCurrentItem(mStartPosition);
-                mStartPosition = -1;
-            }
+            mParentViewPager.setCurrentItem(sCurrentPosition);
         }
     }
 
@@ -100,13 +119,15 @@ public class DetailFragment extends Fragment {
 
         private ProductItem mProductItem;
 
-        TextView mProductName;
-        TextView mProductBarcode;
-        TextView mProductCurrentStock;
-        Button mEditButton;
+        private TextView mProductName;
+        private TextView mProductBarcode;
+        private TextView mProductCurrentStock;
+        private Button mEditButton;
+        private DetailEditButtonCallback mDetailEditButtonCallback;
 
-        public static DetailDisplayFragment createInstance(ProductItem productItem) {
+        public static DetailDisplayFragment createInstance(ProductItem productItem, DetailEditButtonCallback detailEditButtonCallback) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
+            detailDisplayFragment.mDetailEditButtonCallback = detailEditButtonCallback;
             detailDisplayFragment.mProductItem = productItem;
             return detailDisplayFragment;
         }
@@ -128,16 +149,11 @@ public class DetailFragment extends Fragment {
             mEditButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sDetailEditButtonCallback.editButtonPressed(mProductItem);
+                    mDetailEditButtonCallback.editButtonPressed(mProductItem);
                 }
             });
 
             return view;
-        }
-
-        @Override
-        public void onAttach(Context context) {
-            super.onAttach(context);
         }
     }
 
