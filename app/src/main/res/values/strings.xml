@@ -31,4 +31,8 @@
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
 
+    // Detail Fragment Strings
+
+    <string name="detail_default_text">Default Text</string>
+
 </resources>

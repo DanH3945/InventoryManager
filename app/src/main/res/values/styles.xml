@@ -2,7 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -21,6 +20,24 @@
     <style name="CameraButtonStyle">
         <item name="android:src">@mipmap/camera_24px</item>
         <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="ParentTextStyle">
+        <item name="android:text">@string/detail_default_text</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="EditFragmentTextStyle" parent="ParentTextStyle">
+
+    </style>
+
+    <style name="DetailFragmentTextStyle" parent="ParentTextStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="DetailFragmentTextLabelStyle" parent="DetailFragmentTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
 
 </resources>

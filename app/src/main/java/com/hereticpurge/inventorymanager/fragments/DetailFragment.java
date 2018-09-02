@@ -9,19 +9,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class DetailFragment extends Fragment {
+
+    private static final String TAG = "DetailFragment";
 
     private DetailPagerAdapter mDetailPagerAdapter;
 
@@ -119,10 +125,14 @@ public class DetailFragment extends Fragment {
 
         private ProductItem mProductItem;
 
+        private ImageView mToolBarImageView;
+
         private TextView mProductName;
         private TextView mProductBarcode;
         private TextView mProductCurrentStock;
+
         private Button mEditButton;
+
         private DetailEditButtonCallback mDetailEditButtonCallback;
 
         public static DetailDisplayFragment createInstance(ProductItem productItem, DetailEditButtonCallback detailEditButtonCallback) {
@@ -137,23 +147,36 @@ public class DetailFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
-            mProductName = view.findViewById(R.id.detail_product_name);
-            mProductBarcode = view.findViewById(R.id.detail_product_barcode);
-            mProductCurrentStock = view.findViewById(R.id.detail_product_current_stock);
+//            mProductName = view.findViewById(R.id.detail_product_name);
+//            mProductBarcode = view.findViewById(R.id.detail_product_barcode);
+//            mProductCurrentStock = view.findViewById(R.id.detail_product_current_stock);
+//
+//            mProductName.setText(mProductItem.getName());
+//            mProductBarcode.setText(mProductItem.getBarcode());
+//            mProductCurrentStock.setText(Integer.toString(mProductItem.getCurrentStock()));
+//
+//            mEditButton = view.findViewById(R.id.detail_button_edit);
+//            mEditButton.setOnClickListener(v -> mDetailEditButtonCallback.editButtonPressed(mProductItem));
 
-            mProductName.setText(mProductItem.getName());
-            mProductBarcode.setText(mProductItem.getBarcode());
-            mProductCurrentStock.setText(Integer.toString(mProductItem.getCurrentStock()));
-
-            mEditButton = view.findViewById(R.id.detail_button_edit);
-            mEditButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mDetailEditButtonCallback.editButtonPressed(mProductItem);
-                }
-            });
+            mToolBarImageView = getActivity().findViewById(R.id.toolbar_image_container);
 
             return view;
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            loadImage();
+        }
+
+        private void loadImage(){
+            File file = new File(getContext().getExternalFilesDir(null), mProductItem.getName());
+            try {
+                Picasso.get().invalidate(file);
+                Picasso.get().load(file).into(mToolBarImageView);
+            } catch (NullPointerException npe){
+                Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
+            }
         }
     }
 
