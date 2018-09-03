@@ -3,8 +3,10 @@ package com.hereticpurge.inventorymanager.fragments;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -29,14 +32,17 @@ import java.util.List;
 public class DetailFragment extends Fragment {
 
     private static final String TAG = "DetailFragment";
+    protected static int sCurrentPosition;
+
+    private ImageView mToolbarImageView;
+
+    private FloatingActionButton mFloatingActionButton;
 
     private DetailPagerAdapter mDetailPagerAdapter;
 
     private ProductViewModel mViewModel;
 
     private ViewPager mViewPager;
-
-    protected static int sCurrentPosition;
 
     private DetailEditButtonCallback mDetailEditButtonCallback;
 
@@ -65,6 +71,17 @@ public class DetailFragment extends Fragment {
         mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mDetailEditButtonCallback, mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
 
+        mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
+
+        mFloatingActionButton = view.findViewById(R.id.main_fab);
+        mFloatingActionButton.setOnClickListener(v -> {
+            ProductItem productItem =
+            ((DetailDisplayFragment) mDetailPagerAdapter.getItem(mViewPager.getCurrentItem()))
+                    .getDisplayProduct();
+            mDetailEditButtonCallback.editButtonPressed(productItem);
+        });
+
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -73,6 +90,16 @@ public class DetailFragment extends Fragment {
 
             @Override
             public void onPageSelected(int i) {
+
+                try {
+                    String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
+                            .getDisplayProduct()
+                            .getName();
+                    loadImage(productName);
+                } catch (NullPointerException npe) {
+                    Log.e(TAG, "onPageSelected: Null Product Reference");
+                }
+
                 // Setting the current position to the currently selected page so that when
                 // the fragment is reloaded the last seen page will be brought into view.
                 sCurrentPosition = i;
@@ -88,6 +115,16 @@ public class DetailFragment extends Fragment {
                 .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
 
         return view;
+    }
+
+    private void loadImage(String filename) {
+        File file = new File(getContext().getExternalFilesDir(null), filename);
+        try {
+            Picasso.get().invalidate(file);
+            Picasso.get().load(file).error(R.mipmap.error_24px).into(mToolbarImageView);
+        } catch (NullPointerException npe) {
+            Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
+        }
     }
 
     @Override
@@ -120,7 +157,7 @@ public class DetailFragment extends Fragment {
             return mProductItemList == null ? 0 : mProductItemList.size();
         }
 
-        void updateList(List<ProductItem> productItemList){
+        void updateList(List<ProductItem> productItemList) {
             this.mProductItemList = productItemList;
             this.notifyDataSetChanged();
 
@@ -168,14 +205,8 @@ public class DetailFragment extends Fragment {
             return view;
         }
 
-        private void loadImage(){
-            File file = new File(getContext().getExternalFilesDir(null), mProductItem.getName());
-            try {
-                Picasso.get().invalidate(file);
-                Picasso.get().load(file).into(mToolBarImageView);
-            } catch (NullPointerException npe){
-                Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
-            }
+        public ProductItem getDisplayProduct() {
+            return mProductItem;
         }
     }
 
