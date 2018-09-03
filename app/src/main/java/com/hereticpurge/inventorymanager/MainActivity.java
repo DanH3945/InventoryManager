@@ -56,12 +56,6 @@ public class MainActivity extends AppCompatActivity {
             loadFragment(getMainFragment(), false, null);
         }
 
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
     }
 
     @Override
@@ -178,19 +172,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         return mMainFragment;
-    }
-
-    public void onSearch(View view) {
-        String query;
-
-        if (view instanceof EditText) {
-            query = ((EditText) view).getText().toString();
-        } else {
-            Log.d(TAG, "onSearch: Couldn't recognize view type.  view is not a type of EditText");
-            query = null;
-        }
-        barcodeSearch(query);
-        // TODO text based search functionality;
     }
 
     public void barcodeSearch(@Nullable String barcode) {

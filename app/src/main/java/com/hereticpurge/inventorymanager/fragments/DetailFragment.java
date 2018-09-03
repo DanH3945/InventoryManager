@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,12 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
+
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mViewPager = view.findViewById(R.id.detail_viewpager);
         mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mDetailEditButtonCallback, mViewPager);
@@ -158,15 +165,7 @@ public class DetailFragment extends Fragment {
 //            mEditButton = view.findViewById(R.id.detail_button_edit);
 //            mEditButton.setOnClickListener(v -> mDetailEditButtonCallback.editButtonPressed(mProductItem));
 
-            mToolBarImageView = getActivity().findViewById(R.id.toolbar_image_container);
-
             return view;
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            loadImage();
         }
 
         private void loadImage(){

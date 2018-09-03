@@ -1,161 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <android.support.constraint.ConstraintLayout
+    <include layout="@layout/toolbar_layout" />
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
 
 
-        <ImageView
-            android:id="@+id/edit_product_image_iv"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_main_image_dimension"
-            android:layout_height="@dimen/edit_fragment_main_image_dimension"
-            android:layout_marginEnd="56dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            <ImageView
+                android:id="@+id/edit_product_image_iv"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_main_image_dimension"
+                android:layout_height="@dimen/edit_fragment_main_image_dimension"
+                android:layout_marginEnd="56dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-        <ImageButton
-            android:id="@+id/edit_product_main_image_camera_button"
-            style="@style/CameraButtonStyle"
-            android:layout_width="@dimen/camera_button_dimension"
-            android:layout_height="@dimen/camera_button_dimension"
-            app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-            app:layout_constraintLeft_toRightOf="@id/edit_product_image_iv"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/edit_product_main_image_camera_button"
+                style="@style/CameraButtonStyle"
+                android:layout_width="@dimen/camera_button_dimension"
+                android:layout_height="@dimen/camera_button_dimension"
+                app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
+                app:layout_constraintLeft_toRightOf="@id/edit_product_image_iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/edit_product_name_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_big_field"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/product_name"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
+            <EditText
+                android:id="@+id/edit_product_name_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_big_field"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/product_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
 
 
-        <EditText
-            android:id="@+id/edit_product_customid_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_big_field"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/custom_id"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
+            <EditText
+                android:id="@+id/edit_product_customid_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_big_field"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/custom_id"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
 
-        <EditText
-            android:id="@+id/edit_product_barcode_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginTop="16dp"
-            android:hint="@string/barcode"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
+            <EditText
+                android:id="@+id/edit_product_barcode_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/barcode"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
 
-        <ImageButton
-            android:id="@+id/edit_product_barcode_camera_button"
-            style="@style/CameraButtonStyle"
-            android:layout_width="@dimen/camera_button_dimension"
-            android:layout_height="@dimen/camera_button_dimension"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
-            app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et" />
+            <ImageButton
+                android:id="@+id/edit_product_barcode_camera_button"
+                style="@style/CameraButtonStyle"
+                android:layout_width="@dimen/camera_button_dimension"
+                android:layout_height="@dimen/camera_button_dimension"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et" />
 
-        <EditText
-            android:id="@+id/edit_fragment_cost_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_small_field"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="38dp"
-            android:layout_marginTop="32dp"
-            android:hint="@string/cost"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
-            app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
+            <EditText
+                android:id="@+id/edit_fragment_cost_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_small_field"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="38dp"
+                android:layout_marginTop="32dp"
+                android:hint="@string/cost"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
-        <EditText
-            android:id="@+id/edit_fragment_retail_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_small_field"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="@string/retail"
-            app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
+            <EditText
+                android:id="@+id/edit_fragment_retail_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_small_field"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:hint="@string/retail"
+                app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
-        <EditText
-            android:id="@+id/edit_fragment_stock_current_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_small_field"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="38dp"
-            android:layout_marginTop="32dp"
-            android:hint="@string/current_stock"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
-            app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
+            <EditText
+                android:id="@+id/edit_fragment_stock_current_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_small_field"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="38dp"
+                android:layout_marginTop="32dp"
+                android:hint="@string/current_stock"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
 
-        <EditText
-            android:id="@+id/edit_fragment_stock_target_et"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="@dimen/edit_fragment_et_small_field"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="@string/target_stock"
-            app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
+            <EditText
+                android:id="@+id/edit_fragment_stock_target_et"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="@dimen/edit_fragment_et_small_field"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:hint="@string/target_stock"
+                app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
 
-        <TextView
-            android:id="@+id/edit_fragment_track_switch_label"
-            style="@style/EditFragmentTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tracking"
-            app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent" />
+            <TextView
+                android:id="@+id/edit_fragment_track_switch_label"
+                style="@style/EditFragmentTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tracking"
+                app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent" />
 
-        <Switch
-            android:id="@+id/edit_fragment_track_switch_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:showText="true"
-            android:textOff="@string/switch_off"
-            android:textOn="@string/switch_on"
-            app:layout_constraintBottom_toTopOf="@id/edit_save_button"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et" />
+            <Switch
+                android:id="@+id/edit_fragment_track_switch_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:showText="true"
+                android:textOff="@string/switch_off"
+                android:textOn="@string/switch_on"
+                app:layout_constraintBottom_toTopOf="@id/edit_save_button"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et" />
 
-        <Button
-            android:id="@+id/edit_save_button"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/button_save_product_string"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button" />
+            <Button
+                android:id="@+id/edit_save_button"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/button_save_product_string"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button" />
 
-    </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp" />
+
+</android.support.design.widget.CoordinatorLayout>
