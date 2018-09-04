@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.utils.ImageUtils;
+import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
 import java.util.Currency;
 import java.util.List;
@@ -93,7 +93,7 @@ public class DetailFragment extends Fragment {
                     String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                             .getDisplayProduct()
                             .getName();
-                    ImageUtils.loadImage(getContext(), productName, mToolbarImageView);
+                    CustomImageUtils.loadImage(getContext(), productName, mToolbarImageView);
                 } catch (NullPointerException npe) {
                     Log.e(TAG, "onPageSelected: Null Product Reference");
                 }
@@ -203,7 +203,7 @@ public class DetailFragment extends Fragment {
             mProductTracked.setText(String.valueOf(mProductItem.isTracked()));
 
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
-            ImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
+            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
             return view;
         }

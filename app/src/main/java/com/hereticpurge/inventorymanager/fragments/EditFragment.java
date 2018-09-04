@@ -26,10 +26,7 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.ImageUtils;
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
+import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
 public class EditFragment extends Fragment {
 
@@ -108,7 +105,7 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
-            ImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
+            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
         }
 
         return view;
@@ -184,7 +181,7 @@ public class EditFragment extends Fragment {
             mProductItem.setTracked(mTrackSwitch.isChecked());
 
             if (mTempImage != null){
-                ImageUtils.saveImage(getContext(), mTempImage, mProductItem.getName());
+                CustomImageUtils.saveImage(getContext(), mTempImage, mProductItem.getName());
             }
 
             mViewModel.addProduct(mProductItem);
