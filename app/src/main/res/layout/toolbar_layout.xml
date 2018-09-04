@@ -17,7 +17,7 @@
             <ImageView
                 android:id="@+id/toolbar_image_container"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_image_height"
+                android:layout_height="@dimen/appbar_image_dimen"
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher"
