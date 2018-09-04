@@ -21,9 +21,8 @@ import android.widget.TextView;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.squareup.picasso.Picasso;
+import com.hereticpurge.inventorymanager.utils.ImageUtils;
 
-import java.io.File;
 import java.util.List;
 
 public class DetailFragment extends Fragment {
@@ -73,8 +72,8 @@ public class DetailFragment extends Fragment {
         mFloatingActionButton = view.findViewById(R.id.main_fab);
         mFloatingActionButton.setOnClickListener(v -> {
             ProductItem productItem =
-            ((DetailDisplayFragment) mDetailPagerAdapter.getItem(mViewPager.getCurrentItem()))
-                    .getDisplayProduct();
+                    ((DetailDisplayFragment) mDetailPagerAdapter.getItem(mViewPager.getCurrentItem()))
+                            .getDisplayProduct();
             mDetailEditButtonCallback.editButtonPressed(productItem);
         });
 
@@ -92,7 +91,7 @@ public class DetailFragment extends Fragment {
                     String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                             .getDisplayProduct()
                             .getName();
-                    loadImage(productName);
+                    ImageUtils.loadImage(getContext(), productName, mToolbarImageView);
                 } catch (NullPointerException npe) {
                     Log.e(TAG, "onPageSelected: Null Product Reference");
                 }
@@ -112,16 +111,6 @@ public class DetailFragment extends Fragment {
                 .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
 
         return view;
-    }
-
-    private void loadImage(String filename) {
-        File file = new File(getContext().getExternalFilesDir(null), filename);
-        try {
-            Picasso.get().invalidate(file);
-            Picasso.get().load(file).error(R.mipmap.error_24px).into(mToolbarImageView);
-        } catch (NullPointerException npe) {
-            Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
-        }
     }
 
     @Override

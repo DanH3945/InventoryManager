@@ -26,7 +26,7 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.ImageSaver;
+import com.hereticpurge.inventorymanager.utils.ImageUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -108,7 +108,7 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
-            loadImage(mProductItem.getName());
+            ImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
         }
 
         return view;
@@ -165,15 +165,6 @@ public class EditFragment extends Fragment {
         }
     }
 
-    private void loadImage(String fileName){
-        try {
-            Picasso.get().load(new File(getContext().getExternalFilesDir(null),
-                    fileName)).into(mMainImageView);
-        } catch (NullPointerException npe){
-            Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
-        }
-    }
-
     private void checkProductNull(){
         if (mProductItem == null){
             mProductItem = new ProductItem();
@@ -193,7 +184,7 @@ public class EditFragment extends Fragment {
             mProductItem.setTracked(mTrackSwitch.isChecked());
 
             if (mTempImage != null){
-                ImageSaver.saveImage(getContext(), mTempImage, mProductItem.getName());
+                ImageUtils.saveImage(getContext(), mTempImage, mProductItem.getName());
             }
 
             mViewModel.addProduct(mProductItem);

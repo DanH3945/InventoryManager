@@ -17,9 +17,6 @@ public class ProductItem {
     @ColumnInfo(name = "custom_id")
     public String customId;
 
-    @ColumnInfo(name = "image_location")
-    public String imageLocation;
-
     @ColumnInfo(name = "name")
     public String name;
 
@@ -41,7 +38,6 @@ public class ProductItem {
     public ProductItem(){
         this("0000",
                 "0000",
-                "null",
                 "Default Product Name",
                 "0.00",
                 "0.00",
@@ -52,7 +48,6 @@ public class ProductItem {
 
     public ProductItem(String barcode,
                        String customId,
-                       String imageLocation,
                        @NonNull String name,
                        String cost,
                        String retail,
@@ -62,7 +57,6 @@ public class ProductItem {
 
         this.barcode = barcode;
         this.customId = customId;
-        this.imageLocation = imageLocation;
         this.name = name;
         this.cost = cost;
         this.retail = retail;
@@ -93,14 +87,6 @@ public class ProductItem {
 
     public void setCustomId(String customId) {
         this.customId = customId;
-    }
-
-    public String getImageLocation() {
-        return imageLocation;
-    }
-
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
     }
 
     public String getName() {
