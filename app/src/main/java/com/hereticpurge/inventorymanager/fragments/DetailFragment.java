@@ -23,7 +23,9 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.ImageUtils;
 
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailFragment extends Fragment {
 
@@ -186,10 +188,10 @@ public class DetailFragment extends Fragment {
             mProductCustomId.setText(mProductItem.getCustomId());
 
             mProductCost = view.findViewById(R.id.detail_cost_text);
-            mProductCost.setText(mProductItem.getCost());
+            mProductCost.setText(addLocalCurrencySymbol(mProductItem.getCost()));
 
             mProductRetail = view.findViewById(R.id.detail_retail_text);
-            mProductRetail.setText(mProductItem.getRetail());
+            mProductRetail.setText(addLocalCurrencySymbol(mProductItem.getRetail()));
 
             mProductCurrentStock = view.findViewById(R.id.detail_current_stock_text);
             mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
@@ -204,6 +206,11 @@ public class DetailFragment extends Fragment {
             ImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
             return view;
+        }
+
+        private String addLocalCurrencySymbol(String string){
+            Currency currency = Currency.getInstance(Locale.getDefault());
+            return currency.getSymbol() + string;
         }
 
         public ProductItem getDisplayProduct() {

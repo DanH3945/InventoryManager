@@ -9,11 +9,15 @@
         style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View style="@style/DividerStyle"
+        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text"
+        android:layout_marginTop="4dp"/>
 
     <ImageView
         android:id="@+id/detail_image_small"
