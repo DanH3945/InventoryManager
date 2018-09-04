@@ -28,7 +28,8 @@
     </style>
 
     <style name="EditFragmentTextStyle" parent="ParentTextStyle">
-
+        <!--Override for parent text so the hint text shows-->
+        <item name="android:text"></item>
     </style>
 
     <style name="DetailFragmentTextStyle" parent="ParentTextStyle">
@@ -38,7 +39,15 @@
     <style name="DetailFragmentTextLabelStyle" parent="DetailFragmentTextStyle">
         <item name="android:textSize">@dimen/detail_label_text_size</item>
         <item name="android:textColor">@color/textColorPrimaryLight</item>
-        <item name="android:layout_marginTop">@dimen/detail_label_top_margin</item>
+    </style>
+
+    <style name="DetailContainerStyle">
+        <item name="android:layout_margin">@dimen/detail_container_separation</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:background">#fff</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

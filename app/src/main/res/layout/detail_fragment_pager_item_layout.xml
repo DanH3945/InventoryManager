@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,120 +15,191 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/detail_barcode_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_barcode_label"
+    <ImageView
+        android:id="@+id/detail_image_small"
+        android:layout_width="@dimen/detail_product_image_dimen"
+        android:layout_height="@dimen/detail_product_image_dimen"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/detail_custom_id_container"
         app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
 
-    <TextView
-        android:id="@+id/detail_barcode_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/detail_custom_id_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text_label" />
-
-    <TextView
-        android:id="@+id/detail_custom_id_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_custom_id_label"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/detail_image_small"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
+        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text">
 
-    <TextView
-        android:id="@+id/detail_custom_id_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/detail_custom_id_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_custom_id_label" />
+
+        <TextView
+            android:id="@+id/detail_custom_id_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_barcode_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/detail_image_small"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text_label" />
+        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_container">
 
-    <TextView
-        android:id="@+id/detail_cost_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_cost_label"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text" />
+        <TextView
+            android:id="@+id/detail_barcode_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_barcode_label" />
 
-    <TextView
-        android:id="@+id/detail_cost_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_cost_text_label" />
+        <TextView
+            android:id="@+id/detail_barcode_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/detail_retail_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_retail_label"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/detail_retail_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/detail_cost_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_retail_text_label" />
-
-    <TextView
-        android:id="@+id/detail_current_stock_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_current_stock_label"
-        app:layout_constraintTop_toBottomOf="@id/detail_cost_text" />
-
-    <TextView
-        android:id="@+id/detail_current_stock_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text_label" />
-
-    <TextView
-        android:id="@+id/detail_target_stock_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_target_stock_label"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_retail_text" />
-
-    <TextView
-        android:id="@+id/detail_target_stock_text"
-        style="@style/DetailFragmentTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_target_stock_text_label" />
-
-    <TextView
-        android:id="@+id/detail_track_text_label"
-        style="@style/DetailFragmentTextLabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
-        android:text="@string/detail_tracked_label"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text" />
+        app:layout_constraintRight_toLeftOf="@id/detail_retail_container"
+        app:layout_constraintTop_toBottomOf="@id/detail_barcode_container">
 
-    <TextView
-        android:id="@+id/detail_track_text"
-        style="@style/DetailFragmentTextStyle"
+        <TextView
+            android:id="@+id/detail_cost_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_cost_label" />
+
+        <TextView
+            android:id="@+id/detail_cost_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_retail_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/detail_cost_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_barcode_container">
+
+        <TextView
+            android:id="@+id/detail_retail_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_retail_label" />
+
+        <TextView
+            android:id="@+id/detail_retail_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_current_stock_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/detail_target_stock_container"
+        app:layout_constraintTop_toBottomOf="@id/detail_cost_container">
+
+        <TextView
+            android:id="@+id/detail_current_stock_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_current_stock_label" />
+
+        <TextView
+            android:id="@+id/detail_current_stock_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_target_stock_container"
+        style="@style/DetailContainerStyle"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/detail_current_stock_container"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_retail_container">
+
+        <TextView
+            android:id="@+id/detail_target_stock_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_target_stock_label" />
+
+        <TextView
+            android:id="@+id/detail_target_stock_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/DetailContainerStyle"
+        android:id="@+id/detail_tracked_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_track_text_label" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/detail_track_text_label"
+            style="@style/DetailFragmentTextLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_tracked_label" />
+
+        <TextView
+            android:id="@+id/detail_track_text"
+            style="@style/DetailFragmentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

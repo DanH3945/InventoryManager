@@ -163,6 +163,8 @@ public class DetailFragment extends Fragment {
 
         private TextView mProductTracked;
 
+        ImageView mProductImageViewSmall;
+
         public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
             detailDisplayFragment.mProductItem = productItem;
@@ -197,6 +199,9 @@ public class DetailFragment extends Fragment {
 
             mProductTracked = view.findViewById(R.id.detail_track_text);
             mProductTracked.setText(String.valueOf(mProductItem.isTracked()));
+
+            mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
+            ImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
             return view;
         }
