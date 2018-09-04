@@ -3,7 +3,6 @@ package com.hereticpurge.inventorymanager.fragments;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,14 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -68,7 +65,7 @@ public class DetailFragment extends Fragment {
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mViewPager = view.findViewById(R.id.detail_viewpager);
-        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mDetailEditButtonCallback, mViewPager);
+        mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
 
         mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
@@ -138,18 +135,16 @@ public class DetailFragment extends Fragment {
     private static class DetailPagerAdapter extends FragmentPagerAdapter {
 
         private List<ProductItem> mProductItemList;
-        private DetailEditButtonCallback mDetailEditButtonCallback;
         private ViewPager mParentViewPager;
 
-        DetailPagerAdapter(FragmentManager fragmentManager, DetailEditButtonCallback detailEditButtonCallback, ViewPager parentViewPager) {
+        DetailPagerAdapter(FragmentManager fragmentManager, ViewPager parentViewPager) {
             super(fragmentManager);
             mParentViewPager = parentViewPager;
-            mDetailEditButtonCallback = detailEditButtonCallback;
         }
 
         @Override
         public Fragment getItem(int i) {
-            return DetailDisplayFragment.createInstance(mProductItemList.get(i), mDetailEditButtonCallback);
+            return DetailDisplayFragment.createInstance(mProductItemList.get(i));
         }
 
         @Override
@@ -169,19 +164,18 @@ public class DetailFragment extends Fragment {
 
         private ProductItem mProductItem;
 
-        private ImageView mToolBarImageView;
-
         private TextView mProductName;
         private TextView mProductBarcode;
+        private TextView mProductCustomId;
+        private TextView mProductCost;
+        private TextView mProductRetail;
         private TextView mProductCurrentStock;
+        private TextView mProductTargetStock;
 
-        private Button mEditButton;
+        private TextView mProductTracked;
 
-        private DetailEditButtonCallback mDetailEditButtonCallback;
-
-        public static DetailDisplayFragment createInstance(ProductItem productItem, DetailEditButtonCallback detailEditButtonCallback) {
+        public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
-            detailDisplayFragment.mDetailEditButtonCallback = detailEditButtonCallback;
             detailDisplayFragment.mProductItem = productItem;
             return detailDisplayFragment;
         }
@@ -191,16 +185,29 @@ public class DetailFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
-//            mProductName = view.findViewById(R.id.detail_product_name);
-//            mProductBarcode = view.findViewById(R.id.detail_product_barcode);
-//            mProductCurrentStock = view.findViewById(R.id.detail_product_current_stock);
-//
-//            mProductName.setText(mProductItem.getName());
-//            mProductBarcode.setText(mProductItem.getBarcode());
-//            mProductCurrentStock.setText(Integer.toString(mProductItem.getCurrentStock()));
-//
-//            mEditButton = view.findViewById(R.id.detail_button_edit);
-//            mEditButton.setOnClickListener(v -> mDetailEditButtonCallback.editButtonPressed(mProductItem));
+            mProductName = view.findViewById(R.id.detail_product_name_text);
+            mProductName.setText(mProductItem.getName());
+
+            mProductBarcode = view.findViewById(R.id.detail_barcode_text);
+            mProductBarcode.setText(mProductItem.getBarcode());
+
+            mProductCustomId = view.findViewById(R.id.detail_custom_id_text);
+            mProductCustomId.setText(mProductItem.getCustomId());
+
+            mProductCost = view.findViewById(R.id.detail_cost_text);
+            mProductCost.setText(mProductItem.getCost());
+
+            mProductRetail = view.findViewById(R.id.detail_retail_text);
+            mProductRetail.setText(mProductItem.getRetail());
+
+            mProductCurrentStock = view.findViewById(R.id.detail_current_stock_text);
+            mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
+
+            mProductTargetStock = view.findViewById(R.id.detail_target_stock_text);
+            mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
+
+            mProductTracked = view.findViewById(R.id.detail_track_text);
+            mProductTracked.setText(String.valueOf(mProductItem.isTracked()));
 
             return view;
         }

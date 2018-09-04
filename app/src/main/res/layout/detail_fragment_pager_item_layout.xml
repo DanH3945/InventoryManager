@@ -1,134 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="24dp">
+    android:layout_height="match_parent">
 
     <TextView
-        android:layout_marginTop="24dp"
         android:id="@+id/detail_product_name_text"
         style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="20sp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/detail_barcode_text_label"
+        style="@style/DetailFragmentTextLabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DetailFragmentTextLabelStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text"
-        android:text="@string/detail_barcode_label"/>
+        android:text="@string/detail_barcode_label"
+        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
 
     <TextView
         android:id="@+id/detail_barcode_text"
+        style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text_label"
-        style="@style/DetailFragmentTextStyle"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text_label" />
 
     <TextView
         android:id="@+id/detail_custom_id_text_label"
+        style="@style/DetailFragmentTextLabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DetailFragmentTextLabelStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text"
+        android:text="@string/detail_custom_id_label"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/detail_custom_id_label"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
 
     <TextView
         android:id="@+id/detail_custom_id_text"
+        style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DetailFragmentTextStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text_label"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text_label" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/detail_cost_text_label"
-        android:text="@string/detail_cost_label"
         style="@style/DetailFragmentTextLabelStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text"/>
-    
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_cost_text_label"
+        android:text="@string/detail_cost_label"
+        app:layout_constraintTop_toBottomOf="@id/detail_barcode_text" />
+
+    <TextView
+        android:id="@+id/detail_cost_text"
         style="@style/DetailFragmentTextStyle"
-        android:id="@+id/detail_cost_text"/>
-    
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_cost_text_label" />
+
     <TextView
         android:id="@+id/detail_retail_text_label"
+        style="@style/DetailFragmentTextLabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DetailFragmentTextLabelStyle"
         android:text="@string/detail_retail_label"
-        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_retail_text"
-        app:layout_constraintTop_toBottomOf="@id/detail_retail_text_label"
         app:layout_constraintRight_toRightOf="parent"
-        style="@style/DetailFragmentTextStyle"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_custom_id_text" />
 
     <TextView
+        android:id="@+id/detail_retail_text"
+        style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_retail_text_label" />
+
+    <TextView
+        android:id="@+id/detail_current_stock_text_label"
         style="@style/DetailFragmentTextLabelStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/detail_current_stock_label"
-        app:layout_constraintTop_toBottomOf="@id/detail_cost_text"
-        android:id="@+id/detail_current_stock_text_label"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_cost_text" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/detail_current_stock_text"
         style="@style/DetailFragmentTextStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text_label"
-        android:id="@+id/detail_current_stock_text"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_target_stock_label"
-        android:text="@string/detail_target_stock_label"
+        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text_label" />
+
+    <TextView
+        android:id="@+id/detail_target_stock_text_label"
         style="@style/DetailFragmentTextLabelStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_retail_text"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/detail_target_stock_label"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_retail_text" />
+
+    <TextView
+        android:id="@+id/detail_target_stock_text"
         style="@style/DetailFragmentTextStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_target_stock_label"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_target_stock_text_label" />
 
     <TextView
         android:id="@+id/detail_track_text_label"
-        android:text="@string/detail_tracked_label"
-        android:layout_height="wrap_content"
+        style="@style/DetailFragmentTextLabelStyle"
         android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:text="@string/detail_tracked_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="128dp"
-        style="@style/DetailFragmentTextLabelStyle"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_current_stock_text" />
 
     <TextView
         android:id="@+id/detail_track_text"
+        style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/DetailFragmentTextStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_track_text_label"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_track_text_label" />
 
 </android.support.constraint.ConstraintLayout>
