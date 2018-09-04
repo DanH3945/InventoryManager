@@ -46,7 +46,7 @@
                 android:layout_width="@dimen/edit_fragment_et_big_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/product_name"
+                android:hint="@string/edit_product_name"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
@@ -58,7 +58,7 @@
                 android:layout_width="@dimen/edit_fragment_et_big_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/custom_id"
+                android:hint="@string/edit_custom_id"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
                 android:layout_marginTop="16dp"
-                android:hint="@string/barcode"
+                android:hint="@string/edit_barcode"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="38dp"
                 android:layout_marginTop="32dp"
-                android:hint="@string/cost"
+                android:hint="@string/edit_cost"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
@@ -103,7 +103,7 @@
                 android:layout_width="@dimen/edit_fragment_et_small_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="@string/retail"
+                android:hint="@string/edit_retail"
                 app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
                 app:layout_constraintRight_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="38dp"
                 android:layout_marginTop="32dp"
-                android:hint="@string/current_stock"
+                android:hint="@string/edit_current_stock"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
@@ -126,7 +126,7 @@
                 android:layout_width="@dimen/edit_fragment_et_small_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="@string/target_stock"
+                android:hint="@string/edit_target_stock"
                 app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
                 app:layout_constraintRight_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
@@ -136,7 +136,7 @@
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tracking"
+                android:text="@string/edit_tracking"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent" />
@@ -147,8 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:showText="true"
-                android:textOff="@string/switch_off"
-                android:textOn="@string/switch_on"
+                android:textOff="@string/edit_switch_off"
+                android:textOn="@string/edit_switch_on"
                 app:layout_constraintBottom_toTopOf="@id/edit_save_button"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="32dp"
-                android:text="@string/button_save_product_string"
+                android:text="@string/edit_button_save_product_string"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

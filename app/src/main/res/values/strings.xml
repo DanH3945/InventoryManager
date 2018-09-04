@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Inventory Manager</string>
+    <string name="default_text">Default Text</string>
 
     // Error Strings
     <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
@@ -10,29 +11,37 @@
     <string name="number_error">Invalid Number Input</string>
 
     // Appbar Strings
-    <string name="search_prompt">Barcode Search</string>
-    <string name="preferences">Preferences</string>
-    <string name="about">About</string>
-    <string name="add_debug_product">Add Debug Product</string>
-    <string name="add_debug_product_scan">Add Debug Product Scan</string>
-    <string name="wipe_database">Wipe Database</string>
+    <string name="toolbar_search_prompt_button">Barcode Search</string>
+    <string name="toolbar_preferences_button">Preferences</string>
+    <string name="toolbar_about_button">About</string>
+    <string name="toolbar_add_debug_product_button">Add Debug Product</string>
+    <string name="toolbar_add_debug_product_scan_button">Add Debug Product Scan</string>
+    <string name="toolbar_wipe_database_button">Wipe Database</string>
 
 
     // Edit Fragment Strings
-    <string name="button_save_product_string">Save Product</string>
-    <string name="product_name">Product Name</string>
-    <string name="custom_id">Custom Id</string>
-    <string name="barcode">Barcode</string>
-    <string name="cost">Cost</string>
-    <string name="retail">Retail</string>
-    <string name="current_stock">Current Stock</string>
-    <string name="target_stock">Target Stock</string>
-    <string name="tracking">Tracking</string>
-    <string name="switch_on">On</string>
-    <string name="switch_off">Off</string>
+    <string name="edit_button_save_product_string">Save Product</string>
+    <string name="edit_product_name">Product Name</string>
+    <string name="edit_custom_id">Custom Id</string>
+    <string name="edit_barcode">Barcode</string>
+    <string name="edit_cost">Cost</string>
+    <string name="edit_retail">Retail</string>
+    <string name="edit_current_stock">Current Stock</string>
+    <string name="edit_target_stock">Target Stock</string>
+    <string name="edit_tracking">Tracking</string>
+    <string name="edit_switch_on">On</string>
+    <string name="edit_switch_off">Off</string>
 
     // Detail Fragment Strings
-
-    <string name="detail_default_text">Default Text</string>
+    <string name="detail_label_top_margin">56dp</string>
+    <string name="detail_label_text_size">12sp</string>
+    <string name="detail_text_size">16sp</string>
+    <string name="detail_barcode_label">Barcode#</string>
+    <string name="detail_custom_id_label">Custom ID#</string>
+    <string name="detail_cost_label">Cost</string>
+    <string name="detail_retail_label">Retail</string>
+    <string name="detail_current_stock_label">Current Stock</string>
+    <string name="detail_target_stock_label">Target Stock</string>
+    <string name="detail_tracked_label">Tracked</string>
 
 </resources>

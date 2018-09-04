@@ -4,29 +4,29 @@
 
     <item
         android:id="@+id/menu_pref_btn"
-        android:title="@string/preferences"
+        android:title="@string/toolbar_preferences_button"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_about_btn"
-        android:title="@string/about"
+        android:title="@string/toolbar_about_button"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_debug_generic_btn"
-        android:title="@string/add_debug_product"
+        android:title="@string/toolbar_add_debug_product_button"
         android:visible="false"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_debug_scan_btn"
-        android:title="@string/add_debug_product_scan"
+        android:title="@string/toolbar_add_debug_product_scan_button"
         android:visible="false"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_debug_clear_database"
-        android:title="@string/wipe_database"
+        android:title="@string/toolbar_wipe_database_button"
         android:visible="false"
         app:showAsAction="never" />
 

@@ -23,7 +23,7 @@
     </style>
 
     <style name="ParentTextStyle">
-        <item name="android:text">@string/detail_default_text</item>
+        <item name="android:text">@string/default_text</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
@@ -32,12 +32,13 @@
     </style>
 
     <style name="DetailFragmentTextStyle" parent="ParentTextStyle">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@string/detail_text_size</item>
     </style>
 
     <style name="DetailFragmentTextLabelStyle" parent="DetailFragmentTextStyle">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@string/detail_label_text_size</item>
         <item name="android:textColor">@color/textColorPrimaryLight</item>
+        <item name="android:layout_marginTop">@string/detail_label_top_margin</item>
     </style>
 
 </resources>

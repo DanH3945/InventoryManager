@@ -39,7 +39,7 @@
                     android:backgroundTint="@color/search_bar_color"
                     android:drawableEnd="@mipmap/search_24px"
                     android:gravity="center"
-                    android:hint="@string/search_prompt"
+                    android:hint="@string/toolbar_search_prompt_button"
                     android:inputType="text"
                     android:onClick="onSearch"
                     android:paddingEnd="8dp"
