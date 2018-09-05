@@ -14,7 +14,9 @@ import com.hereticpurge.inventorymanager.R;
 
 import javax.annotation.Nullable;
 
-public class BarcodeReader {
+public final class BarcodeReader {
+
+    private BarcodeReader(){}
 
     private static @Nullable
     Result decodeBitmap(Bitmap image) throws NotFoundException {

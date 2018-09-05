@@ -2,7 +2,9 @@ package com.hereticpurge.inventorymanager.utils;
 
 import android.util.Log;
 
-public class DebugAssistant {
+public final class DebugAssistant {
+
+    private DebugAssistant(){}
 
     public static void nullityCheck(Object object){
         Log.e("NULLITY CHECK", "OBJECT IS: " + (object == null ? "NULL" : "NOT NULL"));

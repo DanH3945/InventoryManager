@@ -13,6 +13,11 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="ContainerDividerStyle" parent="DividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center|bottom</item>
+    </style>
+
     <style name="ButtonStyle">
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
@@ -30,6 +35,11 @@
     <style name="EditFragmentTextStyle" parent="ParentTextStyle">
         <!--Override for parent text so the hint text shows-->
         <item name="android:text"></item>
+    </style>
+
+    <style name="EditFragmentLabelTextStyle" parent="ParentTextStyle">
+        <item name="android:textSize">@dimen/edit_label_text_size</item>
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
 
     <style name="DetailFragmentTextStyle" parent="ParentTextStyle">

@@ -26,6 +26,7 @@ import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
 public class EditFragment extends Fragment {
@@ -100,8 +101,8 @@ public class EditFragment extends Fragment {
             mName.setText(mProductItem.getName());
             mBarcode.setText(mProductItem.getBarcode());
             mCustomId.setText(mProductItem.getCustomId());
-            mCost.setText(mProductItem.getCost());
-            mRetail.setText(mProductItem.getRetail());
+            mCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
+            mRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
@@ -174,8 +175,8 @@ public class EditFragment extends Fragment {
             mProductItem.setName(mName.getText().toString());
             mProductItem.setBarcode(mBarcode.getText().toString());
             mProductItem.setCustomId(mCustomId.getText().toString());
-            mProductItem.setCost(mCost.getText().toString());
-            mProductItem.setRetail(mRetail.getText().toString());
+            mProductItem.setCost(CurrencyUtils.removeLocalCurrencySymbol(mCost.getText().toString()));
+            mProductItem.setRetail(CurrencyUtils.removeLocalCurrencySymbol(mRetail.getText().toString()));
             mProductItem.setCurrentStock(Integer.parseInt(mCurrentStock.getText().toString()));
             mProductItem.setTargetStock(Integer.parseInt(mTargetStock.getText().toString()));
             mProductItem.setTracked(mTrackSwitch.isChecked());

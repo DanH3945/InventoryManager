@@ -52,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/ContainerDividerStyle"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -76,6 +78,8 @@
             style="@style/DetailFragmentTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <View style="@style/ContainerDividerStyle"/>
 
     </LinearLayout>
 
@@ -102,6 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/ContainerDividerStyle"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -126,6 +132,8 @@
             style="@style/DetailFragmentTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <View style="@style/ContainerDividerStyle"/>
 
     </LinearLayout>
 
@@ -152,6 +160,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <View style="@style/ContainerDividerStyle"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -176,6 +186,8 @@
             style="@style/DetailFragmentTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <View style="@style/ContainerDividerStyle"/>
 
     </LinearLayout>
 

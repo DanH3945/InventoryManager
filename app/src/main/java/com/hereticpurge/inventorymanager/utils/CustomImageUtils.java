@@ -14,12 +14,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CustomImageUtils {
+public final class CustomImageUtils {
 
     public static final int SAVE_FAILED = -1;
     public static final int SAVE_SUCCESS = 1;
 
     private static final String TAG = "CustomImageUtils";
+
+    private CustomImageUtils(){}
 
     public static int saveImage(@Nullable Context context, Bitmap bitmap, String fileName) {
         File target;

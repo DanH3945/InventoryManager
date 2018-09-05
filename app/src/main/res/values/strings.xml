@@ -1,6 +1,11 @@
 <resources>
+
+    // Generic Strings
     <string name="app_name">Inventory Manager</string>
     <string name="default_text">Default Text</string>
+    <string name="scan">Scan</string>
+    <string name="replace">Replace</string>
+    <string name="photo">Photo</string>
 
     // Error Strings
     <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
