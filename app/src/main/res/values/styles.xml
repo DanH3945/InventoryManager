@@ -56,4 +56,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="RecyclerItemTextStyle" parent="ParentTextStyle">
+        <item name="android:textSize">@dimen/recycler_item_text_size</item>
+        <item name="android:text">text</item>
+    </style>
+
+    <style name="RecyclerItemTextLabelStyle" parent="RecyclerItemTextStyle">
+        <item name="android:textSize">@dimen/recycler_item_label_text_size</item>
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
+    </style>
+
 </resources>
