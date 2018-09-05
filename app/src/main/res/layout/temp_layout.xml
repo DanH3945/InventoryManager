@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:padding="16dp"
+        android:id="@+id/main_fragment_btn_browse_all"
+        style="@style/ButtonStyle"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Browse Products"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:padding="16dp"
+        android:id="@+id/main_fragment_btn_new_product"
+        style="@style/ButtonStyle"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Add New Item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_browse_all" />
+
+    <ImageButton
+        android:id="@+id/main_fragment_btn_browse_barcode"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/camera_24px"
+        app:layout_constraintBottom_toTopOf="@+id/main_fragment_btn_quick_change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_browse_all"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <Button
+        android:id="@+id/main_fragment_btn_quick_change"
+        style="@style/ButtonStyle"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:drawableEnd="@mipmap/camera_24px"
+        android:drawablePadding="8dp"
+        android:padding="16dp"
+        android:text="Quick Stock Change"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/main_fragment_btn_new_product"
+        app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <NumberPicker
+        android:background="#c8c8c9"
+        android:id="@+id/main_fragment_number_picker"
+        android:layout_width="24dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/main_fragment_btn_quick_change"
+        app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_quick_change"
+        app:layout_constraintTop_toTopOf="@+id/main_fragment_btn_quick_change" />
+
+</android.support.constraint.ConstraintLayout>
