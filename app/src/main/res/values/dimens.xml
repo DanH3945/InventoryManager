@@ -13,10 +13,10 @@
     <dimen name="edit_label_text_size">16sp</dimen>
 
     // Detail Fragment Dimensions
-    <dimen name="detail_container_separation">32dp</dimen>
+    <dimen name="detail_container_separation">48dp</dimen>
     <dimen name="detail_label_text_size">16sp</dimen>
     <dimen name="detail_text_size">20sp</dimen>
-    <dimen name="detail_product_image_dimen">120dp</dimen>
+    <dimen name="detail_product_image_dimen">160dp</dimen>
 
     // Appbar Dimensions
     <dimen name="appbar_image_dimen">240dp</dimen>

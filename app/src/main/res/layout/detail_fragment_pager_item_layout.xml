@@ -9,25 +9,27 @@
         style="@style/DetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View style="@style/DividerStyle"
-        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text"
-        android:layout_marginTop="4dp"/>
+    <View
+        android:id="@+id/detail_top_divider"
+        style="@style/DividerStyle"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
 
     <ImageView
         android:id="@+id/detail_image_small"
         android:layout_width="@dimen/detail_product_image_dimen"
         android:layout_height="@dimen/detail_product_image_dimen"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_product_name_text" />
+        app:layout_constraintTop_toBottomOf="@id/detail_top_divider" />
 
     <LinearLayout
         android:id="@+id/detail_custom_id_container"
@@ -52,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
@@ -61,7 +63,9 @@
         style="@style/DetailContainerStyle"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/detail_retail_container"
         app:layout_constraintLeft_toRightOf="@id/detail_image_small"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_custom_id_container">
@@ -79,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
@@ -88,10 +92,12 @@
         style="@style/DetailContainerStyle"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/detail_current_stock_container"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/detail_retail_container"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_container">
+        app:layout_constraintTop_toBottomOf="@+id/detail_image_small">
 
         <TextView
             android:id="@+id/detail_cost_text_label"
@@ -106,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
@@ -115,10 +121,12 @@
         style="@style/DetailContainerStyle"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/detail_target_stock_container"
         app:layout_constraintLeft_toRightOf="@id/detail_cost_container"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detail_barcode_container">
+        app:layout_constraintTop_toBottomOf="@+id/detail_image_small">
 
         <TextView
             android:id="@+id/detail_retail_text_label"
@@ -133,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
@@ -142,7 +150,9 @@
         style="@style/DetailContainerStyle"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/detail_tracked_container"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/detail_target_stock_container"
         app:layout_constraintTop_toBottomOf="@id/detail_cost_container">
@@ -160,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
@@ -170,6 +180,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/detail_tracked_container"
         app:layout_constraintLeft_toRightOf="@id/detail_current_stock_container"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_retail_container">
@@ -187,16 +198,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <View style="@style/ContainerDividerStyle"/>
+        <View style="@style/ContainerDividerStyle" />
 
     </LinearLayout>
 
     <LinearLayout
-        style="@style/DetailContainerStyle"
         android:id="@+id/detail_tracked_container"
+        style="@style/DetailContainerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
