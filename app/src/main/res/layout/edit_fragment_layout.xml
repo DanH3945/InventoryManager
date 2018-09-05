@@ -54,6 +54,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageButton
+                    android:elevation="6dp"
                     android:id="@+id/edit_product_main_image_camera_button"
                     style="@style/CameraButtonStyle"
                     android:layout_width="@dimen/camera_button_dimension"
@@ -98,9 +99,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
 
             <LinearLayout
-                android:elevation="12dp"
-                android:background="#fff"
-                android:padding="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -117,6 +115,7 @@
                     android:layout_gravity="center"/>
 
                 <ImageButton
+                    android:elevation="6dp"
                     android:id="@+id/edit_product_barcode_camera_button"
                     style="@style/CameraButtonStyle"
                     android:layout_width="@dimen/camera_button_dimension"
@@ -217,6 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="24dp" />
+        android:layout_margin="24dp"
+        android:src="@mipmap/savefile_24px"/>
 
 </android.support.design.widget.CoordinatorLayout>

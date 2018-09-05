@@ -199,7 +199,9 @@ public class DetailFragment extends Fragment {
             mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
 
             mProductTracked = view.findViewById(R.id.detail_track_text);
-            mProductTracked.setText(String.valueOf(mProductItem.isTracked()));
+            mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
+                    view.getResources().getString(R.string.detail_tracked_yes) :
+                    view.getResources().getString(R.string.detail_tracked_no)));
 
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
             CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);

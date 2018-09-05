@@ -45,5 +45,7 @@
     <string name="detail_current_stock_label">Current Stock</string>
     <string name="detail_target_stock_label">Target Stock</string>
     <string name="detail_tracked_label">Tracked</string>
+    <string name="detail_tracked_yes">Yes</string>
+    <string name="detail_tracked_no">No</string>
 
 </resources>

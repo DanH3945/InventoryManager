@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -56,6 +57,8 @@ public class EditFragment extends Fragment {
 
     private Button mSaveButton;
 
+    FloatingActionButton mFloatingActionButton;
+
     private static final int MAIN_IMAGE_RESULT = 200;
     private static final int BARCODE_RESULT = 201;
 
@@ -69,6 +72,9 @@ public class EditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
+
+        mFloatingActionButton = view.findViewById(R.id.main_fab);
+        mFloatingActionButton.setOnClickListener(v -> doSave());
 
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
