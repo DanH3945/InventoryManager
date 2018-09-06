@@ -5,10 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
+import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
 import java.util.List;
 
@@ -16,9 +21,11 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
     private List<ProductItem> mProductItemList;
     private RecyclerCallback mCallback;
+    private ProductViewModel mViewmodel;
 
-    RecyclerFragmentAdapter(RecyclerCallback callback) {
+    RecyclerFragmentAdapter(RecyclerCallback callback, ProductViewModel viewModel) {
         this.mCallback = callback;
+        this.mViewmodel = viewModel;
     }
 
     @NonNull
@@ -33,10 +40,21 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
         ProductItem productItem = mProductItemList.get(i);
 
-        viewHolder.productId.setText(Integer.toString(productItem.getId()));
-        viewHolder.productName.setText(productItem.getName());
-        viewHolder.barcode.setText(productItem.getBarcode());
-        viewHolder.currentStock.setText(Integer.toString(productItem.getCurrentStock()));
+        CustomImageUtils.loadImage(viewHolder.itemView.getContext(),
+                productItem.getName(),
+                viewHolder.mImageView);
+
+        viewHolder.mNameText.setText(productItem.getName());
+        viewHolder.mCost.setText(CurrencyUtils.addLocalCurrencySymbol(productItem.getCost()));
+        viewHolder.mRetail.setText(CurrencyUtils.addLocalCurrencySymbol(productItem.getRetail()));
+        viewHolder.mCurrentStock.setText(String.valueOf(productItem.getCurrentStock()));
+
+        viewHolder.mTrackingSwitch.setChecked(productItem.isTracked());
+
+        viewHolder.mTrackingSwitch.setOnClickListener(v -> {
+            productItem.setTracked(!productItem.isTracked());
+            mViewmodel.addProduct(productItem);
+        });
 
         viewHolder.itemView.setOnClickListener(view -> mCallback.onItemSelected(i));
     }
@@ -53,17 +71,26 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView productId;
-        private TextView productName;
-        private TextView barcode;
-        private TextView currentStock;
+        ImageView mImageView;
+
+        TextView mNameText;
+        TextView mCost;
+        TextView mRetail;
+        TextView mCurrentStock;
+
+        Switch mTrackingSwitch;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.productId = itemView.findViewById(R.id.rv_item_id);
-            this.productName = itemView.findViewById(R.id.rv_item_name);
-            this.barcode = itemView.findViewById(R.id.rv_item_barcode);
-            this.currentStock = itemView.findViewById(R.id.rv_item_current_stock);
+
+            mImageView = itemView.findViewById(R.id.recycler_item_image_view);
+
+            mNameText = itemView.findViewById(R.id.recycler_item_product_name);
+            mCost = itemView.findViewById(R.id.recycler_item_cost);
+            mRetail = itemView.findViewById(R.id.recycler_item_retail);
+            mCurrentStock = itemView.findViewById(R.id.recycler_item_current_stock);
+
+            mTrackingSwitch = itemView.findViewById(R.id.recycler_item_tracking_switch);
         }
     }
 

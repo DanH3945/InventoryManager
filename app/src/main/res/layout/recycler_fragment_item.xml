@@ -30,7 +30,8 @@
                 style="@style/RecyclerItemTextStyle"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias=".35"/>
 
             <LinearLayout
                 android:id="@+id/recycler_item_cost_retail_container"
@@ -40,7 +41,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_item_product_name"
-                app:layout_constraintBottom_toTopOf="@id/recycler_item_current_stock_container">
+                app:layout_constraintBottom_toTopOf="@id/recycler_item_current_stock_container"
+                app:layout_constraintHorizontal_bias=".25">
 
                 <TextView
                     android:id="@+id/recycler_item_cost_label"
@@ -80,7 +82,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_item_cost_retail_container"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias=".25">
 
                 <TextView
                     android:id="@+id/recycler_item_current_stock_label"

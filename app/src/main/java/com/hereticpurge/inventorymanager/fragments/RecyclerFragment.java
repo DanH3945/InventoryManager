@@ -18,13 +18,13 @@ import com.hereticpurge.inventorymanager.model.ProductViewModel;
 
 public class RecyclerFragment extends Fragment {
 
-    private RecyclerFragmentAdapter mAdapter;
-
     private ProductViewModel mViewModel;
+
+    private RecyclerFragmentAdapter.RecyclerCallback recyclerCallback;
 
     public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
-        recyclerFragment.mAdapter = new RecyclerFragmentAdapter(recyclerCallback);
+        recyclerFragment.recyclerCallback = recyclerCallback;
         return recyclerFragment;
     }
 
@@ -40,11 +40,12 @@ public class RecyclerFragment extends Fragment {
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(mAdapter);
+        RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(recyclerCallback, mViewModel);
+        recyclerView.setAdapter(recyclerFragmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mViewModel.getProductList()
-                .observe(this, productItems -> mAdapter.updateList(productItems));
+                .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
 
         return view;
     }
