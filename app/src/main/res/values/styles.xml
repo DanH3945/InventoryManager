@@ -18,6 +18,8 @@
         <item name="android:layout_gravity">center|bottom</item>
     </style>
 
+    // Button Styles
+
     <style name="ButtonStyle">
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
@@ -27,28 +29,37 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
+    // Generic Text Styles
+
     <style name="ParentTextStyle">
         <item name="android:text">@string/default_text</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
+    <style name="ParentTextLabelStyle" parent="ParentTextStyle">
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
+    </style>
+
+    // Edit Fragment Styles
+
     <style name="EditFragmentTextStyle" parent="ParentTextStyle">
         <!--Override for parent text so the hint text shows-->
         <item name="android:text"></item>
+        <item name="android:textSize">@dimen/edit_text_size</item>
     </style>
 
-    <style name="EditFragmentLabelTextStyle" parent="ParentTextStyle">
+    <style name="EditFragmentLabelTextStyle" parent="ParentTextLabelStyle">
         <item name="android:textSize">@dimen/edit_label_text_size</item>
-        <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
+
+    // Detail Fragment Styles
 
     <style name="DetailFragmentTextStyle" parent="ParentTextStyle">
         <item name="android:textSize">@dimen/detail_text_size</item>
     </style>
 
-    <style name="DetailFragmentTextLabelStyle" parent="DetailFragmentTextStyle">
+    <style name="DetailFragmentTextLabelStyle" parent="ParentTextLabelStyle">
         <item name="android:textSize">@dimen/detail_label_text_size</item>
-        <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
 
     <style name="DetailContainerStyle">
@@ -56,14 +67,15 @@
         <item name="android:gravity">center</item>
     </style>
 
+    // Recycler Fragment Styles
+
     <style name="RecyclerItemTextStyle" parent="ParentTextStyle">
         <item name="android:textSize">@dimen/recycler_item_text_size</item>
         <item name="android:text">text</item>
     </style>
 
-    <style name="RecyclerItemTextLabelStyle" parent="RecyclerItemTextStyle">
+    <style name="RecyclerItemTextLabelStyle" parent="ParentTextLabelStyle">
         <item name="android:textSize">@dimen/recycler_item_label_text_size</item>
-        <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
 
 </resources>

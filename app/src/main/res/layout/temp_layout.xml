@@ -1,73 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:padding="16dp"
-        android:id="@+id/main_fragment_btn_browse_all"
-        style="@style/ButtonStyle"
-        android:layout_width="220dp"
+
+    <ImageView
+        android:id="@+id/edit_product_image_iv"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_main_image_dimension"
+        android:layout_height="@dimen/edit_fragment_main_image_dimension"
+        android:layout_marginEnd="56dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
+        app:layout_constraintLeft_toRightOf="@id/edit_product_image_iv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/EditFragmentLabelTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/replace"
+            android:layout_gravity="center"/>
+
+        <TextView
+            style="@style/EditFragmentLabelTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photo"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:elevation="6dp"
+            android:id="@+id/edit_product_main_image_camera_button"
+            style="@style/CameraButtonStyle"
+            android:layout_width="@dimen/camera_button_dimension"
+            android:layout_height="@dimen/camera_button_dimension"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_name_et"
+        android:text="@string/edit_product_name"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_product_name_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_big_field"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Browse Products"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:hint="@string/edit_product_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
 
-    <Button
-        android:padding="16dp"
-        android:id="@+id/main_fragment_btn_new_product"
-        style="@style/ButtonStyle"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_customid_et"
+        android:text="@string/edit_custom_id"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+
+    <EditText
+        android:id="@+id/edit_product_customid_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_big_field"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/edit_custom_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_barcode_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_barcode_et"
+        android:text="@string/edit_barcode"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_product_barcode_et"
+        style="@style/EditFragmentTextStyle"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Add New Item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_browse_all" />
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="36dp"
+        android:hint="@string/edit_barcode"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
 
-    <ImageButton
-        android:id="@+id/main_fragment_btn_browse_barcode"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/camera_24px"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_btn_quick_change"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_browse_all"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
+        app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/EditFragmentLabelTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:elevation="6dp"
+            android:id="@+id/edit_product_barcode_camera_button"
+            style="@style/CameraButtonStyle"
+            android:layout_width="@dimen/camera_button_dimension"
+            android:layout_height="@dimen/camera_button_dimension"
+            app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
+            app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_cost_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_cost_et"
+        android:text="@string/edit_cost"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_fragment_cost_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_small_field"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/edit_cost"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
+        app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_retail_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_retail_et"
+        android:text="@string/edit_retail"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_fragment_retail_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_small_field"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/edit_retail"
+        app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_current_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_current_et"
+        android:text="@string/edit_current_stock"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_fragment_stock_current_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_small_field"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
+        android:layout_marginTop="32dp"
+        android:hint="@string/edit_current_stock"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
+        app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/EditFragmentLabelTextStyle"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_target_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_target_et"
+        android:text="@string/edit_target_stock"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <EditText
+        android:id="@+id/edit_fragment_stock_target_et"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="@dimen/edit_fragment_et_small_field"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/edit_target_stock"
+        app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
+
+    <TextView
+        android:id="@+id/edit_fragment_track_switch_label"
+        style="@style/EditFragmentTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_tracking"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent" />
+
+    <Switch
+        android:id="@+id/edit_fragment_track_switch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:showText="true"
+        android:textOff="@string/edit_switch_off"
+        android:textOn="@string/edit_switch_on"
+        app:layout_constraintBottom_toTopOf="@id/edit_delete_button"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et" />
 
     <Button
-        android:id="@+id/main_fragment_btn_quick_change"
+        android:id="@+id/edit_delete_button"
         style="@style/ButtonStyle"
-        android:layout_width="280dp"
-        android:layout_height="56dp"
-        android:drawableEnd="@mipmap/camera_24px"
-        android:drawablePadding="8dp"
-        android:padding="16dp"
-        android:text="Quick Stock Change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/edit_button_delete_product_string"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/main_fragment_btn_new_product"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <NumberPicker
-        android:background="#c8c8c9"
-        android:id="@+id/main_fragment_number_picker"
-        android:layout_width="24dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/main_fragment_btn_quick_change"
-        app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_quick_change"
-        app:layout_constraintTop_toTopOf="@+id/main_fragment_btn_quick_change" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button" />
 
 </android.support.constraint.ConstraintLayout>

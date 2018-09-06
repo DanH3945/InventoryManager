@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,8 +56,6 @@ public class EditFragment extends Fragment {
 
     private Switch mTrackSwitch;
 
-    private Button mSaveButton;
-
     FloatingActionButton mFloatingActionButton;
 
     private static final int MAIN_IMAGE_RESULT = 200;
@@ -88,8 +87,8 @@ public class EditFragment extends Fragment {
         mBarcodeImageButton = view.findViewById(R.id.edit_product_barcode_camera_button);
         mBarcodeImageButton.setOnClickListener(v -> startCameraForResult(BARCODE_RESULT));
 
-        mSaveButton = view.findViewById(R.id.edit_save_button);
-        mSaveButton.setOnClickListener(v -> doSave());
+        Button mDeleteButton = view.findViewById(R.id.edit_delete_button);
+        mDeleteButton.setOnClickListener(v -> doDelete());
 
         mMainImageView = view.findViewById(R.id.edit_product_image_iv);
 
@@ -204,6 +203,19 @@ public class EditFragment extends Fragment {
             getActivity().onBackPressed();
         } catch (NumberFormatException nfe){
             Toast.makeText(getContext(), R.string.number_error, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void doDelete(){
+        mViewModel.deleteSingleProduct(mProductItem);
+        // popping the backstack twice to clear out remnant fragments associated with the deleted
+        // product item.
+        try {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.popBackStack();
+            fragmentManager.popBackStack();
+        } catch (NullPointerException npe){
+            Log.e(TAG, "doDelete: Failed to get support fragment manager");
         }
     }
 }

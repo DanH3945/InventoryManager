@@ -26,6 +26,7 @@
 
     // Edit Fragment Strings
     <string name="edit_button_save_product_string">Save Product</string>
+    <string name="edit_button_delete_product_string">Delete Product</string>
     <string name="edit_product_name">Product Name</string>
     <string name="edit_custom_id">Custom Id</string>
     <string name="edit_barcode">Barcode</string>
