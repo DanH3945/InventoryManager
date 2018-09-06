@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
+import com.hereticpurge.inventorymanager.fragments.ConfirmDialog;
 import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
@@ -107,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (fragment instanceof EditFragment){
+            ((EditFragment) fragment).confirmNavigateAwaySave();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

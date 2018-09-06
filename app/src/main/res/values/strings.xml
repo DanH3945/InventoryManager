@@ -7,6 +7,18 @@
     <string name="replace">Replace</string>
     <string name="photo">Photo</string>
 
+    // Dialog Strings
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_save">Save</string>
+    // Dialog Body Strings
+    <string name="dialog_action_default">do</string>
+    <string name="dialog_body_start">"Do you want to "</string>
+    <string name="dialog_body_end">" this?"</string>
+
     // Error Strings
     <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
     <string name="activity_result_error">Activity result error</string>

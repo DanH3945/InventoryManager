@@ -5,15 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Debug;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -30,6 +33,7 @@ import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class EditFragment extends Fragment {
 
@@ -116,7 +120,7 @@ public class EditFragment extends Fragment {
                 .get(ProductViewModel.class);
     }
 
-    private void initProductFields(){
+    private void initProductFields() {
         if (mProductItem != null) {
             mName.setText(mProductItem.getName());
             mBarcode.setText(mProductItem.getBarcode());
@@ -204,24 +208,61 @@ public class EditFragment extends Fragment {
             } catch (NullPointerException e) {
                 Log.e(TAG, "doSave: Error Removing Soft Keyboard");
             }
-
-            getActivity().onBackPressed();
+            popParentBackStack();
         } catch (NumberFormatException nfe) {
             Toast.makeText(getContext(), R.string.number_error, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void doDelete() {
-        checkProductNull();
-        mViewModel.deleteSingleProduct(mProductItem);
-        // popping the backstack twice to clear out remnant fragments associated with the deleted
-        // product item.
+    private void popParentBackStack(){
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentManager.popBackStack();
             fragmentManager.popBackStack();
         } catch (NullPointerException npe) {
             Log.e(TAG, "doDelete: Failed to get support fragment manager");
         }
+    }
+
+    private void doDelete() {
+        checkProductNull();
+
+        ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
+            @Override
+            public void onConfirm() {
+                mViewModel.deleteSingleProduct(mProductItem);
+                // popping the backstack twice to clear out remnant fragments associated with the deleted
+                // product item.
+                popParentBackStack();
+                popParentBackStack();
+            }
+
+            @Override
+            public void onCancel() {}
+        };
+
+        ConfirmDialog.createDialog(confirmDialogCallback,
+                R.string.dialog_delete,
+                R.string.dialog_yes,
+                R.string.dialog_no)
+                .show(getChildFragmentManager(), null);
+    }
+
+    public void confirmNavigateAwaySave(){
+        ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
+            @Override
+            public void onConfirm() {
+                doSave();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        };
+        ConfirmDialog confirmDialog = ConfirmDialog.createDialog(confirmDialogCallback,
+                R.string.dialog_save,
+                R.string.dialog_yes,
+                R.string.dialog_no);
+        confirmDialog.show(getChildFragmentManager(), null);
     }
 }
