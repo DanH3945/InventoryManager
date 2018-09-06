@@ -61,7 +61,7 @@ public class EditFragment extends Fragment {
     private static final int MAIN_IMAGE_RESULT = 200;
     private static final int BARCODE_RESULT = 201;
 
-    public static EditFragment createInstance(@Nullable ProductItem productItem){
+    public static EditFragment createInstance(@Nullable ProductItem productItem) {
         EditFragment editFragment = new EditFragment();
         editFragment.mProductItem = productItem;
         return editFragment;
@@ -102,17 +102,7 @@ public class EditFragment extends Fragment {
 
         mTrackSwitch = view.findViewById(R.id.edit_fragment_track_switch_button);
 
-        if (mProductItem != null) {
-            mName.setText(mProductItem.getName());
-            mBarcode.setText(mProductItem.getBarcode());
-            mCustomId.setText(mProductItem.getCustomId());
-            mCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
-            mRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
-            mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
-            mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
-            mTrackSwitch.setChecked(mProductItem.isTracked());
-            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
-        }
+        initProductFields();
 
         return view;
     }
@@ -124,6 +114,20 @@ public class EditFragment extends Fragment {
         mViewModel = ViewModelProviders
                 .of(this)
                 .get(ProductViewModel.class);
+    }
+
+    private void initProductFields(){
+        if (mProductItem != null) {
+            mName.setText(mProductItem.getName());
+            mBarcode.setText(mProductItem.getBarcode());
+            mCustomId.setText(mProductItem.getCustomId());
+            mCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
+            mRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
+            mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
+            mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
+            mTrackSwitch.setChecked(mProductItem.isTracked());
+            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
+        }
     }
 
     private void startCameraForResult(int requestCode) {
@@ -146,17 +150,17 @@ public class EditFragment extends Fragment {
             dataObject = data.getExtras().get("data");
         }
 
-        switch (requestCode){
+        switch (requestCode) {
 
             case (MAIN_IMAGE_RESULT):
-                if (dataObject instanceof Bitmap){
+                if (dataObject instanceof Bitmap) {
                     mTempImage = (Bitmap) dataObject;
                     mMainImageView.setImageBitmap(mTempImage);
                     break;
                 }
 
             case (BARCODE_RESULT):
-                if (dataObject instanceof Bitmap){
+                if (dataObject instanceof Bitmap) {
                     String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
                     checkProductNull();
                     mBarcode.setText(barcode);
@@ -168,13 +172,14 @@ public class EditFragment extends Fragment {
         }
     }
 
-    private void checkProductNull(){
-        if (mProductItem == null){
+    private void checkProductNull() {
+        if (mProductItem == null) {
             mProductItem = new ProductItem();
+            initProductFields();
         }
     }
 
-    private void doSave(){
+    private void doSave() {
         checkProductNull();
         try {
             mProductItem.setName(mName.getText().toString());
@@ -186,7 +191,7 @@ public class EditFragment extends Fragment {
             mProductItem.setTargetStock(Integer.parseInt(mTargetStock.getText().toString()));
             mProductItem.setTracked(mTrackSwitch.isChecked());
 
-            if (mTempImage != null){
+            if (mTempImage != null) {
                 CustomImageUtils.saveImage(getContext(), mTempImage, mProductItem.getName());
             }
 
@@ -201,12 +206,13 @@ public class EditFragment extends Fragment {
             }
 
             getActivity().onBackPressed();
-        } catch (NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             Toast.makeText(getContext(), R.string.number_error, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void doDelete(){
+    private void doDelete() {
+        checkProductNull();
         mViewModel.deleteSingleProduct(mProductItem);
         // popping the backstack twice to clear out remnant fragments associated with the deleted
         // product item.
@@ -214,7 +220,7 @@ public class EditFragment extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.popBackStack();
             fragmentManager.popBackStack();
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             Log.e(TAG, "doDelete: Failed to get support fragment manager");
         }
     }
