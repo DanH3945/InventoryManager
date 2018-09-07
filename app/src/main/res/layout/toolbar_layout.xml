@@ -45,7 +45,8 @@
                     android:paddingEnd="8dp"
                     android:paddingStart="8dp"
                     android:textAlignment="center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:alpha=".75"/>
 
             </android.support.v7.widget.Toolbar>
 
