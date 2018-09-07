@@ -31,10 +31,6 @@ import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO MOVE TO SHARED PREFERENCES
-    private static final String IMAGE_DIRECTORY = "images";
-    // TODO END
-
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
 
