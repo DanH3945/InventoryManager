@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="search_bar_color">#ffffff</color>
 
+    <color name="http_link_blue">#0000EE</color>
+
     <color name="textColorPrimary">#6c6c6c</color>
     <color name="textColorPrimaryLight">#9b9b9b</color>
 </resources>

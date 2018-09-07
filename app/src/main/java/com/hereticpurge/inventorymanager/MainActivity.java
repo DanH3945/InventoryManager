@@ -14,12 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
-import com.hereticpurge.inventorymanager.fragments.ConfirmDialog;
+import com.hereticpurge.inventorymanager.fragments.AboutDialog;
 import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
@@ -28,7 +26,6 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.LicenseUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_about_btn:
                 Log.e(TAG, "onOptionsItemSelected: About Pressed");
-                LicenseUtils.showLicenseDialogLicense(this);
+                new AboutDialog().show(getSupportFragmentManager(), null);
                 break;
 
             case R.id.menu_pref_btn:
