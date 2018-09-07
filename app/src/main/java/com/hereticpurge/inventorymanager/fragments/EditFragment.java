@@ -256,7 +256,7 @@ public class EditFragment extends Fragment {
 
             @Override
             public void onCancel() {
-
+                popParentBackStack();
             }
         };
         ConfirmDialog confirmDialog = ConfirmDialog.createDialog(confirmDialogCallback,
