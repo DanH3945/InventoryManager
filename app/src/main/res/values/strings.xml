@@ -61,4 +61,10 @@
     <string name="detail_tracked_yes">Yes</string>
     <string name="detail_tracked_no">No</string>
 
+    // Recycler Fragment Item Strings
+    <string name="recycler_item_cost">Cost:</string>
+    <string name="recycler_item_retail">Retail:</string>
+    <string name="recycler_item_current_stock">Current Stock:</string>
+    <string name="recycler_item_tracking">Tracking</string>
+
 </resources>

@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
-                    android:text="Cost: "/>
+                    android:text="@string/recycler_item_cost"/>
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
-                    android:text="Retail: "/>
+                    android:text="@string/recycler_item_retail"/>
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
-                    android:text="Current Stock: "/>
+                    android:text="@string/recycler_item_current_stock"/>
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
@@ -115,7 +115,7 @@
                     android:id="@+id/recycler_item_tracking_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tracking"/>
+                    android:text="@string/recycler_item_tracking"/>
 
                 <Switch
                     android:id="@+id/recycler_item_tracking_switch"
