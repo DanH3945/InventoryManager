@@ -4,7 +4,7 @@ buildscript {
 
     ext {
 
-        supportVersion = '28.0.0-rc01'
+        supportVersion = '28.0.0-rc02'
 
         licenseDialogVersion = '1.8.3'
         zxingVersion = '3.3.3'
@@ -12,7 +12,7 @@ buildscript {
         roomVersion = '1.1.1'
         googleAdsVersion = '15.0.1'
         googleAnalyticsVersion = '16.0.3'
-        constraintLayoutVersion = '1.1.2'
+        constraintLayoutVersion = '1.1.3'
     }
     
     repositories {
