@@ -67,4 +67,17 @@
     <string name="recycler_item_current_stock">Current Stock:</string>
     <string name="recycler_item_tracking">Tracking</string>
 
+    // License Dialog Strings
+    <string name="license_license_dialog_name">PSDev\'s License Dialog</string>
+    <string name="license_license_dialog_url">http://github.psdev.de/LicensesDialog/</string>
+    <string name="license_license_dialog_copyright">Copyright 2013 Philip Schiffer</string>
+
+    <string name="license_zxing_name">ZXing\'s Barcode Reader</string>
+    <string name="license_zxing_url">https://github.com/zxing/zxing</string>
+    <string name="license_zxing_copyright">Copyright 2017 ZXing</string>
+
+    <string name="license_picasso_name">Picasso Image Loader</string>
+    <string name="license_picasso_url">https://square.github.io/picasso/</string>
+    <string name="license_picasso_copyright">Copyright 2013 Square, Inc.</string>
+
 </resources>

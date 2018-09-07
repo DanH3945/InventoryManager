@@ -28,6 +28,7 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.LicenseUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_about_btn:
                 Log.e(TAG, "onOptionsItemSelected: About Pressed");
+                LicenseUtils.showLicenseDialogLicense(this);
                 break;
 
             case R.id.menu_pref_btn:
