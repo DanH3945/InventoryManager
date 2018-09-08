@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
@@ -29,7 +31,6 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment mMainFragment;
 
     private ProductViewModel mViewModel;
+
+    private AdView mAdView;
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 101;
@@ -56,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(getMainFragment(), false, null);
         }
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mAdView = findViewById(R.id.included_ad_view);
+        mAdView.loadAd(adRequest);
     }
 
     @Override
