@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.fragments.AboutDialog;
 import com.hereticpurge.inventorymanager.fragments.DetailFragment;
@@ -26,6 +29,7 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 101;
+    private static final int PLAY_SERVICES_DIALOG_RESULT_CODE = 200;
+
     private static final int BARCODE_DEBUG = 1000;
 
     private static final String TAG = "MainActivity";
@@ -50,7 +56,23 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(getMainFragment(), false, null);
         }
+    }
 
+    @Override
+    protected void onResume() {
+        int playServicesResultCode = GoogleApiAvailability
+                .getInstance()
+                .isGooglePlayServicesAvailable(this);
+
+        if (playServicesResultCode == ConnectionResult.SUCCESS) {
+            super.onResume();
+        } else {
+            GoogleApiAvailability
+                    .getInstance()
+                    .getErrorDialog(this,
+                            playServicesResultCode,
+                            PLAY_SERVICES_DIALOG_RESULT_CODE);
+        }
     }
 
     @Override
@@ -108,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (fragment instanceof EditFragment){
+        if (fragment instanceof EditFragment) {
             ((EditFragment) fragment).confirmNavigateAwaySave();
         } else {
             super.onBackPressed();
@@ -125,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
 
-        if (addToBackStack){
+        if (addToBackStack) {
             transaction.addToBackStack(s);
         }
         transaction.commit();
@@ -272,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
     }
 
-    public void onEditButtonPressed(ProductItem productItem){
+    public void onEditButtonPressed(ProductItem productItem) {
         loadFragment(getEditFragment(productItem), true, null);
     }
 }
