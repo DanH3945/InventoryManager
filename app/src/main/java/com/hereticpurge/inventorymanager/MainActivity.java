@@ -14,11 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private MainFragment mMainFragment;
 
     private ProductViewModel mViewModel;
+
+    private Tracker mTracker;
 
     private AdView mAdView;
 
@@ -66,10 +71,22 @@ public class MainActivity extends AppCompatActivity {
 
         mAdView = findViewById(R.id.included_ad_view);
         mAdView.loadAd(adRequest);
+
+        // Fix for ad view dropping the frame rate of the app. Credit to Martin on stackoverflow.com
+        // for giving me the idea to switch the layer type.  My solution is somewhat simpler.  Just
+        // change the layer type for the entire view since i'm only trying to load test ads on a demo.
+        // https://stackoverflow.com/questions/9366365/android-admob-admob-ad-refresh-destroys-frame-rate
+        mAdView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+        mTracker = ((AnalyticsApplication) getApplication()).getDefaultTracker();
+
     }
 
     @Override
     protected void onResume() {
+        mTracker.setScreenName(TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
         int playServicesResultCode = GoogleApiAvailability
                 .getInstance()
                 .isGooglePlayServicesAvailable(this);
