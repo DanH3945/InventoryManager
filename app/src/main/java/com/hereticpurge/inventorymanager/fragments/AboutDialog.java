@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hereticpurge.inventorymanager.R;

@@ -5,18 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Debug;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -27,13 +24,15 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 public class EditFragment extends Fragment {
 
@@ -43,12 +42,12 @@ public class EditFragment extends Fragment {
 
     private ProductItem mProductItem;
 
-    ImageButton mMainImageButton;
-    ImageButton mBarcodeImageButton;
+    private ImageButton mMainImageButton;
+    private ImageButton mBarcodeImageButton;
 
-    ImageView mMainImageView;
+    private ImageView mMainImageView;
 
-    Bitmap mTempImage;
+    private Bitmap mTempImage;
 
     private EditText mName;
     private EditText mBarcode;
@@ -60,7 +59,9 @@ public class EditFragment extends Fragment {
 
     private Switch mTrackSwitch;
 
-    FloatingActionButton mFloatingActionButton;
+    private FloatingActionButton mFloatingActionButton;
+
+    private Tracker mTracker;
 
     private static final int MAIN_IMAGE_RESULT = 200;
     private static final int BARCODE_RESULT = 201;
@@ -108,7 +109,16 @@ public class EditFragment extends Fragment {
 
         initProductFields();
 
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mTracker.setScreenName(TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
     }
 
     @Override

@@ -18,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
@@ -152,6 +155,8 @@ public class DetailFragment extends Fragment {
 
     public static class DetailDisplayFragment extends Fragment {
 
+        private static final String TAG = "DetailDisplayFragment";
+
         private ProductItem mProductItem;
 
         private TextView mProductName;
@@ -165,6 +170,8 @@ public class DetailFragment extends Fragment {
         private TextView mProductTracked;
 
         ImageView mProductImageViewSmall;
+
+        private Tracker mTracker;
 
         public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
@@ -206,7 +213,16 @@ public class DetailFragment extends Fragment {
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
             CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
+            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+
             return view;
+        }
+
+        @Override
+        public void onResume() {
+            mTracker.setScreenName(TAG);
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+            super.onResume();
         }
 
         public ProductItem getDisplayProduct() {

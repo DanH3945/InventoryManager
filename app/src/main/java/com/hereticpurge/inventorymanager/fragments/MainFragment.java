@@ -10,12 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 
 public class MainFragment extends Fragment implements View.OnClickListener{
 
     private NumberPicker mNumberPicker;
     private MainFragmentButtonListener mMainFragmentButtonListener;
+
+    private Tracker mTracker;
+
+    private static final String TAG = "MainFragment";
 
     public static MainFragment createFragment(MainFragmentButtonListener mainFragmentButtonListener){
         MainFragment mainFragment = new MainFragment();
@@ -44,7 +51,16 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.main_fragment_btn_new_product).setOnClickListener(this);
         view.findViewById(R.id.main_fragment_btn_quick_change).setOnClickListener(this);
 
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mTracker.setScreenName(TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
     }
 
     @Override

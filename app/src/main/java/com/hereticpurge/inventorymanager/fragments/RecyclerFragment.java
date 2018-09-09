@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 
@@ -21,6 +24,10 @@ public class RecyclerFragment extends Fragment {
     private ProductViewModel mViewModel;
 
     private RecyclerFragmentAdapter.RecyclerCallback recyclerCallback;
+
+    private Tracker mTracker;
+
+    private static final String TAG = "RecyclerFragment";
 
     public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();
@@ -47,7 +54,16 @@ public class RecyclerFragment extends Fragment {
         mViewModel.getProductList()
                 .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
 
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mTracker.setScreenName(TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();
     }
 
     @Override
