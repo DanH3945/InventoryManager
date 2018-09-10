@@ -15,6 +15,9 @@ import java.util.List;
 public interface ProductDao {
 
     @Query("SELECT * FROM ProductItem")
+    List<ProductItem> getProductListNonLive();
+
+    @Query("SELECT * FROM ProductItem")
     LiveData<List<ProductItem>> getProductList();
 
     @Query("SELECT * FROM ProductItem WHERE id = :id")

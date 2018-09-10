@@ -32,7 +32,7 @@
     <TextView
         android:text="@string/about_license_dialog_name"
         android:id="@+id/about_license_dialog_tv"
-        android:textColor="@color/http_link_blue"
+        android:textColor="@color/httpLinkBlue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/about_item_height"
         android:layout_margin="@dimen/about_item_margin"
@@ -41,7 +41,7 @@
     <TextView
         android:text="@string/about_zxing_name"
         android:id="@+id/about_zxing_tv"
-        android:textColor="@color/http_link_blue"
+        android:textColor="@color/httpLinkBlue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/about_item_height"
         android:layout_margin="@dimen/about_item_margin"
@@ -50,7 +50,7 @@
     <TextView
         android:text="@string/about_picasso_name"
         android:id="@+id/about_picasso_tv"
-        android:textColor="@color/http_link_blue"
+        android:textColor="@color/httpLinkBlue"
         android:layout_width="match_parent"
         android:layout_height="@dimen/about_item_height"
         android:layout_margin="@dimen/about_item_margin"

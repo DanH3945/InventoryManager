@@ -2,11 +2,14 @@ package com.hereticpurge.inventorymanager.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity
-public class ProductItem {
+public class ProductItem implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -63,6 +66,19 @@ public class ProductItem {
         this.currentStock = currentStock;
         this.targetStock = targetStock;
         this.tracked = tracked;
+    }
+
+    @Ignore
+    protected ProductItem(Parcel in) {
+        id = in.readInt();
+        barcode = in.readString();
+        customId = in.readString();
+        name = in.readString();
+        cost = in.readString();
+        retail = in.readString();
+        currentStock = in.readInt();
+        targetStock = in.readInt();
+        tracked = in.readByte() != 0;
     }
 
     public int getId() {
@@ -135,5 +151,38 @@ public class ProductItem {
 
     public void setTracked(boolean tracked) {
         this.tracked = tracked;
+    }
+
+    @Ignore
+    public static final Creator<ProductItem> CREATOR = new Creator<ProductItem>() {
+        @Override
+        public ProductItem createFromParcel(Parcel in) {
+            return new ProductItem(in);
+        }
+
+        @Override
+        public ProductItem[] newArray(int size) {
+            return new ProductItem[size];
+        }
+    };
+
+    @Ignore
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Ignore
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(barcode);
+        dest.writeString(customId);
+        dest.writeString(name);
+        dest.writeString(cost);
+        dest.writeString(retail);
+        dest.writeInt(currentStock);
+        dest.writeInt(targetStock);
+        dest.writeByte((byte) (tracked ? 1 : 0));
     }
 }

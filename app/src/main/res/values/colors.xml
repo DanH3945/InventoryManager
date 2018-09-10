@@ -3,9 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="search_bar_color">#ffffff</color>
+    <color name="searchBarColor">#ffffff</color>
+    <color name="widgetBackground">#ffffff</color>
 
-    <color name="http_link_blue">#0000EE</color>
+    <color name="httpLinkBlue">#0000EE</color>
 
     <color name="textColorPrimary">#6c6c6c</color>
     <color name="textColorPrimaryLight">#9b9b9b</color>

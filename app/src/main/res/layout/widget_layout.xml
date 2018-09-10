@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/widgetBackground"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal">
 
     <ListView
         android:id="@+id/widget_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </ListView>
 
-</ScrollView>
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:text="EMPTY"
+        android:gravity="center"/>
+
+
+</LinearLayout>
