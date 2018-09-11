@@ -7,9 +7,11 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.hereticpurge.inventorymanager.R;
+import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainWidgetRemoteViewsService extends RemoteViewsService {
     @Override
@@ -21,18 +23,16 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
     public class MainWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
         private Context mContext;
-        private List<ProductItem> mTrackedProducts;
+        private ArrayList<ProductItem> mTrackedProducts;
         private int mAppWidgetId;
+        private ProductDatabase mProductDatabase;
 
         MainWidgetRemoteViewsFactory(Context context, Intent intent) {
-
             this.mContext = context;
-
-            this.mTrackedProducts = intent
-                    .getParcelableArrayListExtra(MainAppWidgetProvider.TRACKED_LIST_TAG);
-
+            this.mTrackedProducts = new ArrayList<>();
             this.mAppWidgetId = intent
                     .getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+            this.mProductDatabase = ProductDatabase.getDatabase(context);
         }
 
         @Override
@@ -42,12 +42,18 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-
+            DebugAssistant.callCheck("DATA SET CHANGED CALLED");
+            mTrackedProducts.clear();
+            for (ProductItem productItem : mProductDatabase.productDao().getProductListNonLive()){
+                if (productItem.isTracked()){
+                    mTrackedProducts.add(productItem);
+                }
+            }
         }
 
         @Override
         public void onDestroy() {
-
+            mProductDatabase.close();
         }
 
         @Override
