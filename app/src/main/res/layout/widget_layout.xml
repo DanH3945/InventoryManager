@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/widgetBackground"
+    android:background="@drawable/rounded_edges"
     android:orientation="vertical"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:backgroundTint="@color/widgetBackground">
 
     <ListView
         android:id="@+id/widget_list_view"

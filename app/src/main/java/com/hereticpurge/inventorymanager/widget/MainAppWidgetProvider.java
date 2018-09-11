@@ -1,21 +1,20 @@
 package com.hereticpurge.inventorymanager.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.widget.RemoteViews;
 
+import com.hereticpurge.inventorymanager.MainActivity;
 import com.hereticpurge.inventorymanager.R;
-import com.hereticpurge.inventorymanager.database.ProductDatabase;
-import com.hereticpurge.inventorymanager.model.ProductItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainAppWidgetProvider extends AppWidgetProvider {
+
+    public static final String EXTRA_LIST_POSITION = "extraProductItem";
+    public static final String WIDGET_ITEM_SELECTED = "widgetItemSelected";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -26,9 +25,16 @@ public class MainAppWidgetProvider extends AppWidgetProvider {
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.setAction(WIDGET_ITEM_SELECTED);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
             remoteViews.setRemoteAdapter(R.id.widget_list_view, serviceIntent);
             remoteViews.setEmptyView(R.id.widget_list_view, R.id.empty_view);
+            remoteViews.setPendingIntentTemplate(R.id.widget_list_view, pendingIntent);
+
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
     }

@@ -31,6 +31,7 @@ import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
+import com.hereticpurge.inventorymanager.widget.MainAppWidgetProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(getMainFragment(), false, null);
         }
+
+        checkIntentForWidgetAction(getIntent());
 
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -313,5 +316,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void onEditButtonPressed(ProductItem productItem) {
         loadFragment(getEditFragment(productItem), true, null);
+    }
+
+    private void checkIntentForWidgetAction(Intent intent) {
+        try {
+            if (intent.getAction().equals(MainAppWidgetProvider.WIDGET_ITEM_SELECTED)) {
+                int position = (Integer) intent.getExtras().get(MainAppWidgetProvider.EXTRA_LIST_POSITION);
+                onProductSelected(position);
+            }
+        } catch (NullPointerException npe){
+            Log.e(TAG, "checkIntentForWidgetAction: Resulted in NullPointerException");
+        }
     }
 }

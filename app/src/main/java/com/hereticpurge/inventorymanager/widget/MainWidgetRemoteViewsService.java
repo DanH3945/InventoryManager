@@ -9,9 +9,9 @@ import android.widget.RemoteViewsService;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
 import com.hereticpurge.inventorymanager.model.ProductItem;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainWidgetRemoteViewsService extends RemoteViewsService {
     @Override
@@ -23,30 +23,30 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
     public class MainWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
         private Context mContext;
-        private ArrayList<ProductItem> mTrackedProducts;
+        private ArrayList<Integer> mProductsNeedRestock;
         private int mAppWidgetId;
         private ProductDatabase mProductDatabase;
+        private List<ProductItem> mProductItemList;
 
         MainWidgetRemoteViewsFactory(Context context, Intent intent) {
             this.mContext = context;
-            this.mTrackedProducts = new ArrayList<>();
+            this.mProductsNeedRestock = new ArrayList<>();
             this.mAppWidgetId = intent
                     .getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-            this.mProductDatabase = ProductDatabase.getDatabase(context);
         }
 
         @Override
         public void onCreate() {
-
+            this.mProductDatabase = ProductDatabase.getDatabase(mContext);
         }
 
         @Override
         public void onDataSetChanged() {
-            DebugAssistant.callCheck("DATA SET CHANGED CALLED");
-            mTrackedProducts.clear();
-            for (ProductItem productItem : mProductDatabase.productDao().getProductListNonLive()){
-                if (productItem.isTracked()){
-                    mTrackedProducts.add(productItem);
+            mProductItemList = mProductDatabase.productDao().getProductListNonLive();
+            mProductsNeedRestock.clear();
+            for (int i = 0; i < mProductItemList.size(); i++){
+                if (mProductItemList.get(i).isTracked() && mProductItemList.get(i).currentStock < mProductItemList.get(i).targetStock){
+                    mProductsNeedRestock.add(i);
                 }
             }
         }
@@ -58,13 +58,31 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            return mTrackedProducts.size();
+            return mProductsNeedRestock.size();
         }
 
         @Override
         public RemoteViews getViewAt(int position) {
-            RemoteViews view = new RemoteViews(mContext.getPackageName(), R.layout.widget_layout_item);
-            return view;
+            int listPosition = mProductsNeedRestock.get(position);
+            ProductItem productItem = mProductItemList.get(listPosition);
+
+            RemoteViews baseView =
+                    new RemoteViews(mContext.getPackageName(), R.layout.widget_layout_item);
+
+            baseView.setTextViewText(R.id.widget_item_name_text, productItem.getName());
+
+            baseView.setTextViewText(R.id.widget_item_current_stock_text,
+                    Integer.toString(productItem.getCurrentStock()));
+
+            baseView.setTextViewText(R.id.widget_item_target_stock_text,
+                    Integer.toString(productItem.getTargetStock()));
+
+            Intent intent = new Intent();
+            intent.putExtra(MainAppWidgetProvider.EXTRA_LIST_POSITION, listPosition);
+
+            baseView.setOnClickFillInIntent(R.id.widget_item_base, intent);
+
+            return baseView;
         }
 
         @Override
