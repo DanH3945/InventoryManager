@@ -1,5 +1,6 @@
 package com.hereticpurge.inventorymanager.fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.List;
 
@@ -61,11 +63,14 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        try {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        } catch (NullPointerException npe){
+            Log.e(TAG, "onCreateView: Failed to Load AppBar");
+        }
         mViewPager = view.findViewById(R.id.detail_viewpager);
         mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
@@ -73,13 +78,16 @@ public class DetailFragment extends Fragment {
         mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
 
         mFloatingActionButton = view.findViewById(R.id.main_fab);
-        mFloatingActionButton.setOnClickListener(v -> {
-            ProductItem productItem =
-                    ((DetailDisplayFragment) mDetailPagerAdapter.getItem(mViewPager.getCurrentItem()))
-                            .getDisplayProduct();
-            mDetailEditButtonCallback.editButtonPressed(productItem);
-        });
 
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductItem productItem = ((DetailDisplayFragment) mDetailPagerAdapter
+                        .getItem(mViewPager.getCurrentItem()))
+                        .getDisplayProduct();
+                mDetailEditButtonCallback.editButtonPressed(productItem);
+            }
+        });
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -91,10 +99,12 @@ public class DetailFragment extends Fragment {
             public void onPageSelected(int i) {
 
                 try {
+
                     String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                             .getDisplayProduct()
                             .getName();
                     CustomImageUtils.loadImage(getContext(), productName, mToolbarImageView);
+
                 } catch (NullPointerException npe) {
                     Log.e(TAG, "onPageSelected: Null Product Reference");
                 }
@@ -161,8 +171,11 @@ public class DetailFragment extends Fragment {
     public static class DetailDisplayFragment extends Fragment {
 
         private static final String TAG = "DetailDisplayFragment";
+        private static final String PRODUCT_ID = "productId";
 
         private ProductItem mProductItem;
+
+        private int mProductId;
 
         private TextView mProductName;
         private TextView mProductBarcode;
@@ -178,6 +191,8 @@ public class DetailFragment extends Fragment {
 
         private Tracker mTracker;
 
+        private ProductViewModel mViewModel;
+
         public static DetailDisplayFragment createInstance(ProductItem productItem) {
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
             detailDisplayFragment.mProductItem = productItem;
@@ -189,38 +204,42 @@ public class DetailFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
+            if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null){
+                mProductId = (int) savedInstanceState.get(PRODUCT_ID);
+            } else {
+                mProductId = mProductItem.getId();
+            }
+
             mProductName = view.findViewById(R.id.detail_product_name_text);
-            mProductName.setText(mProductItem.getName());
-
             mProductBarcode = view.findViewById(R.id.detail_barcode_text);
-            mProductBarcode.setText(mProductItem.getBarcode());
-
             mProductCustomId = view.findViewById(R.id.detail_custom_id_text);
-            mProductCustomId.setText(mProductItem.getCustomId());
-
             mProductCost = view.findViewById(R.id.detail_cost_text);
-            mProductCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
-
             mProductRetail = view.findViewById(R.id.detail_retail_text);
-            mProductRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
-
             mProductCurrentStock = view.findViewById(R.id.detail_current_stock_text);
-            mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
-
             mProductTargetStock = view.findViewById(R.id.detail_target_stock_text);
-            mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
-
             mProductTracked = view.findViewById(R.id.detail_track_text);
-            mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
-                    view.getResources().getString(R.string.detail_tracked_yes) :
-                    view.getResources().getString(R.string.detail_tracked_no)));
-
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
-            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
-            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+            if (getActivity() != null){
+                mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+            }
+
+            mViewModel.getProductById(mProductId).observe(this, productItem -> updateProductItem(productItem));
 
             return view;
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+
+            mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+        }
+
+        @Override
+        public void onSaveInstanceState(@NonNull Bundle outState) {
+            outState.putInt(PRODUCT_ID, mProductItem.getId());
+            super.onSaveInstanceState(outState);
         }
 
         @Override
@@ -232,6 +251,31 @@ public class DetailFragment extends Fragment {
 
         public ProductItem getDisplayProduct() {
             return mProductItem;
+        }
+
+        private void updateProductItem(ProductItem productItem){
+            mProductItem = productItem;
+            populateFields();
+        }
+
+        private void populateFields(){
+
+            mProductName.setText(mProductItem.getName());
+            mProductBarcode.setText(mProductItem.getBarcode());
+            mProductCustomId.setText(mProductItem.getCustomId());
+            mProductCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
+            mProductRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
+            mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
+            mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
+
+            if (getActivity() != null){
+                mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
+                        getActivity().getResources().getString(R.string.detail_tracked_yes) :
+                        getActivity().getResources().getString(R.string.detail_tracked_no)));
+            }
+
+            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
+
         }
     }
 
