@@ -31,7 +31,7 @@ import java.util.List;
 
 public class DetailFragment extends Fragment {
 
-    private static final String TAG = "DetailFragment";
+    public static final String TAG = "DetailFragment";
     protected static int sCurrentPosition;
 
     private ImageView mToolbarImageView;

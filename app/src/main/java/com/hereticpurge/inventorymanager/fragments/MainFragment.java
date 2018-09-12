@@ -22,7 +22,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     private Tracker mTracker;
 
-    private static final String TAG = "MainFragment";
+    public static final String TAG = "MainFragment";
 
     public static MainFragment createFragment(MainFragmentButtonListener mainFragmentButtonListener){
         MainFragment mainFragment = new MainFragment();

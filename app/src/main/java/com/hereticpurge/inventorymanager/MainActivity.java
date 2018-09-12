@@ -3,6 +3,7 @@ package com.hereticpurge.inventorymanager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null) {
-            loadFragment(getMainFragment(), false, null);
+            loadFragment(getMainFragment(), false, MainFragment.TAG);
         }
 
         checkIntentForWidgetAction(getIntent());
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void loadFragment(Fragment fragment, boolean addToBackStack, @Nullable String s) {
+    private void loadFragment(Fragment fragment, boolean addToBackStack, @NonNull String s) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
 
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private DetailFragment getNewDetailFragment(int id) {
+    private DetailFragment getDetailFragment(int id) {
         return DetailFragment.createInstance(id, productItem -> onEditButtonPressed(productItem));
     }
 
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onBrowseAllPressed() {
                     loadFragment(getRecyclerFragment(),
                             true,
-                            null);
+                            RecyclerFragment.TAG);
                 }
 
                 @Override
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(
                             getEditFragment(null),
                             true,
-                            null);
+                            EditFragment.TAG);
                 }
 
                 @Override
@@ -227,10 +228,10 @@ public class MainActivity extends AppCompatActivity {
             LiveData<ProductItem> productItemLiveData = mViewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
             try {
-                loadFragment(getNewDetailFragment(
+                loadFragment(getDetailFragment(
                         productItem.getId()),
                         true,
-                        null);
+                        DetailFragment.TAG);
             } catch (NullPointerException npe) {
                 productNotFoundErrorToast();
             }
@@ -238,9 +239,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onProductSelected(int id) {
-        loadFragment(getNewDetailFragment(id),
+        loadFragment(getDetailFragment(id),
                 true,
-                null);
+                DetailFragment.TAG);
     }
 
     private void startCameraForResult(int requestCode) {
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onEditButtonPressed(ProductItem productItem) {
-        loadFragment(getEditFragment(productItem), true, null);
+        loadFragment(getEditFragment(productItem), true, EditFragment.TAG);
     }
 
     private void checkIntentForWidgetAction(Intent intent) {

@@ -36,7 +36,7 @@ import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
 public class EditFragment extends Fragment {
 
-    private static final String TAG = "EditFragment";
+    public static final String TAG = "EditFragment";
 
     private ProductViewModel mViewModel;
 

@@ -27,7 +27,7 @@ public class RecyclerFragment extends Fragment {
 
     private Tracker mTracker;
 
-    private static final String TAG = "RecyclerFragment";
+    public static final String TAG = "RecyclerFragment";
 
     public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
         RecyclerFragment recyclerFragment = new RecyclerFragment();

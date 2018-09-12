@@ -16,7 +16,7 @@ public class PreferenceFragment extends Fragment{
 
     private Tracker mTracker;
 
-    private static final String TAG = "PreferenceFragment";
+    public static final String TAG = "PreferenceFragment";
 
     @Nullable
     @Override
