@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/rounded_edges"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
+    android:background="@drawable/rounded_edges_widget"
     android:backgroundTint="@color/widgetBackground">
 
     <LinearLayout
@@ -15,14 +15,13 @@
         android:gravity="center_horizontal">
 
         <TextView
-            style="@style/ParentTextLabelStyle"
+            style="@style/WidgetLabelStyle"
             android:id="@+id/widget_item_name_label"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="Name" />
+            android:paddingTop="8dp"
+            android:text="@string/widget_name"
+            android:gravity="center_horizontal"/>
 
         <FrameLayout
             android:layout_width="1dp"
@@ -30,14 +29,15 @@
             android:background="?android:attr/listDivider"/>
 
         <TextView
-            style="@style/ParentTextLabelStyle"
+            style="@style/WidgetLabelStyle"
             android:id="@+id/widget_item_current_stock_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="Current\nStock"/>
+            android:paddingTop="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/widget_current_stock"
+            android:gravity="center"/>
 
         <FrameLayout
             android:layout_width="1dp"
@@ -45,14 +45,15 @@
             android:background="?android:attr/listDivider"/>
 
         <TextView
-            style="@style/ParentTextLabelStyle"
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            style="@style/WidgetLabelStyle"
+            android:paddingTop="8dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="2dp"
             android:id="@+id/widget_item_target_stock_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Target\nStock"/>
+            android:text="@string/widget_target_stock"
+            android:gravity="center"/>
 
     </LinearLayout>
 
@@ -73,7 +74,7 @@
         style="@android:style/TextAppearance.Medium"
         android:layout_gravity="center"
         android:layout_margin="4dp"
-        android:text="EMPTY"
+        android:text="@string/widget_empty_text"
         android:gravity="center"/>
 
 

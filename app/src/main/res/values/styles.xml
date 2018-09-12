@@ -78,4 +78,9 @@
         <item name="android:textSize">@dimen/recycler_item_label_text_size</item>
     </style>
 
+    // Widget Styles
+    <style name="WidgetLabelStyle" parent="ParentTextLabelStyle">
+        <item name="android:textSize">@dimen/widget_label_text_size</item>
+    </style>
+
 </resources>

@@ -84,8 +84,14 @@
     <string name="about_picasso_url">https://square.github.io/picasso/</string>
     <string name="about_picasso_copyright">Copyright 2013 Square, Inc.</string>
 
-    //Google Mobile Adds Strings
+    // Google Mobile Adds Strings
     <string name="ads_test_banner_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    // Widget Strings
+    <string name="widget_name">Product\nName</string>
+    <string name="widget_current_stock">"Current\nStock"</string>
+    <string name="widget_target_stock">"Target\nStock"</string>
+    <string name="widget_empty_text">When you start tracking items they will be displayed here if their inventory is low.</string>
 
 
 </resources>

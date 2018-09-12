@@ -32,4 +32,7 @@
     <dimen name="about_item_margin">5dp</dimen>
     <dimen name="about_item_height">32dp</dimen>
 
+    // Widget Dimensions
+    <dimen name="widget_label_text_size">12sp</dimen>
+
 </resources>

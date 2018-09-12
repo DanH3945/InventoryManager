@@ -35,7 +35,7 @@
                     android:id="@+id/search_et"
                     android:layout_width="280dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/rounded_edges"
+                    android:background="@drawable/rounded_edges_toolbar"
                     android:backgroundTint="@color/searchBarColor"
                     android:drawableEnd="@mipmap/search_24px"
                     android:gravity="center"
