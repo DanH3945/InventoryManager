@@ -35,6 +35,10 @@
     <string name="toolbar_add_debug_product_scan_button">Add Debug Product Scan</string>
     <string name="toolbar_wipe_database_button">Wipe Database</string>
 
+    // Main Fragment Strings
+    <string name="main_fragment_browse_products_btn_text">Browse Products</string>
+    <string name="main_fragment_add_new_item_btn_text">Add New Item</string>
+    <string name="main_fragment_quick_stock_change_btn_text">Quick Stock Change</string>
 
     // Edit Fragment Strings
     <string name="edit_button_save_product_string">Save Product</string>
@@ -92,6 +96,5 @@
     <string name="widget_current_stock">"Current\nStock"</string>
     <string name="widget_target_stock">"Target\nStock"</string>
     <string name="widget_empty_text">When you start tracking items they will be displayed here if their inventory is low.</string>
-
 
 </resources>
