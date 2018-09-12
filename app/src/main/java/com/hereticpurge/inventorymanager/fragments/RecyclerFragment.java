@@ -23,16 +23,14 @@ public class RecyclerFragment extends Fragment {
 
     private ProductViewModel mViewModel;
 
-    private RecyclerFragmentAdapter.RecyclerCallback recyclerCallback;
+    private RecyclerFragmentAdapter.RecyclerCallback mRecyclerCallback;
 
     private Tracker mTracker;
 
     public static final String TAG = "RecyclerFragment";
 
-    public static RecyclerFragment createInstance(RecyclerFragmentAdapter.RecyclerCallback recyclerCallback){
-        RecyclerFragment recyclerFragment = new RecyclerFragment();
-        recyclerFragment.recyclerCallback = recyclerCallback;
-        return recyclerFragment;
+    public static RecyclerFragment createInstance(){
+        return new RecyclerFragment();
     }
 
     @Nullable
@@ -47,7 +45,7 @@ public class RecyclerFragment extends Fragment {
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(recyclerCallback, mViewModel);
+        RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(mRecyclerCallback, mViewModel);
         recyclerView.setAdapter(recyclerFragmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -70,8 +68,16 @@ public class RecyclerFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        mRecyclerCallback = (RecyclerFragmentAdapter.RecyclerCallback) getActivity();
+
         mViewModel = ViewModelProviders.of(this)
                 .get(ProductViewModel.class);
 
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mRecyclerCallback = null;
     }
 }

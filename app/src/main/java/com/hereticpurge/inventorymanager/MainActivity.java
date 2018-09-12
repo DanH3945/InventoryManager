@@ -3,7 +3,6 @@ package com.hereticpurge.inventorymanager;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,13 +27,14 @@ import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
+import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
 import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.widget.MainAppWidgetProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.MainFragmentButtonListener, RecyclerFragmentAdapter.RecyclerCallback, DetailFragment.DetailEditButtonCallback{
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private DetailFragment getDetailFragment(int id) {
-        return DetailFragment.createInstance(id, productItem -> onEditButtonPressed(productItem));
+        return DetailFragment.createInstance(id);
     }
 
     private EditFragment getEditFragment(ProductItem productItem) {
@@ -185,40 +185,14 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerFragment getRecyclerFragment() {
         if (mRecyclerFragment == null) {
-            mRecyclerFragment = RecyclerFragment.createInstance(id -> onProductSelected(id));
+            mRecyclerFragment = RecyclerFragment.createInstance();
         }
         return mRecyclerFragment;
     }
 
     private MainFragment getMainFragment() {
         if (mMainFragment == null) {
-            mMainFragment = MainFragment.createFragment(new MainFragment.MainFragmentButtonListener() {
-
-                @Override
-                public void onBrowseAllPressed() {
-                    loadFragment(getRecyclerFragment(),
-                            true,
-                            RecyclerFragment.TAG);
-                }
-
-                @Override
-                public void onNewItemPressed() {
-                    loadFragment(
-                            getEditFragment(null),
-                            true,
-                            EditFragment.TAG);
-                }
-
-                @Override
-                public void onBarcodeSearch() {
-                    startCameraForResult(BARCODE_SEARCH);
-                }
-
-                @Override
-                public void onQuickChangePressed() {
-                    startCameraForResult(BARCODE_QUICK_CHANGE);
-                }
-            });
+            mMainFragment = MainFragment.createInstance();
         }
         return mMainFragment;
     }
@@ -325,8 +299,46 @@ public class MainActivity extends AppCompatActivity {
                 int position = (Integer) intent.getExtras().get(MainAppWidgetProvider.EXTRA_LIST_POSITION);
                 onProductSelected(position);
             }
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             Log.e(TAG, "checkIntentForWidgetAction: Resulted in NullPointerException");
         }
+    }
+
+    // Main Fragment Callbacks
+    @Override
+    public void onBrowseAllPressed() {
+        loadFragment(getRecyclerFragment(),
+                true,
+                RecyclerFragment.TAG);
+    }
+
+    @Override
+    public void onNewItemPressed() {
+        loadFragment(
+                getEditFragment(null),
+                true,
+                EditFragment.TAG);
+    }
+
+    @Override
+    public void onBarcodeSearch() {
+        startCameraForResult(BARCODE_SEARCH);
+    }
+
+    @Override
+    public void onQuickChangePressed() {
+        startCameraForResult(BARCODE_QUICK_CHANGE);
+    }
+
+    // Recycler Fragment Adapter Callback
+    @Override
+    public void onItemSelected(int id) {
+        onProductSelected(id);
+    }
+
+    // Detail Fragment Callback
+    @Override
+    public void editButtonPressed(ProductItem productItem) {
+        onEditButtonPressed(productItem);
     }
 }

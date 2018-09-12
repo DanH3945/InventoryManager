@@ -37,6 +37,7 @@ import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 public class EditFragment extends Fragment {
 
     public static final String TAG = "EditFragment";
+    private static final String PRODUCT_KEY = "productKey";
 
     private ProductViewModel mViewModel;
 
@@ -76,6 +77,10 @@ public class EditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
+
+        if (savedInstanceState != null){
+            mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
+        }
 
         mFloatingActionButton = view.findViewById(R.id.main_fab);
         mFloatingActionButton.setOnClickListener(v -> doSave());
@@ -128,6 +133,12 @@ public class EditFragment extends Fragment {
         mViewModel = ViewModelProviders
                 .of(this)
                 .get(ProductViewModel.class);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(PRODUCT_KEY, mProductItem);
+        super.onSaveInstanceState(outState);
     }
 
     private void initProductFields() {

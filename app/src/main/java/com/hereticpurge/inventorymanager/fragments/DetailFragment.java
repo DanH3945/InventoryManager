@@ -46,13 +46,12 @@ public class DetailFragment extends Fragment {
 
     private DetailEditButtonCallback mDetailEditButtonCallback;
 
-    public static DetailFragment createInstance(int position, DetailEditButtonCallback detailEditButtonCallback) {
+    public static DetailFragment createInstance(int position) {
         // The ViewPager position to bring into view when the fragment is loaded.
         sCurrentPosition = position;
 
 
-        DetailFragment detailFragment = new DetailFragment();
-        detailFragment.mDetailEditButtonCallback = detailEditButtonCallback;
+        DetailFragment detailFragment = new DetailFragment();;
         return detailFragment;
     }
 
@@ -120,9 +119,15 @@ public class DetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        mDetailEditButtonCallback = (DetailEditButtonCallback) getActivity();
         mViewModel = ViewModelProviders.of(this)
                 .get(ProductViewModel.class);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mDetailEditButtonCallback = null;
     }
 
     private static class DetailPagerAdapter extends FragmentPagerAdapter {

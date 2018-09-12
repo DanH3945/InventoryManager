@@ -1,5 +1,6 @@
 package com.hereticpurge.inventorymanager.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,10 +25,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     public static final String TAG = "MainFragment";
 
-    public static MainFragment createFragment(MainFragmentButtonListener mainFragmentButtonListener){
-        MainFragment mainFragment = new MainFragment();
-        mainFragment.mMainFragmentButtonListener = mainFragmentButtonListener;
-        return mainFragment;
+    public static MainFragment createInstance(){
+        return new MainFragment();
     }
 
     @Nullable
@@ -54,6 +53,18 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mMainFragmentButtonListener = (MainFragmentButtonListener) getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mMainFragmentButtonListener = null;
     }
 
     @Override
