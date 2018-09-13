@@ -28,16 +28,16 @@
                 android:layout_height="@dimen/edit_fragment_main_image_dimension"
                 android:layout_marginEnd="56dp"
                 android:src="@mipmap/ic_launcher"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-                app:layout_constraintLeft_toRightOf="@id/edit_product_image_iv"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_product_image_iv"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
@@ -72,7 +72,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_product_name"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_product_name_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_product_name_et" />
 
             <EditText
                 android:id="@+id/edit_product_name_et"
@@ -81,8 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_product_name"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
 
             <TextView
@@ -93,7 +93,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_custom_id"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_product_customid_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_product_customid_et" />
 
 
             <EditText
@@ -103,8 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_custom_id"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
 
             <TextView
@@ -115,7 +115,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_barcode"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_barcode_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_product_barcode_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_product_barcode_et" />
 
             <EditText
                 android:id="@+id/edit_product_barcode_et"
@@ -125,8 +125,8 @@
                 android:layout_marginEnd="60dp"
                 android:layout_marginTop="36dp"
                 android:hint="@string/edit_barcode"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
 
             <LinearLayout
@@ -135,7 +135,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
-                app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
+                app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et">
 
                 <TextView
@@ -151,7 +151,7 @@
                     android:layout_width="@dimen/camera_button_dimension"
                     android:layout_height="@dimen/camera_button_dimension"
                     android:elevation="6dp"
-                    app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
+                    app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
                     app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et" />
 
             </LinearLayout>
@@ -164,7 +164,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_cost"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_cost_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_fragment_cost_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_cost_et" />
 
             <EditText
                 android:id="@+id/edit_fragment_cost_et"
@@ -175,8 +175,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_cost"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/edit_fragment_retail_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
             <TextView
@@ -187,7 +187,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_retail"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_retail_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_fragment_retail_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_retail_et" />
 
             <EditText
                 android:id="@+id/edit_fragment_retail_et"
@@ -196,8 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_retail"
-                app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_fragment_cost_et"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
             <TextView
@@ -208,7 +208,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_current_stock"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_current_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_current_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_current_et" />
 
             <EditText
                 android:id="@+id/edit_fragment_stock_current_et"
@@ -219,8 +219,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_current_stock"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/edit_fragment_stock_target_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
 
             <TextView
@@ -231,7 +231,7 @@
                 android:paddingStart="5dp"
                 android:text="@string/edit_target_stock"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_target_et"
-                app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_target_et" />
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_target_et" />
 
             <EditText
                 android:id="@+id/edit_fragment_stock_target_et"
@@ -240,8 +240,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_target_stock"
-                app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_fragment_stock_current_et"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
 
             <TextView
@@ -251,8 +251,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/edit_tracking"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
-                app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintRight_toLeftOf="parent" />
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent" />
 
             <Switch
                 android:id="@+id/edit_fragment_track_switch_button"
@@ -263,8 +263,8 @@
                 android:textOff="@string/edit_switch_off"
                 android:textOn="@string/edit_switch_on"
                 app:layout_constraintBottom_toTopOf="@id/edit_delete_button"
-                app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et" />
 
             <Button
@@ -276,8 +276,8 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/edit_button_delete_product_string"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button" />
 
         </android.support.constraint.ConstraintLayout>
