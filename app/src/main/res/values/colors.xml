@@ -3,18 +3,22 @@
     <color name="colorPrimary">#313131</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#ff6f3a</color>
+
     <color name="layoutBackgroundColor">#212121</color>
     <color name="dividerColor">#9b9b9b</color>
 
+    // Toolbar Colors
     <color name="searchBarColor">#ffffff</color>
+    <color name="toolbarFadeTo">@color/colorPrimary</color>
 
+    // Widget Colors
     <color name="widgetBackground">#ffffff</color>
 
-    <color name="textColorPrimary">#ffffff</color>
-    <color name="textColorPrimaryLight">#9b9b9b</color>
+    // Text colors
+    <color name="textColorPrimary">#bebebe</color>
+    <color name="textColorPrimaryLight">#7c7c7c</color>
 
     // Button Colors
-
     <color name="buttonBackground">@color/colorPrimary</color>
     <color name="buttonTextColor">@color/textColorPrimary</color>
 
