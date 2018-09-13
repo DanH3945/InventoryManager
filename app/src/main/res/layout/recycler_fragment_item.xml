@@ -15,12 +15,14 @@
             android:id="@+id/recycler_item_image_view"
             android:layout_width="@dimen/recycler_item_image_dimen"
             android:layout_height="@dimen/recycler_item_image_dimen"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:background="@color/recyclerCardColor"/>
 
         <android.support.constraint.ConstraintLayout
             android:layout_marginStart="@dimen/recycler_item_image_dimen"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/recyclerCardColor">
 
             <TextView
                 android:id="@+id/recycler_item_product_name"

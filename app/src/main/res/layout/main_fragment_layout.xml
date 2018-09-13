@@ -38,12 +38,22 @@
                 style="@style/ButtonStyle"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/main_fragment_add_new_item_btn_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_browse_all" />
+
+            <TextView
+                style="@style/ParentTextLabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick Search"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_barcode"
+                app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_browse_barcode"
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_browse_barcode"/>
 
             <ImageButton
                 android:id="@+id/main_fragment_btn_browse_barcode"
@@ -53,11 +63,21 @@
                 android:layout_marginStart="8dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/camera_24px"
-                app:layout_constraintBottom_toTopOf="@+id/main_fragment_btn_quick_change"
+                app:layout_constraintTop_toTopOf="@id/main_fragment_btn_browse_all"
+                app:layout_constraintBottom_toBottomOf="@id/main_fragment_btn_new_product"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_browse_all"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.55" />
+
+            <TextView
+                style="@style/ParentTextLabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quickly add to the stock level of an item\nwhen inventory comes in.  Just select a\nnumber and snap the barcode of the item!!"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_quick_change"
+                app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_quick_change"
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_quick_change"/>
 
             <Button
                 android:padding="16dp"
@@ -69,17 +89,16 @@
                 android:drawablePadding="8dp"
                 android:text="@string/main_fragment_quick_stock_change_btn_text"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_all"
                 app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintVertical_bias="0.3" />
 
             <NumberPicker
                 android:background="#c8c8c9"
                 android:id="@+id/main_fragment_number_picker"
                 android:layout_width="24dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="32dp"
                 app:layout_constraintBottom_toBottomOf="@+id/main_fragment_btn_quick_change"
                 app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_quick_change"
                 app:layout_constraintTop_toTopOf="@+id/main_fragment_btn_quick_change" />

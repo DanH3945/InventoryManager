@@ -17,4 +17,7 @@
     <color name="dialogTextColorPrimary">#6c6c6c</color>
     <color name="dialogTextColorPrimaryLight">#9b9b9b</color>
     <color name="httpLinkBlue">#0000EE</color>
+
+    // Recycler Colors
+    <color name="recyclerCardColor">@color/colorPrimaryDark</color>
 </resources>
