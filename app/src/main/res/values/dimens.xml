@@ -8,7 +8,7 @@
     // Edit Fragment Dimensions
     <dimen name="edit_fragment_et_top_margin">16dp</dimen>
     <dimen name="edit_fragment_et_big_field">280dp</dimen>
-    <dimen name="edit_fragment_et_small_field">120dp</dimen>
+    <dimen name="edit_fragment_et_small_field">108dp</dimen>
     <dimen name="edit_fragment_main_image_dimension">220dp</dimen>
     <dimen name="edit_text_size">16sp</dimen>
     <dimen name="edit_label_text_size">14sp</dimen>

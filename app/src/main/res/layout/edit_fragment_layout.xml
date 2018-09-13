@@ -14,10 +14,9 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:padding="16dp"
             style="@style/VisibleLayoutStyle">
 
 
@@ -174,7 +173,7 @@
                 android:layout_marginEnd="38dp"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_cost"
-                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
@@ -196,7 +195,7 @@
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_retail"
                 app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
-                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
             <TextView
@@ -217,7 +216,7 @@
                 android:layout_marginEnd="38dp"
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_current_stock"
-                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
 
@@ -239,7 +238,7 @@
                 android:layout_marginTop="32dp"
                 android:hint="@string/edit_target_stock"
                 app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
-                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
 
             <TextView
