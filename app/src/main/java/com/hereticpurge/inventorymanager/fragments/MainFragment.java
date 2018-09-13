@@ -16,7 +16,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     private NumberPicker mNumberPicker;
     private MainFragmentButtonListener mMainFragmentButtonListener;
@@ -25,7 +25,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     public static final String TAG = "MainFragment";
 
-    public static MainFragment createInstance(){
+    public static MainFragment createInstance() {
         return new MainFragment();
     }
 
@@ -95,14 +95,17 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public int getNumberPickerValue(){
+    public int getNumberPickerValue() {
         return mNumberPicker.getValue();
     }
 
-    public interface MainFragmentButtonListener{
+    public interface MainFragmentButtonListener {
         void onBrowseAllPressed();
+
         void onNewItemPressed();
+
         void onBarcodeSearch();
+
         void onQuickChangePressed();
     }
 }

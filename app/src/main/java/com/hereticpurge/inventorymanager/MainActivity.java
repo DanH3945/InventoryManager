@@ -34,7 +34,7 @@ import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.widget.MainAppWidgetProvider;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.MainFragmentButtonListener, RecyclerFragmentAdapter.RecyclerCallback, DetailFragment.DetailEditButtonCallback{
+public class MainActivity extends AppCompatActivity implements MainFragment.MainFragmentButtonListener, RecyclerFragmentAdapter.RecyclerCallback, DetailFragment.DetailEditButtonCallback {
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;

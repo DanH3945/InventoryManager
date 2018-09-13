@@ -7,7 +7,7 @@ public class DebugProductItemFactory {
         return getDebugProduct(barcode);
     }
 
-    public static ProductItem getDebugProduct(String barcode){
+    public static ProductItem getDebugProduct(String barcode) {
         String customId = String.valueOf(Math.random() * 10000);
         String name = "Debug Item";
         String cost = "4.00";

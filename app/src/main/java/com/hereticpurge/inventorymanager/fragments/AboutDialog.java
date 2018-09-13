@@ -30,7 +30,7 @@ public class AboutDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog;
-        if(getContext() != null){
+        if (getContext() != null) {
             ContextThemeWrapper themeWrapper = new ContextThemeWrapper(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
             dialog = new Dialog(themeWrapper);
         } else {
@@ -50,7 +50,7 @@ public class AboutDialog extends AppCompatDialogFragment {
             String string = getResources().getString(R.string.about_version) + versionCode;
 
             mVersionText.setText(string);
-        } catch (PackageManager.NameNotFoundException nnfe){
+        } catch (PackageManager.NameNotFoundException nnfe) {
             Log.e(TAG, "onCreateDialog: Failed to get package name");
         }
 
@@ -66,7 +66,7 @@ public class AboutDialog extends AppCompatDialogFragment {
         return dialog;
     }
 
-    private void showLicenseDialogLicense(Context context){
+    private void showLicenseDialogLicense(Context context) {
         final String name = context.getResources().getString(R.string.about_license_dialog_name);
         final String url = context.getResources().getString(R.string.about_license_dialog_url);
         final String copyright = context.getResources().getString(R.string.about_license_dialog_copyright);
@@ -75,7 +75,7 @@ public class AboutDialog extends AppCompatDialogFragment {
         new LicensesDialog.Builder(context).setNotices(notice).build().showAppCompat();
     }
 
-    private void showZxingLicense(Context context){
+    private void showZxingLicense(Context context) {
         final String name = context.getResources().getString(R.string.about_zxing_name);
         final String url = context.getResources().getString(R.string.about_zxing_url);
         final String copyright = context.getResources().getString(R.string.about_zxing_copyright);
@@ -84,7 +84,7 @@ public class AboutDialog extends AppCompatDialogFragment {
         new LicensesDialog.Builder(context).setNotices(notice).build().showAppCompat();
     }
 
-    private void showPicassoLicense(Context context){
+    private void showPicassoLicense(Context context) {
         final String name = context.getResources().getString(R.string.about_picasso_name);
         final String url = context.getResources().getString(R.string.about_picasso_url);
         final String copyright = context.getResources().getString(R.string.about_picasso_copyright);

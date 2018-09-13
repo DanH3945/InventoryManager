@@ -17,8 +17,8 @@ public class AnalyticsApplication extends Application {
         sAnalytics = GoogleAnalytics.getInstance(this);
     }
 
-    synchronized public Tracker getDefaultTracker(){
-        if (sTracker == null){
+    synchronized public Tracker getDefaultTracker() {
+        if (sTracker == null) {
             sTracker = sAnalytics.newTracker(R.xml.global_tracker);
         }
 

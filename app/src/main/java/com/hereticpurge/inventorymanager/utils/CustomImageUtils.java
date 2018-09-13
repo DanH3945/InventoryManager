@@ -21,7 +21,8 @@ public final class CustomImageUtils {
 
     private static final String TAG = "CustomImageUtils";
 
-    private CustomImageUtils(){}
+    private CustomImageUtils() {
+    }
 
     public static int saveImage(@Nullable Context context, Bitmap bitmap, String fileName) {
         File target;

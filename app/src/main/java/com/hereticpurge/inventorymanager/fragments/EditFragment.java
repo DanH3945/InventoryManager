@@ -78,7 +78,7 @@ public class EditFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
@@ -235,7 +235,7 @@ public class EditFragment extends Fragment {
         }
     }
 
-    private void popParentBackStack(){
+    private void popParentBackStack() {
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.popBackStack();
@@ -258,7 +258,8 @@ public class EditFragment extends Fragment {
             }
 
             @Override
-            public void onCancel() {}
+            public void onCancel() {
+            }
         };
 
         ConfirmDialog.createDialog(confirmDialogCallback,
@@ -268,7 +269,7 @@ public class EditFragment extends Fragment {
                 .show(getChildFragmentManager(), null);
     }
 
-    public void confirmNavigateAwaySave(){
+    public void confirmNavigateAwaySave() {
         ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
             @Override
             public void onConfirm() {

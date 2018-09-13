@@ -29,7 +29,7 @@ public class RecyclerFragment extends Fragment {
 
     public static final String TAG = "RecyclerFragment";
 
-    public static RecyclerFragment createInstance(){
+    public static RecyclerFragment createInstance() {
         return new RecyclerFragment();
     }
 

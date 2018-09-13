@@ -12,7 +12,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
 
-public class PreferenceFragment extends Fragment{
+public class PreferenceFragment extends Fragment {
 
     private Tracker mTracker;
 

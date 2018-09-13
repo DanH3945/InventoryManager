@@ -16,7 +16,8 @@ import javax.annotation.Nullable;
 
 public final class BarcodeReader {
 
-    private BarcodeReader(){}
+    private BarcodeReader() {
+    }
 
     private static @Nullable
     Result decodeBitmap(Bitmap image) throws NotFoundException {
@@ -29,12 +30,13 @@ public final class BarcodeReader {
         return new MultiFormatReader().decode(binaryBitmap);
     }
 
-    public static @Nullable String getBarcode(Context context, Bitmap bitmap) {
+    public static @Nullable
+    String getBarcode(Context context, Bitmap bitmap) {
         String returnString = null;
 
         try {
             returnString = decodeBitmap(bitmap).getText();
-        } catch (NotFoundException nfe){
+        } catch (NotFoundException nfe) {
             Toast.makeText(context, R.string.image_resolve_error, Toast.LENGTH_LONG).show();
         }
         return returnString;

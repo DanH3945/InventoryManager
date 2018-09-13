@@ -1,6 +1,5 @@
 package com.hereticpurge.inventorymanager.fragments;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
-import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.List;
 
@@ -53,7 +51,8 @@ public class DetailFragment extends Fragment {
         sCurrentPosition = position;
 
 
-        DetailFragment detailFragment = new DetailFragment();;
+        DetailFragment detailFragment = new DetailFragment();
+        ;
         return detailFragment;
     }
 
@@ -68,7 +67,7 @@ public class DetailFragment extends Fragment {
             activity.setSupportActionBar(toolbar);
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             Log.e(TAG, "onCreateView: Failed to Load AppBar");
         }
         mViewPager = view.findViewById(R.id.detail_viewpager);
@@ -204,7 +203,7 @@ public class DetailFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
-            if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null){
+            if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null) {
                 mProductId = (int) savedInstanceState.get(PRODUCT_ID);
             } else {
                 mProductId = mProductItem.getId();
@@ -220,7 +219,7 @@ public class DetailFragment extends Fragment {
             mProductTracked = view.findViewById(R.id.detail_track_text);
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
 
-            if (getActivity() != null){
+            if (getActivity() != null) {
                 mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
             }
 
@@ -253,12 +252,12 @@ public class DetailFragment extends Fragment {
             return mProductItem;
         }
 
-        private void updateProductItem(ProductItem productItem){
+        private void updateProductItem(ProductItem productItem) {
             mProductItem = productItem;
             populateFields();
         }
 
-        private void populateFields(){
+        private void populateFields() {
 
             mProductName.setText(mProductItem.getName());
             mProductBarcode.setText(mProductItem.getBarcode());
@@ -268,7 +267,7 @@ public class DetailFragment extends Fragment {
             mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
 
-            if (getActivity() != null){
+            if (getActivity() != null) {
                 mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
                         getActivity().getResources().getString(R.string.detail_tracked_yes) :
                         getActivity().getResources().getString(R.string.detail_tracked_no)));

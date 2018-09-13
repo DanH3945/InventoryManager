@@ -44,8 +44,8 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
         public void onDataSetChanged() {
             mProductItemList = mProductDatabase.productDao().getProductListNonLive();
             mProductsNeedRestock.clear();
-            for (int i = 0; i < mProductItemList.size(); i++){
-                if (mProductItemList.get(i).isTracked() && mProductItemList.get(i).currentStock < mProductItemList.get(i).targetStock){
+            for (int i = 0; i < mProductItemList.size(); i++) {
+                if (mProductItemList.get(i).isTracked() && mProductItemList.get(i).currentStock < mProductItemList.get(i).targetStock) {
                     mProductsNeedRestock.add(i);
                 }
             }

@@ -38,7 +38,7 @@ public class ProductItem implements Parcelable {
     @ColumnInfo(name = "tracked")
     public boolean tracked;
 
-    public ProductItem(){
+    public ProductItem() {
         this("0000",
                 "0000",
                 "Default Product Name",
