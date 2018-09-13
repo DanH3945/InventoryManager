@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#313131</color>
     <color name="colorPrimaryDark">#212121</color>
-    <color name="colorAccent">#00ACC1</color>
-    <color name="layoutBackgroundColor">#313131</color>
+    <color name="colorAccent">#ff6f3a</color>
+    <color name="layoutBackgroundColor">#212121</color>
     <color name="dividerColor">#9b9b9b</color>
 
     <color name="searchBarColor">#ffffff</color>
@@ -13,11 +13,16 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="textColorPrimaryLight">#9b9b9b</color>
 
+    // Button Colors
+
+    <color name="buttonBackground">@color/colorPrimary</color>
+    <color name="buttonTextColor">@color/textColorPrimary</color>
+
     // Dialog Colors
     <color name="dialogTextColorPrimary">#6c6c6c</color>
     <color name="dialogTextColorPrimaryLight">#9b9b9b</color>
     <color name="httpLinkBlue">#0000EE</color>
 
     // Recycler Colors
-    <color name="recyclerCardColor">@color/colorPrimaryDark</color>
+    <color name="recyclerCardColor">@color/colorPrimary</color>
 </resources>

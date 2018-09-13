@@ -27,6 +27,8 @@
 
     <style name="ButtonStyle">
         <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textColor">@color/buttonTextColor</item>
+        <item name="android:background">@color/buttonBackground</item>
     </style>
 
     <style name="CameraButtonStyle">
