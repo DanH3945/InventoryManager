@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    style="@style/VisibleLayoutStyle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <ImageView
@@ -19,45 +20,45 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
         app:layout_constraintLeft_toRightOf="@id/edit_product_image_iv"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             style="@style/EditFragmentLabelTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/replace"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:text="@string/replace" />
 
         <TextView
             style="@style/EditFragmentLabelTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/photo"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:text="@string/photo" />
 
         <ImageButton
-            android:elevation="6dp"
             android:id="@+id/edit_product_main_image_camera_button"
             style="@style/CameraButtonStyle"
             android:layout_width="@dimen/camera_button_dimension"
             android:layout_height="@dimen/camera_button_dimension"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:elevation="6dp" />
 
     </LinearLayout>
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_product_name_et"
-        android:text="@string/edit_product_name"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_product_name"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_name_et" />
 
     <EditText
         android:id="@+id/edit_product_name_et"
@@ -71,14 +72,14 @@
         app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_product_customid_et"
-        android:text="@string/edit_custom_id"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_custom_id"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_customid_et" />
 
 
     <EditText
@@ -93,14 +94,14 @@
         app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_product_barcode_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_product_barcode_et"
-        android:text="@string/edit_barcode"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_barcode"
+        app:layout_constraintBottom_toTopOf="@id/edit_product_barcode_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_product_barcode_et" />
 
     <EditText
         android:id="@+id/edit_product_barcode_et"
@@ -119,37 +120,37 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
-        app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et">
 
         <TextView
             style="@style/EditFragmentLabelTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scan"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:text="@string/scan" />
 
         <ImageButton
-            android:elevation="6dp"
             android:id="@+id/edit_product_barcode_camera_button"
             style="@style/CameraButtonStyle"
             android:layout_width="@dimen/camera_button_dimension"
             android:layout_height="@dimen/camera_button_dimension"
+            android:elevation="6dp"
             app:layout_constraintLeft_toRightOf="@id/edit_product_barcode_et"
             app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et" />
 
     </LinearLayout>
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_fragment_cost_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_cost_et"
-        android:text="@string/edit_cost"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_cost"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_cost_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_cost_et" />
 
     <EditText
         android:id="@+id/edit_fragment_cost_et"
@@ -159,19 +160,19 @@
         android:layout_marginEnd="38dp"
         android:layout_marginTop="32dp"
         android:hint="@string/edit_cost"
-        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/edit_fragment_retail_et"
         app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_fragment_retail_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_retail_et"
-        android:text="@string/edit_retail"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_retail"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_retail_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_retail_et" />
 
     <EditText
         android:id="@+id/edit_fragment_retail_et"
@@ -181,18 +182,18 @@
         android:layout_marginTop="32dp"
         android:hint="@string/edit_retail"
         app:layout_constraintLeft_toRightOf="@id/edit_fragment_cost_et"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_current_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_current_et"
-        android:text="@string/edit_current_stock"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_current_stock"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_current_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_current_et" />
 
     <EditText
         android:id="@+id/edit_fragment_stock_current_et"
@@ -202,19 +203,19 @@
         android:layout_marginEnd="38dp"
         android:layout_marginTop="32dp"
         android:hint="@string/edit_current_stock"
-        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/edit_fragment_stock_target_et"
         app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
 
     <TextView
+        style="@style/EditFragmentLabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/EditFragmentLabelTextStyle"
-        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_target_et"
-        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_target_et"
-        android:text="@string/edit_target_stock"
+        android:paddingEnd="5dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp"/>
+        android:text="@string/edit_target_stock"
+        app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_target_et"
+        app:layout_constraintLeft_toLeftOf="@id/edit_fragment_stock_target_et" />
 
     <EditText
         android:id="@+id/edit_fragment_stock_target_et"
@@ -224,7 +225,7 @@
         android:layout_marginTop="32dp"
         android:hint="@string/edit_target_stock"
         app:layout_constraintLeft_toRightOf="@id/edit_fragment_stock_current_et"
-        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
 
     <TextView
