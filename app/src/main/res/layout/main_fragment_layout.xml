@@ -49,7 +49,7 @@
                 style="@style/ParentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quick Search"
+                android:text="@string/quick_search"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_barcode"
                 app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_browse_barcode"
@@ -71,13 +71,15 @@
 
             <TextView
                 style="@style/ParentTextLabelStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:text="Quickly add to the stock level of an item\nwhen inventory comes in.  Just select a\nnumber and snap the barcode of the item!!"
+                android:text="@string/main_fragment_quick_change_label_text"
                 android:layout_marginBottom="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="0dp"
                 app:layout_constraintStart_toStartOf="@id/main_fragment_btn_quick_change"
                 app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_quick_change"
-                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_quick_change"/>
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_quick_change" />
 
             <Button
                 android:padding="16dp"
@@ -91,7 +93,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_all"
                 app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
-                app:layout_constraintVertical_bias="0.3"/>
+                app:layout_constraintVertical_bias="0.6"/>
 
             <NumberPicker
                 android:background="#c8c8c9"

@@ -39,6 +39,8 @@
     <string name="main_fragment_browse_products_btn_text">Browse Products</string>
     <string name="main_fragment_add_new_item_btn_text">Add New Item</string>
     <string name="main_fragment_quick_stock_change_btn_text">Quick Stock Change</string>
+    <string name="quick_search">Quick Search</string>
+    <string name="main_fragment_quick_change_label_text">Quickly add to the stock level of an item when inventory comes in. Just select a number and snap the barcode of the item!!</string>
 
     // Edit Fragment Strings
     <string name="edit_button_save_product_string">Save Product</string>
