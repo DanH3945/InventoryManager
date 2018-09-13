@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,17 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/about_version_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/textColorPrimaryLight"/>
+        android:textColor="@color/textColorPrimaryLight" />
 
-    <View style="@style/DividerStyle"
-        android:layout_margin="@dimen/about_item_margin"/>
+    <View
+        style="@style/DividerStyle"
+        android:layout_margin="@dimen/about_item_margin" />
 
     <TextView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:textColor="@color/textColorPrimaryLight"
         android:text="@string/about_third_party_licenses"
         android:gravity="center"
-        android:layout_margin="@dimen/about_item_margin"/>
+        android:layout_margin="@dimen/about_item_margin" />
 
     <TextView
         android:text="@string/about_license_dialog_name"
@@ -55,7 +55,6 @@
         android:layout_height="@dimen/about_item_height"
         android:layout_margin="@dimen/about_item_margin"
         android:gravity="center" />
-
 
 
 </LinearLayout>

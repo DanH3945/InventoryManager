@@ -30,7 +30,7 @@
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/edit_fragment_image_content_description"/>
+                android:contentDescription="@string/edit_fragment_image_content_description" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                     android:layout_height="@dimen/camera_button_dimension"
                     android:layout_gravity="center"
                     android:elevation="6dp"
-                    android:contentDescription="@string/edit_fragment_image_button_content_description"/>
+                    android:contentDescription="@string/edit_fragment_image_button_content_description" />
 
             </LinearLayout>
 
@@ -158,7 +158,7 @@
                     android:elevation="6dp"
                     app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
                     app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
-                    android:contentDescription="@string/edit_fragment_quick_barcode_button_content_description"/>
+                    android:contentDescription="@string/edit_fragment_quick_barcode_button_content_description" />
 
             </LinearLayout>
 

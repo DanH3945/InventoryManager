@@ -85,6 +85,7 @@
     </style>
 
     // Widget Styles
+
     <style name="WidgetLabelStyle" parent="ParentTextLabelStyle">
         <item name="android:textSize">@dimen/widget_label_text_size</item>
     </style>

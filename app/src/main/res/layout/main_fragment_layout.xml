@@ -53,7 +53,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_barcode"
                 app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_browse_barcode"
-                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_browse_barcode"/>
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_browse_barcode" />
 
             <ImageButton
                 android:id="@+id/main_fragment_btn_browse_barcode"
@@ -68,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_browse_all"
                 app:layout_constraintVertical_bias="0.55"
-                android:contentDescription="@string/main_fragment_barcode_search_button_content_description"/>
+                android:contentDescription="@string/main_fragment_barcode_search_button_content_description" />
 
             <TextView
                 style="@style/ParentTextLabelStyle"
@@ -94,7 +94,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_all"
                 app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
-                app:layout_constraintVertical_bias="0.6"/>
+                app:layout_constraintVertical_bias="0.6" />
 
             <NumberPicker
                 android:background="#c8c8c9"

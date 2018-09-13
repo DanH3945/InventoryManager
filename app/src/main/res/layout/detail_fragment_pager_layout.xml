@@ -27,6 +27,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="56dp"
-        android:src="@mipmap/editfile_24px"/>
+        android:src="@mipmap/editfile_24px" />
 
 </android.support.design.widget.CoordinatorLayout>
