@@ -28,6 +28,7 @@
     <string name="number_error">Invalid Number Input</string>
 
     // Appbar Strings
+    <string name="toolbar_image_content_description">A picture of the currently displayed product or the inventory manager logo if no picture was found</string>
     <string name="toolbar_search_prompt_button">Barcode Search</string>
     <string name="toolbar_preferences_button">Preferences</string>
     <string name="toolbar_about_button">About</string>
@@ -36,6 +37,7 @@
     <string name="toolbar_wipe_database_button">Wipe Database</string>
 
     // Main Fragment Strings
+    <string name="main_fragment_barcode_search_button_content_description">Press this button and take a picture of a barcode to search the database for that barcode</string>
     <string name="main_fragment_browse_products_btn_text">Browse Products</string>
     <string name="main_fragment_add_new_item_btn_text">Add New Item</string>
     <string name="main_fragment_quick_stock_change_btn_text">Quick Stock Change</string>
@@ -43,6 +45,9 @@
     <string name="main_fragment_quick_change_label_text">Quickly add to the stock level of an item when inventory comes in. Just select a number and snap the barcode of the item!!</string>
 
     // Edit Fragment Strings
+    <string name="edit_fragment_image_content_description">A picture of the currently displayed product</string>
+    <string name="edit_fragment_image_button_content_description">Press this button take a new picture of the selected product</string>
+    <string name="edit_fragment_quick_barcode_button_content_description">Press this button and take a picture of a barcode to fill this product\'s barcode field.</string>
     <string name="edit_button_save_product_string">Save Product</string>
     <string name="edit_button_delete_product_string">Delete Product</string>
     <string name="edit_product_name">Product Name</string>
@@ -57,6 +62,7 @@
     <string name="edit_switch_off">Off</string>
 
     // Detail Fragment Strings
+    <string name="detail_fragment_image_content_description">A Picture of the currently displayed product</string>
     <string name="detail_barcode_label">Barcode#</string>
     <string name="detail_custom_id_label">Custom ID#</string>
     <string name="detail_cost_label">Cost</string>
@@ -68,6 +74,7 @@
     <string name="detail_tracked_no">No</string>
 
     // Recycler Fragment Item Strings
+    <string name="recycler_fragment_item_image_content_description">A picture of the product represented in this entry</string>
     <string name="recycler_item_cost">Cost:</string>
     <string name="recycler_item_retail">Retail:</string>
     <string name="recycler_item_current_stock">Current Stock:</string>

@@ -16,7 +16,8 @@
             android:layout_width="@dimen/recycler_item_image_dimen"
             android:layout_height="@dimen/recycler_item_image_dimen"
             android:scaleType="fitXY"
-            android:background="@color/recyclerCardColor"/>
+            android:background="@color/recyclerCardColor"
+            android:contentDescription="@string/recycler_fragment_item_image_content_description"/>
 
         <android.support.constraint.ConstraintLayout
             android:layout_marginStart="@dimen/recycler_item_image_dimen"
