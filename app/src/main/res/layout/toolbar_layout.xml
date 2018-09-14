@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -33,22 +34,34 @@
                 android:layout_gravity="bottom"
                 app:layout_collapseMode="pin">
 
-                <EditText
-                    android:id="@+id/search_et"
+                <TextView
+                    android:id="@+id/toolbar_text_view"
                     android:layout_width="280dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/rounded_edges_toolbar"
-                    android:backgroundTint="@color/searchBarColor"
-                    android:drawableEnd="@mipmap/search_24px"
+                    android:text="Inventory Manager"
                     android:gravity="center"
-                    android:hint="@string/toolbar_search_prompt_button"
-                    android:inputType="text"
-                    android:onClick="onSearch"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:alpha=".75" />
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="24sp"
+                    app:layout_collapseMode="pin"
+                    android:visibility="invisible"/>
+
+                <!--<EditText-->
+                    <!--android:id="@+id/search_et"-->
+                    <!--android:layout_width="280dp"-->
+                    <!--android:layout_height="32dp"-->
+                    <!--android:background="@drawable/rounded_edges_toolbar"-->
+                    <!--android:backgroundTint="@color/searchBarColor"-->
+                    <!--android:drawableEnd="@mipmap/search_24px"-->
+                    <!--android:gravity="center"-->
+                    <!--android:hint="@string/toolbar_search_prompt_button"-->
+                    <!--android:inputType="text"-->
+                    <!--android:onClick="onSearch"-->
+                    <!--android:paddingEnd="8dp"-->
+                    <!--android:paddingStart="8dp"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:alpha=".75"-->
+                    <!--android:focusable="false"/>-->
 
             </android.support.v7.widget.Toolbar>
 
