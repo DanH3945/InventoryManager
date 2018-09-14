@@ -91,10 +91,8 @@
         <item name="android:textColor">@color/textColorPrimaryLight</item>
     </style>
 
-    <style name="WidgetTextStyle" parent="ParentTextStyle">
-    </style>
+    <style name="WidgetTextStyle" parent="ParentTextStyle"></style>
 
-    <style name="WidgetDividerStyle" parent="DividerStyle">
-    </style>
+    <style name="WidgetDividerStyle" parent="DividerStyle"></style>
 
 </resources>
