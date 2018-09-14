@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +25,7 @@ import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.AppbarStateChangeListener;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
@@ -116,6 +118,19 @@ public class DetailFragment extends Fragment {
             @Override
             public void onPageScrollStateChanged(int i) {
                 // do nothing
+            }
+        });
+
+        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
+        appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                TextView textView = view.findViewById(R.id.toolbar_text_view);
+                if (state == State.COLLAPSED) {
+                    textView.setVisibility(View.VISIBLE);
+                } else if (state == State.EXPANDED) {
+                    textView.setVisibility(View.INVISIBLE);
+                }
             }
         });
 

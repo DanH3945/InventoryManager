@@ -57,11 +57,10 @@ public class RecyclerFragment extends Fragment {
         appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                Log.i(TAG, "onStateChanged: " + state);
                 TextView textView = view.findViewById(R.id.toolbar_text_view);
-                if (state == State.COLLAPSED){
+                if (state == State.COLLAPSED) {
                     textView.setVisibility(View.VISIBLE);
-                } else if (state == State.EXPANDED){
+                } else if (state == State.EXPANDED) {
                     textView.setVisibility(View.INVISIBLE);
                 }
             }
@@ -70,7 +69,9 @@ public class RecyclerFragment extends Fragment {
         mViewModel.getProductList()
                 .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
 
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        if (getActivity() != null) {
+            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        }
 
         return view;
     }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -30,6 +32,7 @@ import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
+import com.hereticpurge.inventorymanager.utils.AppbarStateChangeListener;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
@@ -114,7 +117,22 @@ public class EditFragment extends Fragment {
 
         initProductFields();
 
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
+        appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                TextView textView = view.findViewById(R.id.toolbar_text_view);
+                if (state == State.COLLAPSED) {
+                    textView.setVisibility(View.VISIBLE);
+                } else if (state == State.EXPANDED) {
+                    textView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        if (getActivity() != null) {
+            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        }
 
         return view;
     }
