@@ -88,6 +88,13 @@
 
     <style name="WidgetLabelStyle" parent="ParentTextLabelStyle">
         <item name="android:textSize">@dimen/widget_label_text_size</item>
+        <item name="android:textColor">@color/textColorPrimaryLight</item>
+    </style>
+
+    <style name="WidgetTextStyle" parent="ParentTextStyle">
+    </style>
+
+    <style name="WidgetDividerStyle" parent="DividerStyle">
     </style>
 
 </resources>

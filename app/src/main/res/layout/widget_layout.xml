@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/rounded_edges_widget"
-    android:backgroundTint="@color/widgetBackground">
+    android:backgroundTint="@color/layoutBackgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         <FrameLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="?android:attr/listDivider" />
+            style="@style/WidgetDividerStyle" />
 
         <TextView
             style="@style/WidgetLabelStyle"
@@ -41,7 +41,7 @@
         <FrameLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="?android:attr/listDivider" />
+            style="@style/WidgetDividerStyle" />
 
         <TextView
             style="@style/WidgetLabelStyle"
@@ -59,7 +59,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
+        style="@style/WidgetDividerStyle" />
 
     <ListView
         android:id="@+id/widget_list_view"
