@@ -38,7 +38,7 @@
                     android:id="@+id/toolbar_text_view"
                     android:layout_width="280dp"
                     android:layout_height="32dp"
-                    android:text="Inventory Manager"
+                    android:text="@string/app_name"
                     android:gravity="center"
                     android:textColor="@color/textColorPrimary"
                     android:textSize="24sp"
