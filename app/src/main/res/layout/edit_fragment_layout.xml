@@ -301,6 +301,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="56dp"
         android:layout_marginEnd="24dp"
-        android:src="@mipmap/savefile_24px" />
+        android:src="@mipmap/savefile_24px"
+        android:nextFocusRight="@id/edit_product_main_image_camera_button"/>
 
 </android.support.design.widget.CoordinatorLayout>
