@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
 
         if (savedInstanceState == null) {
-            loadFragment(getMainFragment(), false, MainFragment.TAG);
+            if (!isTablet) {
+                loadFragment(getMainFragment(), false, MainFragment.TAG);
+            } else {
+                loadFragment(getRecyclerFragment(), true, RecyclerFragment.TAG);
+            }
         }
 
         checkIntentForWidgetAction(getIntent());
@@ -168,14 +172,35 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     }
 
     private void loadFragment(Fragment fragment, boolean addToBackStack, @NonNull String s) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
+        if (!isTablet) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment);
 
-        if (addToBackStack) {
-            transaction.addToBackStack(s);
+            if (addToBackStack) {
+                transaction.addToBackStack(s);
+            }
+            transaction.commit();
+        } else {
+            if (!checkTabletMainFragment()){
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, getMainFragment());
+                transaction.commit();
+            }
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container_tablet, fragment);
+
+            if (addToBackStack) {
+                transaction.addToBackStack(s);
+            }
+            transaction.commit();
         }
-        transaction.commit();
+
         getSupportFragmentManager().executePendingTransactions();
+    }
+
+    private boolean checkTabletMainFragment(){
+        return getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof MainFragment;
     }
 
     private DetailFragment getDetailFragment(int id) {
