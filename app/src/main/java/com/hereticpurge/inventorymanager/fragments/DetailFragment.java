@@ -48,6 +48,8 @@ public class DetailFragment extends Fragment {
 
     private DetailEditButtonCallback mDetailEditButtonCallback;
 
+    private boolean isTablet;
+
     public static DetailFragment createInstance(int position) {
         // The ViewPager position to bring into view when the fragment is loaded.
         sCurrentPosition = position;
@@ -63,20 +65,15 @@ public class DetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
-        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
-        try {
-            AppCompatActivity activity = (AppCompatActivity) getActivity();
-            activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        } catch (NullPointerException npe) {
-            Log.e(TAG, "onCreateView: Failed to Load AppBar");
+        isTablet = getResources().getBoolean(R.bool.isTablet);
+
+        if (!isTablet) {
+            initAppBar(view);
         }
+
         mViewPager = view.findViewById(R.id.detail_viewpager);
         mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
-
-        mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
 
         mFloatingActionButton = view.findViewById(R.id.main_fab);
 
@@ -101,10 +98,12 @@ public class DetailFragment extends Fragment {
 
                 try {
 
-                    String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
-                            .getDisplayProduct()
-                            .getName();
-                    CustomImageUtils.loadImage(getContext(), productName, mToolbarImageView);
+                    if (!isTablet) {
+                        String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
+                                .getDisplayProduct()
+                                .getName();
+                        CustomImageUtils.loadImage(getContext(), productName, mToolbarImageView);
+                    }
 
                 } catch (NullPointerException npe) {
                     Log.e(TAG, "onPageSelected: Null Product Reference");
@@ -121,6 +120,25 @@ public class DetailFragment extends Fragment {
             }
         });
 
+        mViewModel.getProductList()
+                .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
+
+        return view;
+    }
+
+    private void initAppBar(View view) {
+        mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
+
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        try {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        } catch (NullPointerException npe) {
+            Log.e(TAG, "onCreateView: Failed to Load AppBar");
+        }
+
         AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
         appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
             @Override
@@ -133,11 +151,6 @@ public class DetailFragment extends Fragment {
                 }
             }
         });
-
-        mViewModel.getProductList()
-                .observe(this, productItemList -> mDetailPagerAdapter.updateList(productItemList));
-
-        return view;
     }
 
     @Override

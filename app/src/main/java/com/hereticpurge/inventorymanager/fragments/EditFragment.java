@@ -85,14 +85,12 @@ public class EditFragment extends Fragment {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
+        if (!getResources().getBoolean(R.bool.isTablet)){
+            initAppBar(view);
+        }
+
         mFloatingActionButton = view.findViewById(R.id.main_fab);
         mFloatingActionButton.setOnClickListener(v -> doSave());
-
-        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mMainImageButton = view.findViewById(R.id.edit_product_main_image_camera_button);
         mMainImageButton.setOnClickListener(v -> startCameraForResult(MAIN_IMAGE_RESULT));
@@ -117,6 +115,20 @@ public class EditFragment extends Fragment {
 
         initProductFields();
 
+        if (getActivity() != null) {
+            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        }
+
+        return view;
+    }
+
+    private void initAppBar(View view) {
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
         appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
             @Override
@@ -129,12 +141,6 @@ public class EditFragment extends Fragment {
                 }
             }
         });
-
-        if (getActivity() != null) {
-            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-        }
-
-        return view;
     }
 
     @Override
@@ -258,7 +264,7 @@ public class EditFragment extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.popBackStack();
         } catch (NullPointerException npe) {
-            Log.e(TAG, "doDelete: Failed to get support fragment manager");
+            Log.e(TAG, "popParentBackStack: Failed to get support fragment manager");
         }
     }
 

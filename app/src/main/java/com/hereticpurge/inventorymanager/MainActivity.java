@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             if (!isTablet) {
                 loadFragment(getMainFragment(), false, MainFragment.TAG);
             } else {
-                loadFragment(getRecyclerFragment(), true, RecyclerFragment.TAG);
+                loadFragment(getRecyclerFragment(), false, RecyclerFragment.TAG);
             }
         }
 
@@ -157,7 +158,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
     @Override
     public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        @IdRes int containerId;
+        if (!isTablet) {
+            containerId = R.id.fragment_container;
+        } else {
+            containerId = R.id.fragment_container_tablet;
+        }
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(containerId);
         if (fragment instanceof EditFragment) {
             ((EditFragment) fragment).confirmNavigateAwaySave();
         } else {
@@ -181,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             }
             transaction.commit();
         } else {
+            // Check to see if the main fragment is already loaded.  If not, load it.
             if (!checkTabletMainFragment()){
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, getMainFragment());

@@ -42,16 +42,31 @@ public class RecyclerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
-        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (!getResources().getBoolean(R.bool.isTablet)){
+            initAppBar(view);
+        }
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(mRecyclerCallback, mViewModel);
         recyclerView.setAdapter(recyclerFragmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mViewModel.getProductList()
+                .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
+
+        if (getActivity() != null) {
+            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        }
+
+        return view;
+    }
+
+    private void initAppBar(View view) {
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
         appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
@@ -65,15 +80,6 @@ public class RecyclerFragment extends Fragment {
                 }
             }
         });
-
-        mViewModel.getProductList()
-                .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
-
-        if (getActivity() != null) {
-            mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-        }
-
-        return view;
     }
 
     @Override
