@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
+import com.hereticpurge.inventorymanager.MainActivity;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
@@ -48,8 +49,6 @@ public class DetailFragment extends Fragment {
 
     private DetailEditButtonCallback mDetailEditButtonCallback;
 
-    private boolean isTablet;
-
     public static DetailFragment createInstance(int position) {
         // The ViewPager position to bring into view when the fragment is loaded.
         sCurrentPosition = position;
@@ -65,9 +64,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
-        isTablet = getResources().getBoolean(R.bool.isTablet);
-
-        if (!isTablet) {
+        if (!MainActivity.isTablet | !MainActivity.isLandscape) {
             initAppBar(view);
         }
 
@@ -98,7 +95,7 @@ public class DetailFragment extends Fragment {
 
                 try {
 
-                    if (!isTablet) {
+                    if (!MainActivity.isTablet | !MainActivity.isLandscape) {
                         String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                                 .getDisplayProduct()
                                 .getName();
@@ -233,6 +230,7 @@ public class DetailFragment extends Fragment {
 
             if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null) {
                 mProductId = (int) savedInstanceState.get(PRODUCT_ID);
+                mProductItem = mViewModel.getProductById(mProductId).getValue();
             } else {
                 mProductId = mProductItem.getId();
             }

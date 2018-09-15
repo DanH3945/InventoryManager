@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
+import com.hereticpurge.inventorymanager.MainActivity;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
@@ -85,7 +86,7 @@ public class EditFragment extends Fragment {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
-        if (!getResources().getBoolean(R.bool.isTablet)){
+        if (!MainActivity.isTablet | !MainActivity.isLandscape){
             initAppBar(view);
         }
 

@@ -53,11 +53,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     private static final String TAG = "MainActivity";
 
     public static boolean isTablet;
+    public static boolean isLandscape;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isTablet = getResources().getBoolean(R.bool.isTablet);
+        isLandscape = getResources().getBoolean(R.bool.isLandscape);
         setContentView(R.layout.main_activity);
 
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);

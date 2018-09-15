@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
+import com.hereticpurge.inventorymanager.MainActivity;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.AppbarStateChangeListener;
@@ -42,7 +43,7 @@ public class RecyclerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
-        if (!getResources().getBoolean(R.bool.isTablet)){
+        if (!MainActivity.isTablet | !MainActivity.isLandscape){
             initAppBar(view);
         }
 
