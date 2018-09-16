@@ -86,7 +86,7 @@ public class EditFragment extends Fragment {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
-        if (!MainActivity.isTablet | !MainActivity.isLandscape){
+        if (!MainActivity.isTablet && !MainActivity.isLandscape){
             initAppBar(view);
         }
 

@@ -25,6 +25,7 @@
     // Button Styles
 
     <style name="ButtonStyle">
+        <item name="android:padding">@dimen/button_padding</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textColor">@color/buttonTextColor</item>
         <item name="android:background">@color/buttonBackground</item>

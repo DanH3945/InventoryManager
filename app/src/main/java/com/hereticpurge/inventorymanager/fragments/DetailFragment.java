@@ -64,7 +64,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
-        if (!MainActivity.isTablet | !MainActivity.isLandscape) {
+        if (!MainActivity.isTablet && !MainActivity.isLandscape) {
             initAppBar(view);
         }
 
