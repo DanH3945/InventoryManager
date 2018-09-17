@@ -7,6 +7,8 @@ import com.google.android.gms.analytics.Tracker;
 
 public class AnalyticsApplication extends Application {
 
+    // Google analytics implementation
+
     private static GoogleAnalytics sAnalytics;
     private static Tracker sTracker;
 

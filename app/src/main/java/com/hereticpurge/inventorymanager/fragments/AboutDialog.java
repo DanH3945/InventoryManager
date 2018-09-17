@@ -31,6 +31,8 @@ public class AboutDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog;
         if (getContext() != null) {
+            // Wrapping the context in a theme to display the old style dialog box layout.
+            // I just think this looks better for the layout of the app.
             ContextThemeWrapper themeWrapper = new ContextThemeWrapper(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
             dialog = new Dialog(themeWrapper);
         } else {
@@ -54,6 +56,9 @@ public class AboutDialog extends AppCompatDialogFragment {
             Log.e(TAG, "onCreateDialog: Failed to get package name");
         }
 
+        // Set onClick listeners for each of the 3rd party library names in the dialog
+        // When clicked they load a second dialog via License Dialog library for each 3rd party
+        // library used in the app.
         mLicenseDialogNameText = dialog.findViewById(R.id.about_license_dialog_tv);
         mLicenseDialogNameText.setOnClickListener(v -> showLicenseDialogLicense(getContext()));
 
@@ -66,6 +71,7 @@ public class AboutDialog extends AppCompatDialogFragment {
         return dialog;
     }
 
+    // Following 3 methods each load a specific dialog related to the library selected above.
     private void showLicenseDialogLicense(Context context) {
         final String name = context.getResources().getString(R.string.about_license_dialog_name);
         final String url = context.getResources().getString(R.string.about_license_dialog_url);

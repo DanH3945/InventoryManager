@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 @Entity
 public class ProductItem implements Parcelable {
 
+    // Parcelable room data object.
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 

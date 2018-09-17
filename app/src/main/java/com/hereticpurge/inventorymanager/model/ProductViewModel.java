@@ -1,12 +1,18 @@
 package com.hereticpurge.inventorymanager.model;
 
 import android.app.Application;
+import android.appwidget.AppWidgetManager;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.hereticpurge.inventorymanager.MainActivity;
+import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.database.ProductDatabase;
+import com.hereticpurge.inventorymanager.widget.MainAppWidgetProvider;
 
 import java.util.List;
 
@@ -46,7 +52,7 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     private static class deleteSingleProductAsyncTask extends AsyncTask<ProductItem, Void, Void> {
-
+        // Async Task to delete a single item from the database.
         private ProductDatabase db;
 
         deleteSingleProductAsyncTask(ProductDatabase productDatabase) {
@@ -61,7 +67,7 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     private static class deleteAllProductsAsyncTask extends AsyncTask<Void, Void, Void> {
-
+        // Async Task to wipe the database.
         private ProductDatabase db;
 
         deleteAllProductsAsyncTask(ProductDatabase productDatabase) {
@@ -76,7 +82,7 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     private static class addProductItemAsyncTask extends AsyncTask<ProductItem, Void, Void> {
-
+        // Async Task to add a product to the database.
         ProductDatabase db;
 
         addProductItemAsyncTask(ProductDatabase productDatabase) {
@@ -87,6 +93,22 @@ public class ProductViewModel extends AndroidViewModel {
         protected Void doInBackground(ProductItem... productItems) {
             db.productDao().insertProductItem(productItems[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            // Notifying the app widget that some information has changed and it should update.
+            Context context = MainActivity.getWeakContext().get();
+            AppWidgetManager appWidgetManager =
+                    AppWidgetManager.getInstance(context);
+
+            ComponentName appWidget = new ComponentName(context, MainAppWidgetProvider.class.getName());
+
+            int[] widgetIds = appWidgetManager.getAppWidgetIds(appWidget);
+
+            appWidgetManager.notifyAppWidgetViewDataChanged(widgetIds, R.id.widget_list_view);
         }
     }
 }

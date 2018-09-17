@@ -2,6 +2,9 @@ package com.hereticpurge.inventorymanager.model;
 
 public class DebugProductItemFactory {
 
+    // Simple class that adds debug product items to the application with randomized data for
+    // testing purposes.
+
     public static ProductItem getDebugProduct() {
         String barcode = String.valueOf(Math.random() * 10000);
         return getDebugProduct(barcode);

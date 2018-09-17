@@ -16,12 +16,17 @@ import javax.annotation.Nullable;
 
 public final class BarcodeReader {
 
+    // Implementation of ZXings barcode reader.  Accepts an image and decodes a bitmap from it if
+    // possible.  If it can't read a bitmap it shows a toast.
+
     private BarcodeReader() {
     }
 
     private static @Nullable
     Result decodeBitmap(Bitmap image) throws NotFoundException {
 
+        // For information on how this works please see -- https://github.com/zxing/zxing -- for the
+        // source.  It's too much information to put here.
         int[] pixelArray = new int[image.getWidth() * image.getHeight()];
         image.getPixels(pixelArray, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
 

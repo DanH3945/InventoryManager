@@ -10,6 +10,9 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 @Database(entities = {ProductItem.class}, version = 1)
 public abstract class ProductDatabase extends RoomDatabase {
 
+    private static final String DATABASE_NAME = "inventory_manager";
+
+    // Simple singleton to handle the product database via room.
     private static ProductDatabase database;
 
     public abstract ProductDao productDao();
@@ -17,7 +20,7 @@ public abstract class ProductDatabase extends RoomDatabase {
     public static ProductDatabase getDatabase(Context context) {
         if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(),
-                    ProductDatabase.class, "inventory_manager")
+                    ProductDatabase.class, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .build();
         }

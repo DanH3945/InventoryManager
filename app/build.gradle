@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        // For demonstration purposes only.  NOT A SECURE KEYSTORE - DO NOT USE FOR RELEASE
+        release {
+            keyAlias '...'
+            keyPassword '...'
+            storeFile file('...')
+            storePassword '...'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.hereticpurge.inventorymanager"
@@ -14,9 +23,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
+        // Added compat for Java 1.8  LAMBDAS!!!
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }

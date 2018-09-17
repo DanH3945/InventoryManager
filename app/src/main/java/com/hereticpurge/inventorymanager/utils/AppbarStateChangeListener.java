@@ -4,6 +4,7 @@ import android.support.design.widget.AppBarLayout;
 
 // This class is taken from StackOverflow.  Thanks to rciovati.
 // https://stackoverflow.com/questions/31682310/android-collapsingtoolbarlayout-collapse-listener
+// Class determines whether the app bar is extended.
 
 public abstract class AppbarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
 

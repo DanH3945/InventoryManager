@@ -4,6 +4,9 @@ import android.util.Log;
 
 public final class DebugAssistant {
 
+    // Little utility class to assist in debugging sections of code when permanent log statements
+    // are not necessary and annoying to add and delete.
+
     private DebugAssistant() {
     }
 

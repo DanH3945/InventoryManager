@@ -21,11 +21,11 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
     private List<ProductItem> mProductItemList;
     private RecyclerCallback mCallback;
-    private ProductViewModel mViewmodel;
+    private ProductViewModel mViewModel;
 
     RecyclerFragmentAdapter(RecyclerCallback callback, ProductViewModel viewModel) {
         this.mCallback = callback;
-        this.mViewmodel = viewModel;
+        this.mViewModel = viewModel;
     }
 
     @NonNull
@@ -40,6 +40,7 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
         ProductItem productItem = mProductItemList.get(i);
 
+        // Load the image for the given product item into the recycler list item.
         CustomImageUtils.loadImage(viewHolder.itemView.getContext(),
                 productItem.getName(),
                 viewHolder.mImageView);
@@ -52,10 +53,13 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
         viewHolder.mTrackingSwitch.setChecked(productItem.isTracked());
 
         viewHolder.mTrackingSwitch.setOnClickListener(v -> {
+            // when the tracking status of an item is changed the product item is updated
+            // and saved in the database.
             productItem.setTracked(!productItem.isTracked());
-            mViewmodel.addProduct(productItem);
+            mViewModel.addProduct(productItem);
         });
 
+        // Callback on a selected item.
         viewHolder.itemView.setOnClickListener(view -> mCallback.onItemSelected(i));
     }
 
@@ -65,6 +69,8 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
     }
 
     public void updateList(List<ProductItem> productItems) {
+        // Helper method so that when room detects new data on the observed data set it can load
+        // new information into the recycler view and tell the recycler to update its information.
         this.mProductItemList = productItems;
         this.notifyDataSetChanged();
     }

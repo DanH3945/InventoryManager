@@ -44,6 +44,7 @@ public class RecyclerFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
         if (!MainActivity.isTablet && !MainActivity.isLandscape){
+            // Setup the app bar if we're not in tablet or landscape mode.
             initAppBar(view);
         }
 
@@ -56,6 +57,7 @@ public class RecyclerFragment extends Fragment {
                 .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
 
         if (getActivity() != null) {
+            // Google Analytics tracker.
             mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
         }
 
@@ -63,6 +65,7 @@ public class RecyclerFragment extends Fragment {
     }
 
     private void initAppBar(View view) {
+        // Helper method for setting up the app bar.
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -94,6 +97,7 @@ public class RecyclerFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        // Set the callback for clicks to the main activity for handling navigation.
         mRecyclerCallback = (RecyclerFragmentAdapter.RecyclerCallback) getActivity();
 
         mViewModel = ViewModelProviders.of(this)
@@ -104,6 +108,9 @@ public class RecyclerFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+        // Destroy the reference to the main activity so we're not trying to callback on a destroyed
+        // activity instance.
         mRecyclerCallback = null;
     }
 }

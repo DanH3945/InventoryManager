@@ -72,6 +72,7 @@ public class EditFragment extends Fragment {
     private static final int BARCODE_RESULT = 201;
 
     public static EditFragment createInstance(@Nullable ProductItem productItem) {
+        // Static creation method returns a new instance of this class with variables set.
         EditFragment editFragment = new EditFragment();
         editFragment.mProductItem = productItem;
         return editFragment;
@@ -83,10 +84,12 @@ public class EditFragment extends Fragment {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
 
         if (savedInstanceState != null) {
+            // Reload the display product if it exists.
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
         if (!MainActivity.isTablet && !MainActivity.isLandscape){
+            // Setup for the app bar if we're not in tablet or landscape mode.
             initAppBar(view);
         }
 
@@ -117,6 +120,7 @@ public class EditFragment extends Fragment {
         initProductFields();
 
         if (getActivity() != null) {
+            // Google Analytics tracker.
             mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
         }
 
@@ -181,6 +185,8 @@ public class EditFragment extends Fragment {
     }
 
     private void startCameraForResult(int requestCode) {
+        // Just what the method sais.  Started the camera to take a picture and return a broadcast
+        // containing the picture.  Set the request code from the above for different picture types.
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(intent, requestCode);
@@ -194,6 +200,8 @@ public class EditFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Receive the camera broadcast and determine what to do with the result based on request
+        // code.
         Object dataObject = null;
 
         if (data != null && data.hasExtra("data") && data.getExtras().containsKey("data")) {
@@ -203,6 +211,7 @@ public class EditFragment extends Fragment {
         switch (requestCode) {
 
             case (MAIN_IMAGE_RESULT):
+                // Set the image of the product to the new main image.
                 if (dataObject instanceof Bitmap) {
                     mTempImage = (Bitmap) dataObject;
                     mMainImageView.setImageBitmap(mTempImage);
@@ -210,6 +219,7 @@ public class EditFragment extends Fragment {
                 }
 
             case (BARCODE_RESULT):
+                // Decode the barcode of the returned image and set it in the product.
                 if (dataObject instanceof Bitmap) {
                     String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
                     checkProductNull();
@@ -223,6 +233,8 @@ public class EditFragment extends Fragment {
     }
 
     private void checkProductNull() {
+        // Usually called if the view doesn't have an associated product item. (The user selected
+        // new item so an associated product item doesn't yet exist)
         if (mProductItem == null) {
             mProductItem = new ProductItem();
             initProductFields();
@@ -230,6 +242,7 @@ public class EditFragment extends Fragment {
     }
 
     private void doSave() {
+        // As advertised.  Save the current product item to the room database.
         checkProductNull();
         try {
             mProductItem.setName(mName.getText().toString());
@@ -248,19 +261,25 @@ public class EditFragment extends Fragment {
             mViewModel.addProduct(mProductItem);
 
             try {
+                // Hide the soft keyboard when we save so it's not visible after the back stack is popped
+                // and the user is sent back to the detail page.
                 InputMethodManager inputMethodManager =
                         (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
             } catch (NullPointerException e) {
                 Log.e(TAG, "doSave: Error Removing Soft Keyboard");
             }
+
+
             popParentBackStack();
         } catch (NumberFormatException nfe) {
+            // User entered invalid input in one of the fields.
             Toast.makeText(getContext(), R.string.number_error, Toast.LENGTH_LONG).show();
         }
     }
 
     private void popParentBackStack() {
+        // helper method to push the app backwards one fragment view.
         try {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.popBackStack();
@@ -270,6 +289,7 @@ public class EditFragment extends Fragment {
     }
 
     private void doDelete() {
+        // Delete the currently visible product item from the database.
         checkProductNull();
 
         ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
@@ -295,6 +315,8 @@ public class EditFragment extends Fragment {
     }
 
     public void confirmNavigateAwaySave() {
+        // Called when the Main Activity detects the user attempting to leave an edit fragment by
+        // some means other than the save button.
         ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
             @Override
             public void onConfirm() {

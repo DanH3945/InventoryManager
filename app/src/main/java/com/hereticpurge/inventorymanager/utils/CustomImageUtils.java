@@ -16,6 +16,8 @@ import java.io.IOException;
 
 public final class CustomImageUtils {
 
+    // Utility class for saving and loading image files from the external files directory.
+
     public static final int SAVE_FAILED = -1;
     public static final int SAVE_SUCCESS = 1;
 
@@ -29,8 +31,8 @@ public final class CustomImageUtils {
         try {
             target = new File(context.getExternalFilesDir(null), fileName);
         } catch (NullPointerException npe) {
-            return SAVE_FAILED; // Save failed. Context null.  Probably the context was destroyed
-            // before this function was called as part of an activity result.
+            Log.e(TAG, "saveImage: Save Failed.  Null Context. ");
+            return SAVE_FAILED;
         }
 
         FileOutputStream fileOutputStream = null;
@@ -51,18 +53,14 @@ public final class CustomImageUtils {
         return SAVE_SUCCESS; // Save success
     }
 
-    public static void loadImage(Context context, String filename, ImageView imageView) {
+    public static void loadImage(@Nullable Context context, String filename, ImageView imageView) {
 
-        if (context == null) {
-            return;
-        }
-
-        File file = new File(context.getExternalFilesDir(null), filename);
         try {
+            File file = new File(context.getExternalFilesDir(null), filename);
             Picasso.get().invalidate(file);
             Picasso.get().load(file).error(R.mipmap.error_24px).into(imageView);
         } catch (NullPointerException npe) {
-            Log.e(TAG, "loadImage: getExternalFilesDir() returned null");
+            Log.e(TAG, "loadImage: Load Failed.  Null Context");
         }
     }
 }

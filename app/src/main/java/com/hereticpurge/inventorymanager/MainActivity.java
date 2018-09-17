@@ -2,6 +2,7 @@ package com.hereticpurge.inventorymanager;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -35,7 +36,11 @@ import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.widget.MainAppWidgetProvider;
 
+import java.lang.ref.WeakReference;
+
 public class MainActivity extends AppCompatActivity implements MainFragment.MainFragmentButtonListener, RecyclerFragmentAdapter.RecyclerCallback, DetailFragment.DetailEditButtonCallback {
+
+    private static MainActivity mMainActivity;
 
     private RecyclerFragment mRecyclerFragment;
     private MainFragment mMainFragment;
@@ -58,8 +63,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMainActivity = this;
+
         isTablet = getResources().getBoolean(R.bool.isTablet);
         isLandscape = getResources().getBoolean(R.bool.isLandscape);
+
         setContentView(R.layout.main_activity);
 
         mViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
@@ -87,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         // https://stackoverflow.com/questions/9366365/android-admob-admob-ad-refresh-destroys-frame-rate
         mAdView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
+    }
+
+    public static WeakReference<Context> getWeakContext(){
+        return new WeakReference<>(mMainActivity) ;
     }
 
     @Override

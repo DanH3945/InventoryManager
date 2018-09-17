@@ -5,6 +5,9 @@ import java.util.Locale;
 
 public final class CurrencyUtils {
 
+    // Class that takes a string and adds or removes the system local currency symbol from
+    // the beginning.
+
     private CurrencyUtils() {
     }
 

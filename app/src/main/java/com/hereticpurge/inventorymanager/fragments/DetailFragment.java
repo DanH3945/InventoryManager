@@ -49,14 +49,11 @@ public class DetailFragment extends Fragment {
 
     private DetailEditButtonCallback mDetailEditButtonCallback;
 
+    @NonNull
     public static DetailFragment createInstance(int position) {
         // The ViewPager position to bring into view when the fragment is loaded.
         sCurrentPosition = position;
-
-
-        DetailFragment detailFragment = new DetailFragment();
-        ;
-        return detailFragment;
+        return new DetailFragment();
     }
 
     @Nullable
@@ -64,6 +61,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
+        // We don't load the toolbar if the app is displayed on a tablet or is in landscape.
         if (!MainActivity.isTablet && !MainActivity.isLandscape) {
             initAppBar(view);
         }
@@ -72,18 +70,21 @@ public class DetailFragment extends Fragment {
         mDetailPagerAdapter = new DetailPagerAdapter(getChildFragmentManager(), mViewPager);
         mViewPager.setAdapter(mDetailPagerAdapter);
 
+        // FAB button for this screen grabs the currently displayed product item and sends it to the
+        // callback.
         mFloatingActionButton = view.findViewById(R.id.main_fab);
-
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProductItem productItem = ((DetailDisplayFragment) mDetailPagerAdapter
-                        .getItem(mViewPager.getCurrentItem()))
-                        .getDisplayProduct();
-                mDetailEditButtonCallback.editButtonPressed(productItem);
-            }
+        mFloatingActionButton.setOnClickListener(v -> {
+            ProductItem productItem = ((DetailDisplayFragment) mDetailPagerAdapter
+                    .getItem(mViewPager.getCurrentItem()))
+                    .getDisplayProduct();
+            mDetailEditButtonCallback.editButtonPressed(productItem);
         });
 
+        // When the user changes the page we load the new image into the toolbar if it exists and
+        // set the initial position variable to the new position. If the view
+        // is destroyed and reloaded it will grab the initial position to set it's current location
+        // so even when switching between fragments and landscape / portrait the state is maintained
+        // as long as the app isn't fully destroyed.
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -95,6 +96,7 @@ public class DetailFragment extends Fragment {
 
                 try {
 
+                    // Load the product image into the toolbar parallax display if necessary.
                     if (!MainActivity.isTablet | !MainActivity.isLandscape) {
                         String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                                 .getDisplayProduct()
@@ -124,6 +126,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void initAppBar(View view) {
+        // Helper method to initialize the app bar if it's needed.
         mToolbarImageView = view.findViewById(R.id.toolbar_image_container);
 
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -153,6 +156,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        // Set the callback to the main activity for use when an item selected for edit.
         mDetailEditButtonCallback = (DetailEditButtonCallback) getActivity();
         mViewModel = ViewModelProviders.of(this)
                 .get(ProductViewModel.class);
@@ -161,6 +165,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        // Destroy the reference to the callback so we're not trying to callback to a dead activity.
         mDetailEditButtonCallback = null;
     }
 
@@ -176,6 +181,8 @@ public class DetailFragment extends Fragment {
 
         @Override
         public Fragment getItem(int i) {
+            // creates instances of the display fragment views for individual items based on
+            // list position.
             return DetailDisplayFragment.createInstance(mProductItemList.get(i));
         }
 
@@ -185,6 +192,9 @@ public class DetailFragment extends Fragment {
         }
 
         void updateList(List<ProductItem> productItemList) {
+            // Called by room when the observed dataset changes.  Updates this classes internal
+            // List of products and calls notifyDataSetChanged so the list of possible views will be
+            // re-loaded.
             this.mProductItemList = productItemList;
             this.notifyDataSetChanged();
 
@@ -218,6 +228,9 @@ public class DetailFragment extends Fragment {
         private ProductViewModel mViewModel;
 
         public static DetailDisplayFragment createInstance(ProductItem productItem) {
+            // Creation method that creates and instance of the fragment and pre-loads the given
+            // product item's information into its views and returns it to be displayed in the view
+            // pager.
             DetailDisplayFragment detailDisplayFragment = new DetailDisplayFragment();
             detailDisplayFragment.mProductItem = productItem;
             return detailDisplayFragment;
@@ -229,9 +242,12 @@ public class DetailFragment extends Fragment {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
             if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null) {
+                // if this is a reloaded fragment (after saveInstanceState is called for any reason) we
+                // reload the saved data.
                 mProductId = (int) savedInstanceState.get(PRODUCT_ID);
                 mProductItem = mViewModel.getProductById(mProductId).getValue();
             } else {
+                // If it's a new view we set the id to the given product's id.
                 mProductId = mProductItem.getId();
             }
 
@@ -246,6 +262,7 @@ public class DetailFragment extends Fragment {
             mProductImageViewSmall = view.findViewById(R.id.detail_image_small);
 
             if (getActivity() != null) {
+                // Google analytics tracker.
                 mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
             }
 
@@ -269,17 +286,21 @@ public class DetailFragment extends Fragment {
 
         @Override
         public void onResume() {
+            // setup the analytics tracker
             mTracker.setScreenName(TAG);
             mTracker.send(new HitBuilders.ScreenViewBuilder().build());
             super.onResume();
         }
 
         public ProductItem getDisplayProduct() {
+            // Return the currently displayed product.
             return mProductItem;
         }
 
         private void updateProductItem(ProductItem productItem) {
+            // Replace the current product with a new product and repopulate the display fields.
             mProductItem = productItem;
+            mProductId = mProductItem.getId();
             populateFields();
         }
 
@@ -294,17 +315,21 @@ public class DetailFragment extends Fragment {
             mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
 
             if (getActivity() != null) {
+                // setting the tracked switch to the correct state based on whether it's tracked
+                // in the product item object.
                 mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
                         getActivity().getResources().getString(R.string.detail_tracked_yes) :
                         getActivity().getResources().getString(R.string.detail_tracked_no)));
             }
 
+            // load the image for the product into the small image view.
             CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
 
         }
     }
 
     public interface DetailEditButtonCallback {
+        // Simple callback interface used by this fragment.
         void editButtonPressed(ProductItem productItem);
     }
 }

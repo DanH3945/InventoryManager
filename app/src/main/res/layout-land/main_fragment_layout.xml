@@ -1,6 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            style="@style/VisibleLayoutStyle">
+
+            <Button
+                android:padding="16dp"
+                android:id="@+id/main_fragment_btn_browse_all"
+                style="@style/ButtonStyle"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/main_fragment_browse_products_btn_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:padding="16dp"
+                android:id="@+id/main_fragment_btn_new_product"
+                style="@style/ButtonStyle"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/main_fragment_add_new_item_btn_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_browse_all" />
+
+            <TextView
+                style="@style/ParentTextLabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quick_search"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_barcode"
+                app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_browse_barcode"
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_browse_barcode" />
+
+            <ImageButton
+                android:id="@+id/main_fragment_btn_browse_barcode"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/camera_24px"
+                app:layout_constraintTop_toTopOf="@id/main_fragment_btn_browse_all"
+                app:layout_constraintBottom_toBottomOf="@id/main_fragment_btn_new_product"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_browse_all"
+                app:layout_constraintVertical_bias="0.55"
+                android:contentDescription="@string/main_fragment_barcode_search_button_content_description" />
+
+            <TextView
+                style="@style/ParentTextLabelStyle"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:text="@string/main_fragment_quick_change_label_text"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="0dp"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_quick_change"
+                app:layout_constraintEnd_toEndOf="@id/main_fragment_btn_quick_change"
+                app:layout_constraintBottom_toTopOf="@id/main_fragment_btn_quick_change" />
+
+            <Button
+                android:padding="16dp"
+                android:id="@+id/main_fragment_btn_quick_change"
+                style="@style/ButtonStyle"
+                android:layout_width="280dp"
+                android:layout_height="56dp"
+                android:drawableEnd="@mipmap/camera_24px"
+                android:drawablePadding="8dp"
+                android:text="@string/main_fragment_quick_stock_change_btn_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/main_fragment_btn_browse_all"
+                app:layout_constraintTop_toBottomOf="@+id/main_fragment_btn_new_product"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <NumberPicker
+                android:background="#c8c8c9"
+                android:id="@+id/main_fragment_number_picker"
+                android:layout_width="24dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/main_fragment_btn_quick_change"
+                app:layout_constraintStart_toEndOf="@+id/main_fragment_btn_quick_change"
+                app:layout_constraintTop_toTopOf="@+id/main_fragment_btn_quick_change" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
