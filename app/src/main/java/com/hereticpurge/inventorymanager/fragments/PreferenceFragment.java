@@ -18,11 +18,17 @@ public class PreferenceFragment extends Fragment {
 
     public static final String TAG = "PreferenceFragment";
 
+    public static PreferenceFragment createInstance(){
+        return new PreferenceFragment();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
 
+
+
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

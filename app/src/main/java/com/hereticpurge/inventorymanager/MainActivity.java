@@ -28,6 +28,7 @@ import com.hereticpurge.inventorymanager.fragments.AboutDialog;
 import com.hereticpurge.inventorymanager.fragments.DetailFragment;
 import com.hereticpurge.inventorymanager.fragments.EditFragment;
 import com.hereticpurge.inventorymanager.fragments.MainFragment;
+import com.hereticpurge.inventorymanager.fragments.PreferenceFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragment;
 import com.hereticpurge.inventorymanager.fragments.RecyclerFragmentAdapter;
 import com.hereticpurge.inventorymanager.model.DebugProductItemFactory;
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
             case R.id.menu_pref_btn:
                 Log.e(TAG, "onOptionsItemSelected: Preferences Pressed");
+                loadFragment(getPreferenceFragment(), false, PreferenceFragment.TAG);
                 break;
 
             case R.id.menu_debug_generic_btn:
@@ -246,6 +248,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             mMainFragment = MainFragment.createInstance();
         }
         return mMainFragment;
+    }
+
+    private PreferenceFragment getPreferenceFragment(){
+        return PreferenceFragment.createInstance();
     }
 
     public void barcodeSearch(@Nullable String barcode) {
