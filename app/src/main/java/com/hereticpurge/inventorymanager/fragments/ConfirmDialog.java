@@ -96,7 +96,7 @@ public class ConfirmDialog extends AppCompatDialogFragment {
         return getResources().getString(resource);
     }
 
-    public boolean getResult(){
+    public boolean getResult() {
         return mResult;
     }
 

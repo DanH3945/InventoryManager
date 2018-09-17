@@ -88,7 +88,7 @@ public class EditFragment extends Fragment {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
-        if (!MainActivity.isTablet){
+        if (!MainActivity.isTablet) {
             // Setup for the app bar if we're not in tablet or landscape mode.
             initAppBar(view);
         }

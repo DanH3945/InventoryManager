@@ -2,7 +2,6 @@ package com.hereticpurge.inventorymanager.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;

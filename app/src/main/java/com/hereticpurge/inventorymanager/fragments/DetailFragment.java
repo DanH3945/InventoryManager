@@ -139,7 +139,7 @@ public class DetailFragment extends Fragment {
             Log.e(TAG, "onCreateView: Failed to Load AppBar");
         }
 
-        if (!MainActivity.isLandscape){
+        if (!MainActivity.isLandscape) {
             AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
             appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
                 @Override

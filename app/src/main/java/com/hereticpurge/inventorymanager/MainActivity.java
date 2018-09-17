@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
     }
 
-    public static WeakReference<Context> getWeakContext(){
-        return new WeakReference<>(mMainActivity) ;
+    public static WeakReference<Context> getWeakContext() {
+        return new WeakReference<>(mMainActivity);
     }
 
     @Override
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             transaction.commit();
         } else {
             // Check to see if the main fragment is already loaded.  If not, load it.
-            if (!checkTabletMainFragment()){
+            if (!checkTabletMainFragment()) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, getMainFragment());
                 transaction.commit();
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         getSupportFragmentManager().executePendingTransactions();
     }
 
-    private boolean checkTabletMainFragment(){
+    private boolean checkTabletMainFragment() {
         return getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof MainFragment;
     }
 
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         return mMainFragment;
     }
 
-    private PreferenceFragment getPreferenceFragment(){
+    private PreferenceFragment getPreferenceFragment() {
         return new PreferenceFragment();
     }
 
