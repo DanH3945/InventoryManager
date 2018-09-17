@@ -83,9 +83,11 @@ public class EditFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_fragment_layout, container, false);
 
-        if (savedInstanceState != null) {
+        try {
             // Reload the display product if it exists.
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
+        } catch (NullPointerException npe) {
+            // Couldn't reload the object.  Load as normal.
         }
 
         if (!MainActivity.isTablet) {

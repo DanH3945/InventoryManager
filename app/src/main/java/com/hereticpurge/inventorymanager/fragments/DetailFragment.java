@@ -243,12 +243,12 @@ public class DetailFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.detail_fragment_pager_item_layout, container, false);
 
-            if (savedInstanceState != null && savedInstanceState.get(PRODUCT_ID) != null) {
+            try {
                 // if this is a reloaded fragment (after saveInstanceState is called for any reason) we
                 // reload the saved data.
                 mProductId = (int) savedInstanceState.get(PRODUCT_ID);
                 mProductItem = mViewModel.getProductById(mProductId).getValue();
-            } else {
+            } catch (NullPointerException npe) {
                 // If it's a new view we set the id to the given product's id.
                 mProductId = mProductItem.getId();
             }
