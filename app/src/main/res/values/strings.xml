@@ -19,7 +19,7 @@
     <string name="pref_image_quality_default">75</string>
 
     <string-array name="pref_image_quality_title_array">
-        <item>Bad Quality</item>
+        <item>Low Quality</item>
         <item>Medium Quality</item>
         <item>Good Quality</item>
         <item>Full Quality</item>
