@@ -62,7 +62,7 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.detail_fragment_pager_layout, container, false);
 
         // We don't load the toolbar if the app is displayed on a tablet or is in landscape.
-        if (!MainActivity.isTablet && !MainActivity.isLandscape) {
+        if (!MainActivity.isTablet) {
             initAppBar(view);
         }
 
@@ -139,18 +139,20 @@ public class DetailFragment extends Fragment {
             Log.e(TAG, "onCreateView: Failed to Load AppBar");
         }
 
-        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
-        appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                TextView textView = view.findViewById(R.id.toolbar_text_view);
-                if (state == State.COLLAPSED) {
-                    textView.setVisibility(View.VISIBLE);
-                } else if (state == State.EXPANDED) {
-                    textView.setVisibility(View.INVISIBLE);
+        if (!MainActivity.isLandscape){
+            AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
+            appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+                @Override
+                public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                    TextView textView = view.findViewById(R.id.toolbar_text_view);
+                    if (state == State.COLLAPSED) {
+                        textView.setVisibility(View.VISIBLE);
+                    } else if (state == State.EXPANDED) {
+                        textView.setVisibility(View.INVISIBLE);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

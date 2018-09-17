@@ -43,7 +43,7 @@ public class RecyclerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
-        if (!MainActivity.isTablet && !MainActivity.isLandscape){
+        if (!MainActivity.isTablet){
             // Setup the app bar if we're not in tablet or landscape mode.
             initAppBar(view);
         }
@@ -72,18 +72,20 @@ public class RecyclerFragment extends Fragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
-        appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                TextView textView = view.findViewById(R.id.toolbar_text_view);
-                if (state == State.COLLAPSED) {
-                    textView.setVisibility(View.VISIBLE);
-                } else if (state == State.EXPANDED) {
-                    textView.setVisibility(View.INVISIBLE);
+        if (!MainActivity.isLandscape) {
+            AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
+            appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+                @Override
+                public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                    TextView textView = view.findViewById(R.id.toolbar_text_view);
+                    if (state == State.COLLAPSED) {
+                        textView.setVisibility(View.VISIBLE);
+                    } else if (state == State.EXPANDED) {
+                        textView.setVisibility(View.INVISIBLE);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

@@ -88,7 +88,7 @@ public class EditFragment extends Fragment {
             mProductItem = savedInstanceState.getParcelable(PRODUCT_KEY);
         }
 
-        if (!MainActivity.isTablet && !MainActivity.isLandscape){
+        if (!MainActivity.isTablet){
             // Setup for the app bar if we're not in tablet or landscape mode.
             initAppBar(view);
         }
@@ -134,18 +134,20 @@ public class EditFragment extends Fragment {
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
-        appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                TextView textView = view.findViewById(R.id.toolbar_text_view);
-                if (state == State.COLLAPSED) {
-                    textView.setVisibility(View.VISIBLE);
-                } else if (state == State.EXPANDED) {
-                    textView.setVisibility(View.INVISIBLE);
+        if (!MainActivity.isLandscape) {
+            AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
+            appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+                @Override
+                public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                    TextView textView = view.findViewById(R.id.toolbar_text_view);
+                    if (state == State.COLLAPSED) {
+                        textView.setVisibility(View.VISIBLE);
+                    } else if (state == State.EXPANDED) {
+                        textView.setVisibility(View.INVISIBLE);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
