@@ -19,10 +19,10 @@
     <string name="pref_image_quality_default">75</string>
 
     <string-array name="pref_image_quality_title_array">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-        <item>No Compression</item>
+        <item>Bad Quality</item>
+        <item>Medium Quality</item>
+        <item>Good Quality</item>
+        <item>Full Quality</item>
     </string-array>
 
     <string-array name="pref_image_quality_value_array">

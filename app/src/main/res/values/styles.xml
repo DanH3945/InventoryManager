@@ -52,6 +52,7 @@
     <style name="EditFragmentTextStyle" parent="ParentTextStyle">
         <!--Override for parent text so the hint text shows-->
         <item name="android:text"></item>
+        <item name="android:textColorHint">@color/textColorPrimaryLight</item>
         <item name="android:textSize">@dimen/edit_text_size</item>
     </style>
 

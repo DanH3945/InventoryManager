@@ -2,6 +2,7 @@ package com.hereticpurge.inventorymanager.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -53,9 +54,10 @@ public final class CustomImageUtils {
             // Failed to get the user entered preference so just let the default fall through
         }
 
+        DebugAssistant.callCheck("Saving image with ratio " + Integer.toString(prefImageQuality));
         try {
             fileOutputStream = new FileOutputStream(target);
-            bitmap.compress(Bitmap.CompressFormat.PNG, prefImageQuality, fileOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, prefImageQuality, fileOutputStream);
         } catch (FileNotFoundException fnfe) {
             Log.e(TAG, "saveImage: FileNotFoundException thrown on " + fileName);
             return SAVE_FAILED; // Save failed
