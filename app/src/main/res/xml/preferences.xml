@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="@string/pref_debug_key"
+        android:summary="@string/pref_debug_summary"
+        android:title="@string/pref_debug_title" />
+
+    <ListPreference
+        android:key="@string/pref_image_quality_key"
+        android:title="@string/pref_image_quality_title"
+        android:summary="@string/pref_image_quality_summary"
+        android:dialogTitle="@string/pref_image_quality_title"
+        android:entries="@array/pref_image_quality_title_array"
+        android:entryValues="@array/pref_image_quality_value_array"
+        android:defaultValue="@string/pref_image_quality_default" />
+
+
+</PreferenceScreen>

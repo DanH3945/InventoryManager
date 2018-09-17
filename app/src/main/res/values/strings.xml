@@ -7,6 +7,31 @@
     <string name="replace">Replace</string>
     <string name="photo">Photo</string>
 
+    // Preference Strings
+
+    <string name="pref_debug_key">debugKey</string>
+    <string name="pref_debug_title">Debug Mode</string>
+    <string name="pref_debug_summary">Turns on debugging mode for the application</string>
+
+    <string name="pref_image_quality_key">imageQuality</string>
+    <string name="pref_image_quality_title">Set Image Compression Ratio</string>
+    <string name="pref_image_quality_summary">Larger values use more space per image but look better</string>
+    <string name="pref_image_quality_default">75</string>
+
+    <string-array name="pref_image_quality_title_array">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>No Compression</item>
+    </string-array>
+
+    <string-array name="pref_image_quality_value_array">
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+    </string-array>
+
     // Dialog Strings
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
@@ -14,6 +39,7 @@
     <string name="dialog_confirm">Confirm</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_save">Save</string>
+
     // Dialog Body Strings
     <string name="dialog_action_default">do</string>
     <string name="dialog_body_start">"Do you want to "</string>

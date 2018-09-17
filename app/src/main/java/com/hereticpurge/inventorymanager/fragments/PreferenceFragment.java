@@ -1,36 +1,23 @@
 package com.hereticpurge.inventorymanager.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
+import com.hereticpurge.inventorymanager.R;
 
-public class PreferenceFragment extends Fragment {
+public class PreferenceFragment extends PreferenceFragmentCompat {
 
     private Tracker mTracker;
 
     public static final String TAG = "PreferenceFragment";
 
-    public static PreferenceFragment createInstance(){
-        return new PreferenceFragment();
-    }
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-
+    public void onCreatePreferences(Bundle bundle, String s) {
+        setPreferencesFromResource(R.xml.preferences, s);
         mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-
-        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -124,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
         getMenuInflater().inflate(R.menu.overflow_items, menu);
 
-        if (BuildConfig.DEBUG) {
+        String debugKey = getResources().getString(R.string.pref_debug_key);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(debugKey, false)) {
             menu.findItem(R.id.menu_debug_generic_btn).setVisible(true);
             menu.findItem(R.id.menu_debug_scan_btn).setVisible(true);
             menu.findItem(R.id.menu_debug_clear_database).setVisible(true);
@@ -144,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
             case R.id.menu_pref_btn:
                 Log.e(TAG, "onOptionsItemSelected: Preferences Pressed");
-                loadFragment(getPreferenceFragment(), false, PreferenceFragment.TAG);
+                loadFragment(getPreferenceFragment(), true, PreferenceFragment.TAG);
                 break;
 
             case R.id.menu_debug_generic_btn:
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     }
 
     private PreferenceFragment getPreferenceFragment(){
-        return PreferenceFragment.createInstance();
+        return new PreferenceFragment();
     }
 
     public void barcodeSearch(@Nullable String barcode) {
