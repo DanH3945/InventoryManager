@@ -49,7 +49,7 @@ public final class CustomImageUtils {
             if (stringRatio != null) {
                 prefImageQuality = Integer.parseInt(stringRatio);
             }
-        } catch (ClassCastException cce) {
+        } catch (ClassCastException | NumberFormatException e) {
             // Failed to get the user entered preference so just let the default fall through
         }
 
