@@ -77,8 +77,10 @@ public final class CustomImageUtils {
             File file = new File(context.getExternalFilesDir(null), filename);
             Picasso.get().invalidate(file);
             Picasso.get().load(file).error(R.mipmap.error_24px).into(imageView);
-        } catch (NullPointerException npe) {
-            Log.e(TAG, "loadImage: Load Failed.  Null Context");
+        } catch (NullPointerException | IllegalArgumentException e) {
+            // Most likely the user rotated the screen while picasso was attempting to load an image
+            // into an image view that no long exists.
+            Log.e(TAG, "loadImage: Load Failed.  Values went null before load finished.");
         }
     }
 }
