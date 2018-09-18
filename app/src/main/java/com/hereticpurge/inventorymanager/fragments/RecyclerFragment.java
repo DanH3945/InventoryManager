@@ -99,7 +99,9 @@ public class RecyclerFragment extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mRecyclerView.getLayoutManager().onRestoreInstanceState(state);
+                    if (mRecyclerView != null) {
+                        mRecyclerView.getLayoutManager().onRestoreInstanceState(state);
+                    }
                 }
             }, RESTORE_DELAY);
         }
