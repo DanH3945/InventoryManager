@@ -52,6 +52,7 @@
     <string name="product_not_found_error">Product not found</string>
     <string name="image_unpack_error">Couldn\'t unpack image</string>
     <string name="number_error">Invalid Number Input</string>
+    <string name="external_files_error">Failed to get external files</string>
 
     // Appbar Strings
     <string name="toolbar_image_content_description">A picture of the currently displayed product or the inventory manager logo if no picture was found</string>

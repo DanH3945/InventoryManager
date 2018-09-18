@@ -2,10 +2,12 @@ package com.hereticpurge.inventorymanager.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.hereticpurge.inventorymanager.R;
 import com.squareup.picasso.Picasso;
@@ -28,50 +30,39 @@ public final class CustomImageUtils {
     private CustomImageUtils() {
     }
 
-    public static int saveImage(@Nullable Context context, Bitmap bitmap, String fileName) {
-        File target;
-        try {
-            target = new File(context.getExternalFilesDir(null), fileName);
-        } catch (NullPointerException npe) {
-            Log.e(TAG, "saveImage: Save Failed.  Null Context. ");
-            return SAVE_FAILED;
-        }
+    public static void saveImage(@Nullable Context context, Bitmap bitmap, String fileName) {
+        // This will be the final target location for the image
+        File target = null;
 
-        FileOutputStream fileOutputStream = null;
-
-        // set the default quality
+        // Set the default image quality
         int prefImageQuality = IMAGE_QUALITY_DEFAULT;
 
-        // try and get the user entered image compression ratio from shared preferences
         try {
+            // Initialize the target location
+            target = new File(context.getExternalFilesDir(null), fileName);
+
+            // Try to set the image quality from user selected preferences
             String key = context.getString(R.string.pref_image_quality_key);
             String stringRatio = PreferenceManager.getDefaultSharedPreferences(context).getString(key, null);
             if (stringRatio != null) {
                 prefImageQuality = Integer.parseInt(stringRatio);
             }
-        } catch (ClassCastException | NumberFormatException e) {
+
+        } catch (NullPointerException e) {
+            Toast.makeText(context, R.string.external_files_error, Toast.LENGTH_LONG).show();
+            return;
+        } catch (ClassCastException | NumberFormatException e){
             // Failed to get the user entered preference so just let the default fall through
         }
 
-        DebugAssistant.callCheck("Saving image with ratio " + Integer.toString(prefImageQuality));
-        try {
-            fileOutputStream = new FileOutputStream(target);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, prefImageQuality, fileOutputStream);
-        } catch (FileNotFoundException fnfe) {
-            Log.e(TAG, "saveImage: FileNotFoundException thrown on " + fileName);
-            return SAVE_FAILED; // Save failed
-        } finally {
-            try {
-                fileOutputStream.close();
-            } catch (IOException | NullPointerException e) {
-                e.printStackTrace();
-            }
+        if (target != null) {
+            // Do the actual saving of the image off thread.
+            new SaveImageTask(bitmap, target, prefImageQuality).execute();
         }
-        return SAVE_SUCCESS; // Save success
     }
 
     public static void loadImage(@Nullable Context context, String filename, ImageView imageView) {
-
+        // Loading an image.  Picasso handles the Async work here.
         try {
             File file = new File(context.getExternalFilesDir(null), filename);
             Picasso.get().invalidate(file);
@@ -81,5 +72,41 @@ public final class CustomImageUtils {
             // into an image view that no long exists.
             Log.e(TAG, "loadImage: Load Failed.  Values went null before load finished.");
         }
+    }
+
+    public static class SaveImageTask extends AsyncTask<Void, Void, Void> {
+
+        Bitmap mBitmap;
+        File mTargetFile;
+        int mImageQuality;
+
+
+        SaveImageTask(Bitmap bitmap, File targetFile, int imageQuality) {
+            mBitmap = bitmap;
+            mTargetFile = targetFile;
+            mImageQuality = imageQuality;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            FileOutputStream fileOutputStream = null;
+
+            try {
+                fileOutputStream = new FileOutputStream(mTargetFile);
+                mBitmap.compress(Bitmap.CompressFormat.JPEG, mImageQuality, fileOutputStream);
+            } catch (FileNotFoundException e) {
+                return null;
+            } finally {
+                try {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                } catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
     }
 }
