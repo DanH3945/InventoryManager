@@ -64,6 +64,13 @@ public class ProductViewModel extends AndroidViewModel {
             db.productDao().deleteSingleProduct(productItems[0]);
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            MainAppWidgetProvider.notifyWidgets();
+        }
     }
 
     private static class deleteAllProductsAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -78,6 +85,13 @@ public class ProductViewModel extends AndroidViewModel {
         protected Void doInBackground(Void... voids) {
             db.productDao().deleteAllProducts();
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            MainAppWidgetProvider.notifyWidgets();
         }
     }
 
@@ -99,16 +113,7 @@ public class ProductViewModel extends AndroidViewModel {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            // Notifying the app widget that some information has changed and it should update.
-            Context context = MainActivity.getWeakContext().get();
-            AppWidgetManager appWidgetManager =
-                    AppWidgetManager.getInstance(context);
-
-            ComponentName appWidget = new ComponentName(context, MainAppWidgetProvider.class.getName());
-
-            int[] widgetIds = appWidgetManager.getAppWidgetIds(appWidget);
-
-            appWidgetManager.notifyAppWidgetViewDataChanged(widgetIds, R.id.widget_list_view);
+            MainAppWidgetProvider.notifyWidgets();
         }
     }
 }

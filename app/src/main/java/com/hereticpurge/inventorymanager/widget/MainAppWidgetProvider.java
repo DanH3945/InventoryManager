@@ -3,6 +3,7 @@ package com.hereticpurge.inventorymanager.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,5 +38,18 @@ public class MainAppWidgetProvider extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
+    }
+
+    public static void notifyWidgets() {
+        // Notifying the app widget that some information has changed and it should update.
+        Context context = MainActivity.getWeakContext().get();
+        AppWidgetManager appWidgetManager =
+                AppWidgetManager.getInstance(context);
+
+        ComponentName appWidget = new ComponentName(context, MainAppWidgetProvider.class.getName());
+
+        int[] widgetIds = appWidgetManager.getAppWidgetIds(appWidget);
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(widgetIds, R.id.widget_list_view);
     }
 }

@@ -6,6 +6,7 @@
     <string name="scan">Scan</string>
     <string name="replace">Replace</string>
     <string name="photo">Photo</string>
+    <string name="debug_database_wiped">Database Wiped</string>
 
     // Preference Strings
 
