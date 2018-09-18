@@ -3,20 +3,18 @@ package com.hereticpurge.inventorymanager.fragments;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -24,9 +22,11 @@ import com.hereticpurge.inventorymanager.AnalyticsApplication;
 import com.hereticpurge.inventorymanager.MainActivity;
 import com.hereticpurge.inventorymanager.R;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
-import com.hereticpurge.inventorymanager.utils.AppbarStateChangeListener;
 
 public class RecyclerFragment extends Fragment {
+
+    private static final String LAYOUT_STATE_KEY = "layoutStateKey";
+    private static final int RESTORE_DELAY = 200;
 
     private ProductViewModel mViewModel;
 
@@ -48,9 +48,9 @@ public class RecyclerFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_fragment_layout, container, false);
 
         if (!MainActivity.isTablet) {
-            // Setup the app bar if we're not in tablet or landscape mode.
-            initAppBar(view);
+            showToolbar(view);
         }
+
 
         mRecyclerView = view.findViewById(R.id.recycler_view);
         RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(mRecyclerCallback, mViewModel);
@@ -68,33 +68,45 @@ public class RecyclerFragment extends Fragment {
         return view;
     }
 
-    private void initAppBar(View view) {
-        // Helper method for setting up the app bar.
-        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+    private void showToolbar(View view) {
+        // This toolbar had to be done differently than the rest of the app.  Coordinator layouts
+        // appear to disable the scrollToPosition method in recycler views so it was reseting the
+        // recycler list when the view was destroyed and recreated without allowing me to reset the
+        // correct list position.  As a result this is a simple average toolbar added specifically
+        // to this fragment's class and layout files.
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
 
-        if (!MainActivity.isLandscape) {
-            AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
-            appBarLayout.addOnOffsetChangedListener(new AppbarStateChangeListener() {
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable(LAYOUT_STATE_KEY, mRecyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        // Puts a delay on setting the scroll position after orientation change to allow the LiveData
+        // sources to update.
+        if (savedInstanceState != null) {
+            Parcelable state = savedInstanceState.getParcelable(LAYOUT_STATE_KEY);
+            new Handler().postDelayed(new Runnable() {
                 @Override
-                public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                    TextView textView = view.findViewById(R.id.toolbar_text_view);
-                    if (state == State.COLLAPSED) {
-                        textView.setVisibility(View.VISIBLE);
-                    } else if (state == State.EXPANDED) {
-                        textView.setVisibility(View.INVISIBLE);
-                    }
+                public void run() {
+                    mRecyclerView.getLayoutManager().onRestoreInstanceState(state);
                 }
-            });
+            }, RESTORE_DELAY);
         }
     }
 
     @Override
     public void onResume() {
-
         mTracker.setScreenName(TAG);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         super.onResume();
