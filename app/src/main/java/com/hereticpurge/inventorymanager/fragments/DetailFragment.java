@@ -35,11 +35,9 @@ import java.util.List;
 public class DetailFragment extends Fragment {
 
     public static final String TAG = "DetailFragment";
-    protected static int sCurrentPosition;
+    private static int sCurrentPosition;
 
     private ImageView mToolbarImageView;
-
-    private FloatingActionButton mFloatingActionButton;
 
     private DetailPagerAdapter mDetailPagerAdapter;
 
@@ -72,7 +70,7 @@ public class DetailFragment extends Fragment {
 
         // FAB button for this screen grabs the currently displayed product item and sends it to the
         // callback.
-        mFloatingActionButton = view.findViewById(R.id.main_fab);
+        FloatingActionButton mFloatingActionButton = view.findViewById(R.id.main_fab);
         mFloatingActionButton.setOnClickListener(v -> {
             ProductItem productItem = ((DetailDisplayFragment) mDetailPagerAdapter
                     .getItem(mViewPager.getCurrentItem()))
@@ -229,7 +227,7 @@ public class DetailFragment extends Fragment {
 
         private ProductViewModel mViewModel;
 
-        public static DetailDisplayFragment createInstance(ProductItem productItem) {
+        static DetailDisplayFragment createInstance(ProductItem productItem) {
             // Creation method that creates and instance of the fragment and pre-loads the given
             // product item's information into its views and returns it to be displayed in the view
             // pager.
@@ -294,7 +292,7 @@ public class DetailFragment extends Fragment {
             super.onResume();
         }
 
-        public ProductItem getDisplayProduct() {
+        ProductItem getDisplayProduct() {
             // Return the currently displayed product.
             return mProductItem;
         }

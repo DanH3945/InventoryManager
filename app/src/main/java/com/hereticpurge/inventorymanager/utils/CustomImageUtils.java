@@ -51,7 +51,7 @@ public final class CustomImageUtils {
         } catch (NullPointerException e) {
             Toast.makeText(context, R.string.external_files_error, Toast.LENGTH_LONG).show();
             return;
-        } catch (ClassCastException | NumberFormatException e){
+        } catch (ClassCastException | NumberFormatException e) {
             // Failed to get the user entered preference so just let the default fall through
         }
 
@@ -74,7 +74,7 @@ public final class CustomImageUtils {
         }
     }
 
-    public static class SaveImageTask extends AsyncTask<Void, Void, Void> {
+    static class SaveImageTask extends AsyncTask<Void, Void, Void> {
 
         Bitmap mBitmap;
         File mTargetFile;

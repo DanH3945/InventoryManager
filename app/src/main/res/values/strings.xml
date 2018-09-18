@@ -47,16 +47,13 @@
 
     // Error Strings
     <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
-    <string name="activity_result_error">Activity result error</string>
     <string name="image_resolve_error">Couldn\'t resolve barcode</string>
     <string name="product_not_found_error">Product not found</string>
-    <string name="image_unpack_error">Couldn\'t unpack image</string>
     <string name="number_error">Invalid Number Input</string>
     <string name="external_files_error">Failed to get external files</string>
 
     // Appbar Strings
     <string name="toolbar_image_content_description">A picture of the currently displayed product or the inventory manager logo if no picture was found</string>
-    <string name="toolbar_search_prompt_button">Barcode Search</string>
     <string name="toolbar_preferences_button">Preferences</string>
     <string name="toolbar_about_button">About</string>
     <string name="toolbar_add_debug_product_button">Add Debug Product</string>
@@ -75,7 +72,6 @@
     <string name="edit_fragment_image_content_description">A picture of the currently displayed product</string>
     <string name="edit_fragment_image_button_content_description">Press this button take a new picture of the selected product</string>
     <string name="edit_fragment_quick_barcode_button_content_description">Press this button and take a picture of a barcode to fill this product\'s barcode field.</string>
-    <string name="edit_button_save_product_string">Save Product</string>
     <string name="edit_button_delete_product_string">Delete Product</string>
     <string name="edit_product_name">Product Name</string>
     <string name="edit_custom_id">Custom Id</string>

@@ -21,10 +21,10 @@ public class AboutDialog extends AppCompatDialogFragment {
 
     private static final String TAG = "AboutDialog";
 
-    TextView mVersionText;
-    TextView mLicenseDialogNameText;
-    TextView mZxingNameText;
-    TextView mPicassoNameText;
+    private TextView mVersionText;
+    private TextView mLicenseDialogNameText;
+    private TextView mZxingNameText;
+    private TextView mPicassoNameText;
 
     @NonNull
     @Override

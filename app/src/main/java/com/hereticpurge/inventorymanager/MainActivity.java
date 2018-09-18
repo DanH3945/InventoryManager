@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
 
     private ProductViewModel mViewModel;
 
-    private AdView mAdView;
-
     private static final int BARCODE_SEARCH = 100;
     private static final int BARCODE_QUICK_CHANGE = 101;
     private static final int PLAY_SERVICES_DIALOG_RESULT_CODE = 200;
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
 
-        mAdView = findViewById(R.id.included_ad_view);
+        AdView mAdView = findViewById(R.id.included_ad_view);
         mAdView.loadAd(adRequest);
 
         // Fix for ad view dropping the frame rate of the app. Credit to Martin on stackoverflow.com
@@ -256,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         return new PreferenceFragment();
     }
 
-    public void barcodeSearch(@Nullable String barcode) {
+    private void barcodeSearch(@Nullable String barcode) {
         if (barcode != null) {
             LiveData<ProductItem> productItemLiveData = mViewModel.getProductByBarcode(barcode);
             ProductItem productItem = productItemLiveData.getValue();
@@ -271,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         }
     }
 
-    public void onProductSelected(int id) {
+    private void onProductSelected(int id) {
         loadFragment(getDetailFragment(id),
                 true,
                 DetailFragment.TAG);
@@ -334,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         }
     }
 
-    void quickStockIncrement(@NonNull String barcode, int value) {
+    private void quickStockIncrement(@NonNull String barcode, int value) {
         try {
             ProductItem productItem = mViewModel.getProductByBarcode(barcode).getValue();
             productItem.setCurrentStock(productItem.getCurrentStock() + value);
@@ -348,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
     }
 
-    public void onEditButtonPressed(ProductItem productItem) {
+    private void onEditButtonPressed(ProductItem productItem) {
         loadFragment(getEditFragment(productItem), true, EditFragment.TAG);
     }
 

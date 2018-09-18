@@ -47,9 +47,6 @@ public class EditFragment extends Fragment {
 
     private ProductItem mProductItem;
 
-    private ImageButton mMainImageButton;
-    private ImageButton mBarcodeImageButton;
-
     private ImageView mMainImageView;
 
     private Bitmap mTempImage;
@@ -63,8 +60,6 @@ public class EditFragment extends Fragment {
     private EditText mTargetStock;
 
     private Switch mTrackSwitch;
-
-    private FloatingActionButton mFloatingActionButton;
 
     private Tracker mTracker;
 
@@ -95,13 +90,13 @@ public class EditFragment extends Fragment {
             initAppBar(view);
         }
 
-        mFloatingActionButton = view.findViewById(R.id.main_fab);
+        FloatingActionButton mFloatingActionButton = view.findViewById(R.id.main_fab);
         mFloatingActionButton.setOnClickListener(v -> doSave());
 
-        mMainImageButton = view.findViewById(R.id.edit_product_main_image_camera_button);
+        ImageButton mMainImageButton = view.findViewById(R.id.edit_product_main_image_camera_button);
         mMainImageButton.setOnClickListener(v -> startCameraForResult(MAIN_IMAGE_RESULT));
 
-        mBarcodeImageButton = view.findViewById(R.id.edit_product_barcode_camera_button);
+        ImageButton mBarcodeImageButton = view.findViewById(R.id.edit_product_barcode_camera_button);
         mBarcodeImageButton.setOnClickListener(v -> startCameraForResult(BARCODE_RESULT));
 
         Button mDeleteButton = view.findViewById(R.id.edit_delete_button);

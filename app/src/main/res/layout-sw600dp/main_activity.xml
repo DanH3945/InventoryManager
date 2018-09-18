@@ -16,10 +16,11 @@
 
         </FrameLayout>
 
-        <View style="@style/DividerStyle"
+        <View
+            style="@style/DividerStyle"
             android:layout_height="match_parent"
             android:layout_width="1dp"
-            android:layout_weight="0"/>
+            android:layout_weight="0" />
 
         <FrameLayout
             android:id="@+id/fragment_container_tablet"

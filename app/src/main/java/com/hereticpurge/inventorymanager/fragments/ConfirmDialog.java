@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -57,6 +58,7 @@ public class ConfirmDialog extends AppCompatDialogFragment {
                 CANCEL_STRING_DEFAULT);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Assemble the question to ask the user and activate the callbacks if the callback is not

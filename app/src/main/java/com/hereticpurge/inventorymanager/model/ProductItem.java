@@ -14,22 +14,22 @@ public class ProductItem implements Parcelable {
     // Parcelable room data object.
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
     @ColumnInfo(name = "barcode")
-    public String barcode;
+    private String barcode;
 
     @ColumnInfo(name = "custom_id")
-    public String customId;
+    private String customId;
 
     @ColumnInfo(name = "name")
-    public String name;
+    private String name;
 
     @ColumnInfo(name = "cost")
-    public String cost;
+    private String cost;
 
     @ColumnInfo(name = "retail")
-    public String retail;
+    private String retail;
 
     @ColumnInfo(name = "current_stock")
     public int currentStock;
@@ -38,7 +38,7 @@ public class ProductItem implements Parcelable {
     public int targetStock;
 
     @ColumnInfo(name = "tracked")
-    public boolean tracked;
+    private boolean tracked;
 
     public ProductItem() {
         this("0000",

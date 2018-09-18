@@ -20,7 +20,7 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
         return new MainWidgetRemoteViewsFactory(getApplicationContext(), intent);
     }
 
-    public class MainWidgetRemoteViewsFactory implements RemoteViewsFactory {
+    class MainWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
         private Context mContext;
         private ArrayList<Integer> mProductsNeedRestock;

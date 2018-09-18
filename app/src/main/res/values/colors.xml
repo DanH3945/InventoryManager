@@ -11,9 +11,6 @@
     <color name="searchBarColor">#ffffff</color>
     <color name="toolbarFadeTo">@color/colorPrimary</color>
 
-    // Widget Colors
-    <color name="widgetBackground">#ffffff</color>
-
     // Text colors
     <color name="textColorPrimary">#bebebe</color>
     <color name="textColorPrimaryLight">#7c7c7c</color>
@@ -23,8 +20,6 @@
     <color name="buttonTextColor">@color/textColorPrimary</color>
 
     // Dialog Colors
-    <color name="dialogTextColorPrimary">#6c6c6c</color>
-    <color name="dialogTextColorPrimaryLight">#9b9b9b</color>
     <color name="httpLinkBlue">#0000EE</color>
 
     // Recycler Colors

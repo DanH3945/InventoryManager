@@ -2,7 +2,7 @@ package com.hereticpurge.inventorymanager.utils;
 
 import android.util.Log;
 
-public final class DebugAssistant {
+final class DebugAssistant {
 
     // Little utility class to assist in debugging sections of code when permanent log statements
     // are not necessary and annoying to add and delete.
@@ -14,7 +14,7 @@ public final class DebugAssistant {
         Log.e("NULLITY CHECK", "OBJECT IS: " + (object == null ? "NULL" : "NOT NULL"));
     }
 
-    public static void callCheck(String statement) {
+    private static void callCheck(String statement) {
         Log.e("CALL CHECK", "Method was called with message: " + statement);
     }
 
