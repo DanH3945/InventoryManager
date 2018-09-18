@@ -15,11 +15,13 @@ import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragmentAdapter.ViewHolder> {
 
     private List<ProductItem> mProductItemList;
+    private List<ProductItem> mMasterList;
     private RecyclerCallback mCallback;
     private ProductViewModel mViewModel;
 
@@ -71,7 +73,26 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
     public void updateList(List<ProductItem> productItems) {
         // Helper method so that when room detects new data on the observed data set it can load
         // new information into the recycler view and tell the recycler to update its information.
+        this.mMasterList = productItems;
         this.mProductItemList = productItems;
+        this.notifyDataSetChanged();
+    }
+
+    public void filterProducts(String query) {
+        List<ProductItem> filteredList = new ArrayList<>();
+
+        if (query != null && mProductItemList != null) {
+            for (ProductItem productItem : mProductItemList) {
+                for (String productTerm : productItem.getSearchTerms()) {
+                    if (productTerm.equals(query) && !filteredList.contains(productItem)) {
+                        filteredList.add(productItem);
+                    }
+                }
+            }
+        } else {
+            filteredList = mMasterList;
+        }
+        this.mProductItemList = filteredList;
         this.notifyDataSetChanged();
     }
 

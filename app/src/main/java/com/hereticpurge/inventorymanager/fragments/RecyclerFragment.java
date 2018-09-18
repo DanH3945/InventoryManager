@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,24 @@ public class RecyclerFragment extends Fragment {
         RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(mRecyclerCallback, mViewModel);
         mRecyclerView.setAdapter(recyclerFragmentAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        SearchView searchView = view.findViewById(R.id.recycler_search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                recyclerFragmentAdapter.filterProducts(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (s.equals("")) {
+                    recyclerFragmentAdapter.filterProducts(null);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mViewModel.getProductList()
                 .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));

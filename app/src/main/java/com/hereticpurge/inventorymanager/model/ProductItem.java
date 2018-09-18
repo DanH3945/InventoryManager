@@ -8,6 +8,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+
 @Entity
 public class ProductItem implements Parcelable {
 
@@ -81,6 +83,15 @@ public class ProductItem implements Parcelable {
         currentStock = in.readInt();
         targetStock = in.readInt();
         tracked = in.readByte() != 0;
+    }
+
+    @Ignore
+    public ArrayList<String> getSearchTerms() {
+        ArrayList<String> searchTerms = new ArrayList<>();
+        searchTerms.add(getBarcode());
+        searchTerms.add(customId);
+        searchTerms.add(getName());
+        return searchTerms;
     }
 
     public int getId() {
