@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +34,8 @@ public class RecyclerFragment extends Fragment {
 
     private Tracker mTracker;
 
+    private RecyclerView mRecyclerView;
+
     public static final String TAG = "RecyclerFragment";
 
     public static RecyclerFragment createInstance() {
@@ -47,10 +52,10 @@ public class RecyclerFragment extends Fragment {
             initAppBar(view);
         }
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
         RecyclerFragmentAdapter recyclerFragmentAdapter = new RecyclerFragmentAdapter(mRecyclerCallback, mViewModel);
-        recyclerView.setAdapter(recyclerFragmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(recyclerFragmentAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mViewModel.getProductList()
                 .observe(this, productItems -> recyclerFragmentAdapter.updateList(productItems));
@@ -89,6 +94,7 @@ public class RecyclerFragment extends Fragment {
 
     @Override
     public void onResume() {
+
         mTracker.setScreenName(TAG);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         super.onResume();
