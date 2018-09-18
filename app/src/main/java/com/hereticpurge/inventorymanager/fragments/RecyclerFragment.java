@@ -101,7 +101,8 @@ public class RecyclerFragment extends Fragment {
         // Set the callback for clicks to the main activity for handling navigation.
         mRecyclerCallback = (RecyclerFragmentAdapter.RecyclerCallback) getActivity();
 
-        mViewModel = ViewModelProviders.of(this)
+        // Using get activity instead of the fragment itself to maintain observers.
+        mViewModel = ViewModelProviders.of(getActivity())
                 .get(ProductViewModel.class);
 
     }

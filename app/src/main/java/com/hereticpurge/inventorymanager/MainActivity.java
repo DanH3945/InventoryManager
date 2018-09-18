@@ -161,9 +161,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             case R.id.menu_debug_clear_database:
                 Log.e(TAG, "onOptionsItemSelected: Wipe Database Pressed");
 
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
-                manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
+                    manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
 
                 Toast.makeText(this, R.string.debug_database_wiped, Toast.LENGTH_LONG).show();
 
@@ -245,10 +247,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     }
 
     private RecyclerFragment getRecyclerFragment() {
-        if (mRecyclerFragment == null) {
-            mRecyclerFragment = RecyclerFragment.createInstance();
-        }
-        return mRecyclerFragment;
+        return RecyclerFragment.createInstance();
     }
 
     private MainFragment getMainFragment() {
