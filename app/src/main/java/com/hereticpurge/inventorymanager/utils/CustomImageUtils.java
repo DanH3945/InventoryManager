@@ -21,8 +21,6 @@ public final class CustomImageUtils {
 
     // Utility class for saving and loading image files from the external files directory.
 
-    public static final int SAVE_FAILED = -1;
-    public static final int SAVE_SUCCESS = 1;
     private static final int IMAGE_QUALITY_DEFAULT = 75;
 
     private static final String TAG = "CustomImageUtils";

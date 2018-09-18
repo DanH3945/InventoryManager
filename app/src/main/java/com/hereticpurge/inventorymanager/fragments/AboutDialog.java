@@ -21,11 +21,6 @@ public class AboutDialog extends AppCompatDialogFragment {
 
     private static final String TAG = "AboutDialog";
 
-    private TextView mVersionText;
-    private TextView mLicenseDialogNameText;
-    private TextView mZxingNameText;
-    private TextView mPicassoNameText;
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,7 +37,7 @@ public class AboutDialog extends AppCompatDialogFragment {
         dialog.setContentView(R.layout.about_dialog_layout);
         dialog.setTitle(R.string.about_title);
 
-        mVersionText = dialog.findViewById(R.id.about_version_tv);
+        TextView mVersionText = dialog.findViewById(R.id.about_version_tv);
         try {
             int versionCode = getContext()
                     .getPackageManager()
@@ -59,13 +54,13 @@ public class AboutDialog extends AppCompatDialogFragment {
         // Set onClick listeners for each of the 3rd party library names in the dialog
         // When clicked they load a second dialog via License Dialog library for each 3rd party
         // library used in the app.
-        mLicenseDialogNameText = dialog.findViewById(R.id.about_license_dialog_tv);
+        TextView mLicenseDialogNameText = dialog.findViewById(R.id.about_license_dialog_tv);
         mLicenseDialogNameText.setOnClickListener(v -> showLicenseDialogLicense(getContext()));
 
-        mZxingNameText = dialog.findViewById(R.id.about_zxing_tv);
+        TextView mZxingNameText = dialog.findViewById(R.id.about_zxing_tv);
         mZxingNameText.setOnClickListener(v -> showZxingLicense(getContext()));
 
-        mPicassoNameText = dialog.findViewById(R.id.about_picasso_tv);
+        TextView mPicassoNameText = dialog.findViewById(R.id.about_picasso_tv);
         mPicassoNameText.setOnClickListener(v -> showPicassoLicense(getContext()));
 
         return dialog;

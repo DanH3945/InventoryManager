@@ -24,7 +24,7 @@ public class MainWidgetRemoteViewsService extends RemoteViewsService {
 
         private Context mContext;
         private ArrayList<Integer> mProductsNeedRestock;
-        private int mAppWidgetId;
+        private int mAppWidgetId; // Not used current but possibly in the future
         private ProductDatabase mProductDatabase;
         private List<ProductItem> mProductItemList;
 
