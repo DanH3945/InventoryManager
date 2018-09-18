@@ -81,10 +81,11 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
     public void filterProducts(String query) {
         List<ProductItem> filteredList = new ArrayList<>();
 
-        if (query != null && mProductItemList != null) {
-            for (ProductItem productItem : mProductItemList) {
+        // Saddest search functionality ever.  UPDATE ME!!
+        if (query != null && mMasterList != null) {
+            for (ProductItem productItem : mMasterList) {
                 for (String productTerm : productItem.getSearchTerms()) {
-                    if (productTerm.equals(query) && !filteredList.contains(productItem)) {
+                    if (productTerm.equalsIgnoreCase(query) && !filteredList.contains(productItem)) {
                         filteredList.add(productItem);
                     }
                 }
