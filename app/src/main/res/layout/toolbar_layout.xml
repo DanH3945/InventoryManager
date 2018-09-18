@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/appbar_image_dimen"
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/logo"
                 android:visibility="visible"
                 app:layout_collapseMode="parallax" />
 
