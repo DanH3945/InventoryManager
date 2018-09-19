@@ -22,7 +22,11 @@ public final class CurrencyUtils {
 
         String resultString = string;
 
-        if (resultString != null && resultString.charAt(0) == localCurrencySymbol.charAt(0)) {
+        // Perform checks on the string.  Making sure the string exists.  Isn't "" (the user entered
+        // no value.  The first character matches the currency symbol for the device's region.
+        if (resultString != null
+                && !resultString.equals("")
+                && resultString.charAt(0) == localCurrencySymbol.charAt(0)) {
             resultString = resultString.substring(1);
         }
         return resultString;

@@ -116,6 +116,10 @@ public class EditFragment extends Fragment {
 
         initProductFields();
 
+        // Checking to see if the product item is null.  (The user selected new item instead of an
+        // existing item)
+        checkProductNull();
+
         if (getActivity() != null) {
             // Google Analytics tracker.
             mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
@@ -232,17 +236,15 @@ public class EditFragment extends Fragment {
     }
 
     private void checkProductNull() {
-        // Usually called if the view doesn't have an associated product item. (The user selected
+        // Called if the view doesn't have an associated product item. (The user selected
         // new item so an associated product item doesn't yet exist)
         if (mProductItem == null) {
             mProductItem = new ProductItem();
-            initProductFields();
         }
     }
 
     private void doSave() {
         // As advertised.  Save the current product item to the room database.
-        checkProductNull();
         try {
             mProductItem.setName(mName.getText().toString());
             mProductItem.setBarcode(mBarcode.getText().toString());
