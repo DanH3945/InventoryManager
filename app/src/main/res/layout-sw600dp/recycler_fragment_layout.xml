@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/VisibleLayoutStyle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:importantForAccessibility="no">
 
     <android.support.v7.widget.SearchView
         android:id="@+id/recycler_search_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/recycler_fragment_search_hint"
+        app:queryHint="@string/recycler_fragment_search_hint"
+        android:contentDescription="@string/recycler_fragment_search_bar">
 
     </android.support.v7.widget.SearchView>
 
     <android.support.v7.widget.RecyclerView
+        android:contentDescription="@string/recycler_fragment_rv_content_description"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

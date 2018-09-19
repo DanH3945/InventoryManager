@@ -33,6 +33,9 @@
         <item>100</item>
     </string-array>
 
+    // AdMob Strings
+    <string name="banner_ad_content_description">Banner Advertisement</string>
+
     // Dialog Strings
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
@@ -40,6 +43,11 @@
     <string name="dialog_confirm">Confirm</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_save">Save</string>
+
+    // About Dialog Strings
+    <string name="about_dialog_psdev_license_content_description">Link to the license for licensing dialog library</string>
+    <string name="about_dialog_zxing_license_content_description">Link to the license for ZXing barcode reader library</string>
+    <string name="about_dialog_picasso_license_content_description">Link to the license for Picasso Image Loader library</string>
 
     // Dialog Body Strings
     <string name="dialog_action_default">do</string>
@@ -60,6 +68,7 @@
     <string name="toolbar_add_debug_product_button">Add Debug Product</string>
     <string name="toolbar_add_debug_product_scan_button">Add Debug Product Scan</string>
     <string name="toolbar_wipe_database_button">Wipe Database</string>
+    <string name="toolbar_content_description">Toolbar</string>
 
     // Main Fragment Strings
     <string name="main_fragment_barcode_search_button_content_description">Press this button and take a picture of a barcode to search the database for that barcode</string>
@@ -71,8 +80,11 @@
 
     // Edit Fragment Strings
     <string name="edit_fragment_image_content_description">A picture of the currently displayed product</string>
-    <string name="edit_fragment_image_button_content_description">Press this button take a new picture of the selected product</string>
+    <string name="edit_fragment_image_button_content_description">Press this button to take a new picture of the selected product</string>
     <string name="edit_fragment_quick_barcode_button_content_description">Press this button and take a picture of a barcode to fill this product\'s barcode field.</string>
+    <string name="edit_fragment_switch_content_description">Switch the tracking status of this product</string>
+    <string name="edit_fragment_delete_button_content_description">Delete</string>
+    <string name="edit_fragment_fab_content_description">Save</string>
     <string name="edit_button_delete_product_string">Delete Product</string>
     <string name="edit_product_name">Product Name</string>
     <string name="edit_custom_id">Custom Id</string>
@@ -96,9 +108,13 @@
     <string name="detail_tracked_label">Tracked</string>
     <string name="detail_tracked_yes">Yes</string>
     <string name="detail_tracked_no">No</string>
+    <string name="detail_fragment_fab_content_description">Edit</string>
 
     // Recycler Fragment Item Strings
+    <string name="recycler_fragment_search_hint">Search</string>
     <string name="recycler_fragment_item_image_content_description">A picture of the product represented in this entry</string>
+    <string name="recycler_fragment_search_bar">Search Bar</string>
+    <string name="recycler_fragment_rv_content_description">A list of products in the database</string>
     <string name="recycler_item_cost">Cost:</string>
     <string name="recycler_item_retail">Retail:</string>
     <string name="recycler_item_current_stock">Current Stock:</string>

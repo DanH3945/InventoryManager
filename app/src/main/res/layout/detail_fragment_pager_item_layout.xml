@@ -4,13 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:importantForAccessibility="no"
+    android:focusable="false">
 
     <android.support.constraint.ConstraintLayout
         style="@style/VisibleLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="48dp">
+        android:paddingBottom="48dp"
+        android:importantForAccessibility="no"
+        android:focusable="false">
 
         <TextView
             android:id="@+id/detail_product_name_text"
@@ -21,7 +25,8 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusable="true"/>
 
         <View
             android:id="@+id/detail_top_divider"
@@ -48,14 +53,16 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/detail_image_small"
-            app:layout_constraintTop_toBottomOf="@id/detail_product_name_text">
+            app:layout_constraintTop_toBottomOf="@id/detail_product_name_text"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_custom_id_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_custom_id_label" />
+                android:text="@string/detail_custom_id_label"
+                android:labelFor="@+id/detail_custom_id_text"/>
 
             <TextView
                 android:id="@+id/detail_custom_id_text"
@@ -77,14 +84,16 @@
             app:layout_constraintBottom_toTopOf="@+id/detail_retail_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/detail_image_small"
-            app:layout_constraintTop_toBottomOf="@id/detail_custom_id_container">
+            app:layout_constraintTop_toBottomOf="@id/detail_custom_id_container"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_barcode_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_barcode_label" />
+                android:text="@string/detail_barcode_label"
+                android:labelFor="@id/detail_barcode_text"/>
 
             <TextView
                 android:id="@+id/detail_barcode_text"
@@ -106,14 +115,16 @@
             app:layout_constraintBottom_toTopOf="@id/detail_current_stock_container"
             app:layout_constraintEnd_toStartOf="@id/detail_retail_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_image_small">
+            app:layout_constraintTop_toBottomOf="@+id/detail_image_small"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_cost_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_cost_label" />
+                android:text="@string/detail_cost_label"
+                android:labelFor="@id/detail_cost_text"/>
 
             <TextView
                 android:id="@+id/detail_cost_text"
@@ -135,14 +146,16 @@
             app:layout_constraintBottom_toTopOf="@id/detail_target_stock_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/detail_cost_container"
-            app:layout_constraintTop_toBottomOf="@+id/detail_image_small">
+            app:layout_constraintTop_toBottomOf="@+id/detail_image_small"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_retail_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_retail_label" />
+                android:text="@string/detail_retail_label"
+                android:labelFor="@id/detail_retail_text"/>
 
             <TextView
                 android:id="@+id/detail_retail_text"
@@ -164,14 +177,16 @@
             app:layout_constraintBottom_toTopOf="@+id/detail_tracked_container"
             app:layout_constraintEnd_toStartOf="@id/detail_target_stock_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_cost_container">
+            app:layout_constraintTop_toBottomOf="@id/detail_cost_container"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_current_stock_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_current_stock_label" />
+                android:text="@string/detail_current_stock_label"
+                android:labelFor="@id/detail_current_stock_text"/>
 
             <TextView
                 android:id="@+id/detail_current_stock_text"
@@ -192,14 +207,16 @@
             app:layout_constraintBottom_toTopOf="@id/detail_tracked_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/detail_current_stock_container"
-            app:layout_constraintTop_toBottomOf="@id/detail_retail_container">
+            app:layout_constraintTop_toBottomOf="@id/detail_retail_container"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_target_stock_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_target_stock_label" />
+                android:text="@string/detail_target_stock_label"
+                android:labelFor="@id/detail_target_stock_text"/>
 
             <TextView
                 android:id="@+id/detail_target_stock_text"
@@ -220,14 +237,16 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/detail_track_text_label"
                 style="@style/DetailFragmentTextLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_tracked_label" />
+                android:text="@string/detail_tracked_label"
+                android:labelFor="@id/detail_track_text"/>
 
             <TextView
                 android:id="@+id/detail_track_text"

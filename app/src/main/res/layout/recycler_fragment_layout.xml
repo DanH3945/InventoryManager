@@ -2,11 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:importantForAccessibility="no">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no">
 
         <!--This toolbar had to be done differently than the rest of the app.  Coordinator layouts-->
         <!--appear to disable the scrollToPosition method in recycler views so it was reseting the-->
@@ -20,12 +22,16 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
             app:layout_collapseMode="pin"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:contentDescription="@string/toolbar_content_description">
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/recycler_search_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:defaultQueryHint="@string/recycler_fragment_search_hint"
+                app:queryHint="@string/recycler_fragment_search_hint"
+                android:contentDescription="@string/recycler_fragment_search_bar">
 
             </android.support.v7.widget.SearchView>
 
@@ -34,6 +40,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:contentDescription="@string/recycler_fragment_rv_content_description"
         android:id="@+id/recycler_view"
         style="@style/VisibleLayoutStyle"
         android:layout_width="match_parent"

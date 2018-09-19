@@ -307,19 +307,36 @@ public class DetailFragment extends Fragment {
         private void populateFields() {
 
             mProductName.setText(mProductItem.getName());
+            mProductName.setContentDescription(mProductItem.getName());
+
             mProductBarcode.setText(mProductItem.getBarcode());
+            mProductBarcode.setContentDescription(mProductItem.getBarcode());
+
             mProductCustomId.setText(mProductItem.getCustomId());
+            mProductCustomId.setContentDescription(mProductItem.getCustomId());
+
             mProductCost.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getCost()));
+            mProductCost.setContentDescription(mProductItem.getCost());
+
             mProductRetail.setText(CurrencyUtils.addLocalCurrencySymbol(mProductItem.getRetail()));
+            mProductRetail.setContentDescription(mProductItem.getRetail());
+
             mProductCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
+            mProductCurrentStock.setContentDescription(String.valueOf(mProductItem.getCurrentStock()));
+
             mProductTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
+            mProductTargetStock.setContentDescription(String.valueOf(mProductItem.getTargetStock()));
 
             if (getActivity() != null) {
                 // setting the tracked switch to the correct state based on whether it's tracked
                 // in the product item object.
-                mProductTracked.setText(String.valueOf(mProductItem.isTracked() ?
+
+                String tracked = mProductItem.isTracked() ?
                         getActivity().getResources().getString(R.string.detail_tracked_yes) :
-                        getActivity().getResources().getString(R.string.detail_tracked_no)));
+                        getActivity().getResources().getString(R.string.detail_tracked_no);
+
+                mProductTracked.setText(tracked);
+                mProductTracked.setContentDescription(tracked);
             }
 
             // load the image for the product into the small image view.

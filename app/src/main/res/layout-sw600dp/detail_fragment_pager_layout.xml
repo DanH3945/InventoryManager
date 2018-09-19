@@ -15,8 +15,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/detail_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusable="true" />
+            android:layout_height="match_parent" />
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -27,6 +26,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="56dp"
-        android:src="@mipmap/editfile_24px" />
+        android:src="@mipmap/editfile_24px"
+        android:contentDescription="@string/detail_fragment_fab_content_description"/>
 
 </android.support.design.widget.CoordinatorLayout>
