@@ -54,6 +54,16 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
         viewHolder.mTrackingSwitch.setChecked(productItem.isTracked());
 
+        String contentDesc = viewHolder.mTrackingSwitch.isChecked() ?
+                viewHolder.itemView.getResources().getString(R.string.tracking_yes_with_switch) :
+                viewHolder.itemView.getResources().getString(R.string.tracking_no_with_switch);
+
+        viewHolder.mTrackingSwitch.setContentDescription(contentDesc);
+
+        if (i == 0) {
+            viewHolder.itemView.setNextFocusUpId(R.id.app_bar_layout);
+        }
+
         viewHolder.mTrackingSwitch.setOnClickListener(v -> {
             // when the tracking status of an item is changed the product item is updated
             // and saved in the database.

@@ -49,6 +49,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
 
         mNumberPicker = view.findViewById(R.id.main_fragment_number_picker);
+        mNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            String statement = getResources().getString(R.string.main_fragment_picker_content_desc);
+            mNumberPicker.setContentDescription(statement + " " + Integer.toString(newVal));
+        });
         mNumberPicker.setMinValue(0);
         mNumberPicker.setMaxValue(999);
         mNumberPicker.setValue(10);

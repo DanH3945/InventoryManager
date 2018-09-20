@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            android:importantForAccessibility="no">
+            android:focusable="true"
+            android:nextFocusUp="@id/app_bar_layout">
 
 
             <ImageView
@@ -31,7 +32,11 @@
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/edit_fragment_image_content_description" />
+                android:contentDescription="@string/edit_fragment_image_content_description"
+                android:focusable="true"
+                android:nextFocusRight="@id/edit_product_main_image_camera_button"
+                android:nextFocusUp="@id/app_bar_layout"
+                android:nextFocusDown="@id/edit_product_name_et"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

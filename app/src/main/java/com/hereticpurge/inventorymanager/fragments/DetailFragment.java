@@ -331,12 +331,19 @@ public class DetailFragment extends Fragment {
                 // setting the tracked switch to the correct state based on whether it's tracked
                 // in the product item object.
 
-                String tracked = mProductItem.isTracked() ?
+                boolean isTracked = mProductItem.isTracked();
+
+                String tracked = isTracked ?
                         getActivity().getResources().getString(R.string.detail_tracked_yes) :
                         getActivity().getResources().getString(R.string.detail_tracked_no);
 
                 mProductTracked.setText(tracked);
-                mProductTracked.setContentDescription(tracked);
+
+                String trackedContentDesc = isTracked ?
+                        getResources().getString(R.string.tracking_yes) :
+                        getResources().getString(R.string.tracking_no);
+
+                mProductTracked.setContentDescription(trackedContentDesc);
             }
 
             // load the image for the product into the small image view.

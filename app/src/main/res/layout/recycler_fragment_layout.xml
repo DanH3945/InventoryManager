@@ -6,9 +6,11 @@
     android:importantForAccessibility="no">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="no">
+        android:importantForAccessibility="yes"
+        android:focusable="true">
 
         <!--This toolbar had to be done differently than the rest of the app.  Coordinator layouts-->
         <!--appear to disable the scrollToPosition method in recycler views so it was reseting the-->

@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             style="@style/VisibleLayoutStyle"
-            android:focusable="true">
+            android:focusable="true"
+            android:nextFocusUp="@id/app_bar_layout">
 
             <Button
                 android:padding="16dp"
