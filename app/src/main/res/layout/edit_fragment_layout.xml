@@ -18,9 +18,9 @@
             style="@style/VisibleLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
             android:focusable="true"
-            android:nextFocusUp="@id/app_bar_layout">
+            android:nextFocusUp="@id/app_bar_layout"
+            android:padding="16dp">
 
 
             <ImageView
@@ -29,42 +29,43 @@
                 android:layout_width="@dimen/edit_fragment_main_image_dimension"
                 android:layout_height="@dimen/edit_fragment_main_image_dimension"
                 android:layout_marginEnd="56dp"
-                android:src="@mipmap/ic_launcher"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:contentDescription="@string/edit_fragment_image_content_description"
                 android:focusable="true"
+                android:nextFocusDown="@id/edit_product_name_et"
+                android:nextFocusForward="@id/edit_product_main_image_camera_button"
                 android:nextFocusRight="@id/edit_product_main_image_camera_button"
                 android:nextFocusUp="@id/app_bar_layout"
-                android:nextFocusDown="@id/edit_product_name_et"/>
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:focusable="true"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-                app:layout_constraintStart_toEndOf="@id/edit_product_image_iv"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:focusable="true">
+                app:layout_constraintStart_toEndOf="@id/edit_product_image_iv"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     style="@style/EditFragmentLabelTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/replace"
                     android:importantForAccessibility="no"
-                    android:labelFor="@+id/edit_product_main_image_camera_button"/>
+                    android:labelFor="@+id/edit_product_main_image_camera_button"
+                    android:text="@string/replace" />
 
                 <TextView
                     style="@style/EditFragmentLabelTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/photo"
                     android:importantForAccessibility="no"
-                    android:labelFor="@+id/edit_product_main_image_camera_button"/>
+                    android:labelFor="@+id/edit_product_main_image_camera_button"
+                    android:text="@string/photo" />
 
                 <ImageButton
                     android:id="@+id/edit_product_main_image_camera_button"
@@ -72,8 +73,12 @@
                     android:layout_width="@dimen/camera_button_dimension"
                     android:layout_height="@dimen/camera_button_dimension"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/edit_fragment_image_button_content_description"
                     android:elevation="6dp"
-                    android:contentDescription="@string/edit_fragment_image_button_content_description" />
+                    android:nextFocusDown="@id/edit_product_name_et"
+                    android:nextFocusForward="@id/edit_product_name_et"
+                    android:nextFocusLeft="@id/edit_product_image_iv"
+                    android:nextFocusUp="@id/app_bar_layout" />
 
             </LinearLayout>
 
@@ -81,62 +86,69 @@
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_product_name"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_name_et"
-                app:layout_constraintStart_toStartOf="@id/edit_product_name_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_product_name_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_product_name_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_big_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_product_name"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_product_custom_id_et"
+                android:nextFocusForward="@id/edit_product_custom_id_et"
+                android:nextFocusUp="@id/edit_product_image_iv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_image_iv" />
 
             <TextView
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_custom_id"
-                app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
-                app:layout_constraintStart_toStartOf="@id/edit_product_customid_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintBottom_toTopOf="@id/edit_product_custom_id_et"
+                app:layout_constraintStart_toStartOf="@id/edit_product_custom_id_et" />
 
 
             <EditText
-                android:inputType="text"
-                android:id="@+id/edit_product_customid_et"
+                android:id="@+id/edit_product_custom_id_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_big_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_custom_id"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_product_barcode_et"
+                android:nextFocusForward="@id/edit_product_barcode_et"
+                android:nextFocusUp="@id/edit_product_name_et"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_name_et" />
 
             <TextView
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_barcode"
                 app:layout_constraintBottom_toTopOf="@id/edit_product_barcode_et"
-                app:layout_constraintStart_toStartOf="@id/edit_product_barcode_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_product_barcode_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_product_barcode_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="220dp"
@@ -144,38 +156,48 @@
                 android:layout_marginEnd="60dp"
                 android:layout_marginTop="36dp"
                 android:hint="@string/edit_barcode"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_fragment_cost_et"
+                android:nextFocusForward="@id/edit_product_barcode_camera_button"
+                android:nextFocusRight="@id/edit_product_barcode_camera_button"
+                android:nextFocusUp="@id/edit_product_custom_id_et"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_custom_id_et" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
+                android:focusable="false"
                 android:orientation="vertical"
                 app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
-                app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
-                android:focusable="true">
+                app:layout_constraintTop_toBottomOf="@id/edit_product_custom_id_et">
 
                 <TextView
                     style="@style/EditFragmentLabelTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/scan"
                     android:importantForAccessibility="no"
-                    android:labelFor="@id/edit_product_barcode_camera_button"/>
+                    android:labelFor="@id/edit_product_barcode_camera_button"
+                    android:text="@string/scan" />
 
                 <ImageButton
                     android:id="@+id/edit_product_barcode_camera_button"
                     style="@style/CameraButtonStyle"
                     android:layout_width="@dimen/camera_button_dimension"
                     android:layout_height="@dimen/camera_button_dimension"
+                    android:contentDescription="@string/edit_fragment_quick_barcode_button_content_description"
                     android:elevation="6dp"
+                    android:focusable="true"
+                    android:nextFocusDown="@id/edit_fragment_retail_et"
+                    android:nextFocusForward="@id/edit_fragment_cost_et"
+                    android:nextFocusLeft="@id/edit_product_barcode_et"
+                    android:nextFocusUp="@id/edit_product_custom_id_et"
                     app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
-                    app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
-                    android:contentDescription="@string/edit_fragment_quick_barcode_button_content_description" />
+                    app:layout_constraintTop_toBottomOf="@id/edit_product_custom_id_et" />
 
             </LinearLayout>
 
@@ -183,15 +205,14 @@
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_cost"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_cost_et"
-                app:layout_constraintStart_toStartOf="@id/edit_fragment_cost_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_cost_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_fragment_cost_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_small_field"
@@ -199,47 +220,57 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_cost"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_fragment_stock_current_et"
+                android:nextFocusForward="@id/edit_fragment_retail_et"
+                android:nextFocusRight="@id/edit_fragment_retail_et"
+                android:nextFocusUp="@id/edit_product_barcode_et"
                 app:layout_constraintEnd_toStartOf="@id/edit_fragment_retail_et"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
             <TextView
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_retail"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_retail_et"
-                app:layout_constraintStart_toStartOf="@id/edit_fragment_retail_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_retail_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_fragment_retail_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_small_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_retail"
-                app:layout_constraintStart_toEndOf="@id/edit_fragment_cost_et"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_fragment_stock_target_et"
+                android:nextFocusForward="@id/edit_fragment_stock_current_et"
+                android:nextFocusLeft="@id/edit_fragment_cost_et"
+                android:nextFocusUp="@id/edit_product_barcode_camera_button"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_fragment_cost_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_product_barcode_et" />
 
             <TextView
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_current_stock"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_current_et"
-                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_current_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_current_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_fragment_stock_current_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_small_field"
@@ -247,32 +278,43 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_current_stock"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_fragment_track_switch_button"
+                android:nextFocusForward="@id/edit_fragment_stock_target_et"
+                android:nextFocusRight="@id/edit_fragment_stock_target_et"
+                android:nextFocusUp="@id/edit_fragment_cost_et"
                 app:layout_constraintEnd_toStartOf="@id/edit_fragment_stock_target_et"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_cost_et" />
 
             <TextView
                 style="@style/EditFragmentLabelTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_target_stock"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_stock_target_et"
-                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_target_et"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toStartOf="@id/edit_fragment_stock_target_et" />
 
             <EditText
-                android:inputType="text"
                 android:id="@+id/edit_fragment_stock_target_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_small_field"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:focusable="true"
                 android:hint="@string/edit_target_stock"
-                app:layout_constraintStart_toEndOf="@id/edit_fragment_stock_current_et"
+                android:inputType="text"
+                android:nextFocusDown="@id/edit_fragment_track_switch_button"
+                android:nextFocusForward="@id/edit_fragment_track_switch_button"
+                android:nextFocusLeft="@id/edit_fragment_stock_current_et"
+                android:nextFocusUp="@id/edit_fragment_retail_et"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_fragment_stock_current_et"
                 app:layout_constraintTop_toBottomOf="@id/edit_fragment_retail_et" />
 
             <TextView
@@ -280,25 +322,30 @@
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:focusable="false"
+                android:labelFor="@id/edit_fragment_track_switch_button"
                 android:text="@string/edit_tracking"
                 app:layout_constraintBottom_toTopOf="@id/edit_fragment_track_switch_button"
-                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="parent"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintStart_toEndOf="parent" />
 
             <Switch
                 android:id="@+id/edit_fragment_track_switch_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
+                android:contentDescription="@string/edit_fragment_switch_content_description"
+                android:focusable="true"
+                android:nextFocusDown="@id/edit_delete_button"
+                android:nextFocusForward="@id/edit_delete_button"
+                android:nextFocusUp="@id/edit_fragment_stock_current_et"
                 android:showText="true"
                 android:textOff="@string/edit_switch_off"
                 android:textOn="@string/edit_switch_on"
                 app:layout_constraintBottom_toTopOf="@id/edit_delete_button"
-                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et"
-                android:contentDescription="@string/edit_fragment_switch_content_description"/>
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_stock_current_et" />
 
             <Button
                 android:id="@+id/edit_delete_button"
@@ -307,12 +354,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="48dp"
                 android:layout_marginTop="32dp"
+                android:contentDescription="@string/edit_fragment_delete_button_content_description"
+                android:focusable="true"
+                android:nextFocusDown="@id/main_fab"
+                android:nextFocusForward="@id/main_fab"
+                android:nextFocusUp="@id/edit_fragment_track_switch_button"
                 android:text="@string/edit_button_delete_product_string"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button"
-                android:contentDescription="@string/edit_fragment_delete_button_content_description"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fragment_track_switch_button" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -325,8 +376,9 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="56dp"
         android:layout_marginEnd="24dp"
-        android:src="@mipmap/savefile_24px"
-        android:nextFocusRight="@id/edit_product_main_image_camera_button"
-        android:contentDescription="@string/edit_fragment_fab_content_description"/>
+        android:contentDescription="@string/edit_fragment_fab_content_description"
+        android:nextFocusDown="@id/included_ad_view"
+        android:nextFocusUp="@id/edit_delete_button"
+        android:src="@mipmap/savefile_24px" />
 
 </android.support.design.widget.CoordinatorLayout>

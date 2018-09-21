@@ -101,14 +101,14 @@
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:text="@string/edit_custom_id"
-                app:layout_constraintBottom_toTopOf="@id/edit_product_customid_et"
-                app:layout_constraintStart_toStartOf="@id/edit_product_customid_et"
+                app:layout_constraintBottom_toTopOf="@id/edit_product_custom_id_et"
+                app:layout_constraintStart_toStartOf="@id/edit_product_custom_id_et"
                 android:importantForAccessibility="no"/>
 
 
             <EditText
                 android:inputType="text"
-                android:id="@+id/edit_product_customid_et"
+                android:id="@+id/edit_product_custom_id_et"
                 style="@style/EditFragmentTextStyle"
                 android:layout_width="@dimen/edit_fragment_et_big_field"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:hint="@string/edit_barcode"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_product_customid_et" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_product_custom_id_et" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                 android:layout_marginTop="4dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
-                app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
+                app:layout_constraintTop_toBottomOf="@id/edit_product_custom_id_et"
                 android:focusable="true">
 
                 <TextView
@@ -168,7 +168,7 @@
                     android:layout_height="@dimen/camera_button_dimension"
                     android:elevation="6dp"
                     app:layout_constraintStart_toEndOf="@id/edit_product_barcode_et"
-                    app:layout_constraintTop_toBottomOf="@id/edit_product_customid_et"
+                    app:layout_constraintTop_toBottomOf="@id/edit_product_custom_id_et"
                     android:contentDescription="@string/edit_fragment_quick_barcode_button_content_description" />
 
             </LinearLayout>

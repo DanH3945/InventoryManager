@@ -26,6 +26,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
@@ -106,7 +107,7 @@ public class EditFragment extends Fragment {
 
         mName = view.findViewById(R.id.edit_product_name_et);
         mBarcode = view.findViewById(R.id.edit_product_barcode_et);
-        mCustomId = view.findViewById(R.id.edit_product_customid_et);
+        mCustomId = view.findViewById(R.id.edit_product_custom_id_et);
         mCost = view.findViewById(R.id.edit_fragment_cost_et);
         mRetail = view.findViewById(R.id.edit_fragment_retail_et);
         mCurrentStock = view.findViewById(R.id.edit_fragment_stock_current_et);
