@@ -242,8 +242,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
         return DetailFragment.createInstance(id);
     }
 
-    private EditFragment getEditFragment(ProductItem productItem) {
-        return EditFragment.createInstance(productItem);
+    private EditFragment getEditFragment(ProductItem productItem, boolean newItem) {
+        return EditFragment.createInstance(productItem, newItem);
     }
 
     private RecyclerFragment getRecyclerFragment() {
@@ -354,7 +354,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     }
 
     private void onEditButtonPressed(ProductItem productItem) {
-        loadFragment(getEditFragment(productItem), true, EditFragment.TAG);
+        loadFragment(getEditFragment(productItem, false),
+                true,
+                EditFragment.TAG);
     }
 
     private void checkIntentForWidgetAction(Intent intent) {
@@ -379,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     @Override
     public void onNewItemPressed() {
         loadFragment(
-                getEditFragment(new ProductItem()),
+                getEditFragment(new ProductItem(), true),
                 true,
                 EditFragment.TAG);
     }

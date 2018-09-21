@@ -63,13 +63,16 @@ public class EditFragment extends Fragment {
 
     private Tracker mTracker;
 
+    private boolean isNewItem;
+
     private static final int MAIN_IMAGE_RESULT = 200;
     private static final int BARCODE_RESULT = 201;
 
-    public static EditFragment createInstance(ProductItem productItem) {
+    public static EditFragment createInstance(ProductItem productItem, boolean newItem) {
         // Static creation method returns a new instance of this class with variables set.
         EditFragment editFragment = new EditFragment();
         editFragment.mProductItem = productItem;
+        editFragment.isNewItem = newItem;
         return editFragment;
     }
 
@@ -114,7 +117,9 @@ public class EditFragment extends Fragment {
 
         mTrackSwitch = view.findViewById(R.id.edit_fragment_track_switch_button);
 
-        initProductFields();
+        if (!isNewItem) {
+            initProductFields();
+        }
 
         if (getActivity() != null) {
             // Google Analytics tracker.
