@@ -37,7 +37,7 @@
                     android:textSize="24sp"
                     app:layout_collapseMode="pin"
                     android:visibility="visible"
-                    android:importantForAccessibility="no"/>
+                    android:importantForAccessibility="no" />
 
             </android.support.v7.widget.Toolbar>
 

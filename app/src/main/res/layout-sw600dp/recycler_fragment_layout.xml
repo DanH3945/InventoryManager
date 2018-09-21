@@ -29,6 +29,6 @@
         android:paddingBottom="56dp"
         android:focusable="true"
         android:nextFocusUp="@id/recycler_search_view"
-        android:nextFocusForward="@id/recycler_search_view"/>
+        android:nextFocusForward="@id/recycler_search_view" />
 
 </FrameLayout>

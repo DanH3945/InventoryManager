@@ -55,11 +55,13 @@
     <string name="dialog_body_end">" this?"</string>
 
     // Error Strings
-    <string name="no_camera_app_error">Couldn\'t find an app to take pictures</string>
-    <string name="image_resolve_error">Couldn\'t resolve barcode</string>
-    <string name="product_not_found_error">Product not found</string>
-    <string name="number_error">Invalid Number Input</string>
-    <string name="external_files_error">Failed to get external files</string>
+    <string name="error_no_camera_app">Couldn\'t find an app to take pictures</string>
+    <string name="error_image_resolve">Couldn\'t resolve barcode</string>
+    <string name="error_product_not_found">Product not found</string>
+    <string name="error_number_error">Invalid Number Input</string>
+    <string name="error_external_files">Failed to get external files</string>
+    <string name="error_product_name">Product Name is required.</string>
+
 
     // Appbar Strings
     <string name="toolbar_image_content_description">A picture of the currently displayed product or the inventory manager logo if no picture was found</string>
@@ -77,7 +79,7 @@
     <string name="main_fragment_add_new_item_btn_text">Add New Item</string>
     <string name="main_fragment_quick_stock_change_btn_text">Quick Stock Change</string>
     <string name="main_fragment_picker_content_desc">Currently selected number is</string>
-    <string name="quick_search">Quick Search</string>
+    <string name="main_fragment_quick_search">Quick Search</string>
     <string name="main_fragment_quick_change_label_text">Quickly add to the stock level of an item when inventory comes in. Just select a number and snap the barcode of the item!!</string>
 
     // Edit Fragment Strings
@@ -153,5 +155,4 @@
     <string name="tracking_no_with_switch">Item is not being tracked.  Select to switch</string>
     <string name="tracking_yes">Item is being tracked.</string>
     <string name="tracking_no">Item is not being tracked.</string>
-
 </resources>

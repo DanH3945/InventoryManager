@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
             startActivityForResult(intent, requestCode);
         } else {
             Toast.makeText(this,
-                    R.string.no_camera_app_error,
+                    R.string.error_no_camera_app,
                     Toast.LENGTH_LONG)
                     .show();
         }
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     }
 
     private void productNotFoundErrorToast() {
-        Toast.makeText(this, R.string.product_not_found_error, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.error_product_not_found, Toast.LENGTH_LONG).show();
     }
 
     private void onEditButtonPressed(ProductItem productItem) {
@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Main
     @Override
     public void onNewItemPressed() {
         loadFragment(
-                getEditFragment(null),
+                getEditFragment(new ProductItem()),
                 true,
                 EditFragment.TAG);
     }

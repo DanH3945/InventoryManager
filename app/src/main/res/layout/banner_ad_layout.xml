@@ -11,6 +11,6 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/ads_test_banner_unit_id"
         android:layout_gravity="bottom|center"
-        android:contentDescription="@string/banner_ad_content_description"/>
+        android:contentDescription="@string/banner_ad_content_description" />
 
 </merge>

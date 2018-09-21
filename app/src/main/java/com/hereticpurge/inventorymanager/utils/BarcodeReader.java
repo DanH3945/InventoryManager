@@ -42,7 +42,7 @@ public final class BarcodeReader {
         try {
             returnString = decodeBitmap(bitmap).getText();
         } catch (NotFoundException nfe) {
-            Toast.makeText(context, R.string.image_resolve_error, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.error_image_resolve, Toast.LENGTH_LONG).show();
         }
         return returnString;
     }

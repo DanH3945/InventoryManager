@@ -26,7 +26,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.hereticpurge.inventorymanager.AnalyticsApplication;
@@ -67,7 +66,7 @@ public class EditFragment extends Fragment {
     private static final int MAIN_IMAGE_RESULT = 200;
     private static final int BARCODE_RESULT = 201;
 
-    public static EditFragment createInstance(@Nullable ProductItem productItem) {
+    public static EditFragment createInstance(ProductItem productItem) {
         // Static creation method returns a new instance of this class with variables set.
         EditFragment editFragment = new EditFragment();
         editFragment.mProductItem = productItem;
@@ -116,10 +115,6 @@ public class EditFragment extends Fragment {
         mTrackSwitch = view.findViewById(R.id.edit_fragment_track_switch_button);
 
         initProductFields();
-
-        // Checking to see if the product item is null.  (The user selected new item instead of an
-        // existing item)
-        checkProductNull();
 
         if (getActivity() != null) {
             // Google Analytics tracker.
@@ -196,7 +191,7 @@ public class EditFragment extends Fragment {
             startActivityForResult(intent, requestCode);
         } else {
             Toast.makeText(getContext(),
-                    R.string.no_camera_app_error,
+                    R.string.error_no_camera_app,
                     Toast.LENGTH_LONG)
                     .show();
         }
@@ -226,7 +221,6 @@ public class EditFragment extends Fragment {
                 // Decode the barcode of the returned image and set it in the product.
                 if (dataObject instanceof Bitmap) {
                     String barcode = BarcodeReader.getBarcode(getContext(), (Bitmap) dataObject);
-                    checkProductNull();
                     mBarcode.setText(barcode);
                     break;
                 }
@@ -236,16 +230,13 @@ public class EditFragment extends Fragment {
         }
     }
 
-    private void checkProductNull() {
-        // Called if the view doesn't have an associated product item. (The user selected
-        // new item so an associated product item doesn't yet exist)
-        if (mProductItem == null) {
-            mProductItem = new ProductItem();
-        }
-    }
-
     private void doSave() {
         // As advertised.  Save the current product item to the room database.
+
+        if (mName.getText().equals("") || mName.getText().equals(" ")) {
+            Toast.makeText(getContext(), R.string.error_product_name, Toast.LENGTH_LONG).show();
+        }
+
         try {
             mProductItem.setName(mName.getText().toString());
             mProductItem.setBarcode(mBarcode.getText().toString());
@@ -272,11 +263,10 @@ public class EditFragment extends Fragment {
                 Log.e(TAG, "doSave: Error Removing Soft Keyboard");
             }
 
-
             popParentBackStack();
         } catch (NumberFormatException nfe) {
             // User entered invalid input in one of the fields.
-            Toast.makeText(getContext(), R.string.number_error, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.error_number_error, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -292,7 +282,6 @@ public class EditFragment extends Fragment {
 
     private void doDelete() {
         // Delete the currently visible product item from the database.
-        checkProductNull();
 
         ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
             @Override

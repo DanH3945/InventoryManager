@@ -20,7 +20,7 @@
             android:contentDescription="@string/recycler_fragment_item_image_content_description"
             android:focusable="true"
             android:nextFocusForward="@id/recycler_item_product_name"
-            android:nextFocusRight="@id/recycler_item_product_name"/>
+            android:nextFocusRight="@id/recycler_item_product_name" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_marginStart="@dimen/recycler_item_image_dimen"
@@ -38,7 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_bias=".35"
-                android:focusable="true"/>
+                android:focusable="true" />
 
             <LinearLayout
                 android:id="@+id/recycler_item_cost_retail_container"
@@ -57,14 +57,14 @@
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
                     android:text="@string/recycler_item_cost"
-                    android:labelFor="@id/recycler_item_cost"/>
+                    android:labelFor="@id/recycler_item_cost" />
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
                     android:id="@+id/recycler_item_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:focusable="true"/>
+                    android:focusable="true" />
 
 
                 <TextView
@@ -74,14 +74,14 @@
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
                     android:text="@string/recycler_item_retail"
-                    android:labelFor="@id/recycler_item_retail"/>
+                    android:labelFor="@id/recycler_item_retail" />
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
                     android:id="@+id/recycler_item_retail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:focusable="true"/>
+                    android:focusable="true" />
 
             </LinearLayout>
 
@@ -102,14 +102,14 @@
                     android:layout_height="wrap_content"
                     style="@style/RecyclerItemTextLabelStyle"
                     android:text="@string/recycler_item_current_stock"
-                    android:labelFor="@id/recycler_item_current_stock"/>
+                    android:labelFor="@id/recycler_item_current_stock" />
 
                 <TextView
                     style="@style/RecyclerItemTextStyle"
                     android:id="@+id/recycler_item_current_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:focusable="true"/>
+                    android:focusable="true" />
 
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/recycler_item_tracking"
-                    android:labelFor="@id/recycler_item_tracking_switch"/>
+                    android:labelFor="@id/recycler_item_tracking_switch" />
 
                 <Switch
                     android:id="@+id/recycler_item_tracking_switch"

@@ -47,7 +47,7 @@ public final class CustomImageUtils {
             }
 
         } catch (NullPointerException e) {
-            Toast.makeText(context, R.string.external_files_error, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.error_external_files, Toast.LENGTH_LONG).show();
             return;
         } catch (ClassCastException | NumberFormatException e) {
             // Failed to get the user entered preference so just let the default fall through
