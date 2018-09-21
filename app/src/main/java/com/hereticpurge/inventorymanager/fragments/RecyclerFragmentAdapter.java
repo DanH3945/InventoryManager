@@ -46,7 +46,7 @@ public class RecyclerFragmentAdapter extends RecyclerView.Adapter<RecyclerFragme
 
         // Load the image for the given product item into the recycler list item.
         CustomImageUtils.loadImage(viewHolder.itemView.getContext(),
-                productItem.getName(),
+                String.valueOf(productItem.getId()),
                 viewHolder.mImageView);
 
         viewHolder.mNameText.setText(productItem.getName());

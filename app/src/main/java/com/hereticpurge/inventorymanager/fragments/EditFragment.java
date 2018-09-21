@@ -38,6 +38,8 @@ import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
+import java.util.Objects;
+
 public class EditFragment extends Fragment {
 
     public static final String TAG = "EditFragment";
@@ -184,7 +186,7 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
-            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mMainImageView);
+            CustomImageUtils.loadImage(getContext(), String.valueOf(mProductItem.getId()), mMainImageView);
         }
     }
 
@@ -243,17 +245,44 @@ public class EditFragment extends Fragment {
         }
 
         try {
-            mProductItem.setName(mName.getText().toString());
-            mProductItem.setBarcode(mBarcode.getText().toString());
-            mProductItem.setCustomId(mCustomId.getText().toString());
-            mProductItem.setCost(CurrencyUtils.removeLocalCurrencySymbol(mCost.getText().toString()));
-            mProductItem.setRetail(CurrencyUtils.removeLocalCurrencySymbol(mRetail.getText().toString()));
-            mProductItem.setCurrentStock(Integer.parseInt(mCurrentStock.getText().toString()));
-            mProductItem.setTargetStock(Integer.parseInt(mTargetStock.getText().toString()));
+            // Long list of if statements just checking to see if the user actually input any data
+            // if they didn't input data the .toStrings should be equal to "" and we just leave
+            // the product item defaults in place for the save.
+            String checkStringInput = "";
+
+            if (!mName.getText().toString().equals(checkStringInput)) {
+                mProductItem.setName(mName.getText().toString());
+            }
+
+            if (!mBarcode.getText().toString().equals(checkStringInput)) {
+                mProductItem.setBarcode(mBarcode.getText().toString());
+            }
+
+            if (!mCustomId.getText().toString().equals(checkStringInput)) {
+                mProductItem.setCustomId(mCustomId.getText().toString());
+            }
+
+            if (!mCost.getText().toString().equals(checkStringInput)) {
+                mProductItem.setCost(CurrencyUtils.removeLocalCurrencySymbol(mCost.getText().toString()));
+            }
+
+            if (!mRetail.getText().toString().equals(checkStringInput)) {
+                mProductItem.setRetail(CurrencyUtils.removeLocalCurrencySymbol(mRetail.getText().toString()));
+            }
+
+            if (!mCurrentStock.getText().toString().equals(checkStringInput)) {
+                mProductItem.setCurrentStock(Integer.parseInt(mCurrentStock.getText().toString()));
+            }
+
+            if (!mTargetStock.getText().toString().equals(checkStringInput)) {
+                mProductItem.setTargetStock(Integer.parseInt(mTargetStock.getText().toString()));
+            }
+
             mProductItem.setTracked(mTrackSwitch.isChecked());
 
+
             if (mTempImage != null) {
-                CustomImageUtils.saveImage(getContext(), mTempImage, mProductItem.getName());
+                CustomImageUtils.saveImage(getContext(), mTempImage, String.valueOf(mProductItem.getId()));
             }
 
             mViewModel.addProduct(mProductItem);
@@ -291,15 +320,19 @@ public class EditFragment extends Fragment {
         ConfirmDialog.ConfirmDialogCallback confirmDialogCallback = new ConfirmDialog.ConfirmDialogCallback() {
             @Override
             public void onConfirm() {
-                mViewModel.deleteSingleProduct(mProductItem);
-                // popping the backstack twice to clear out remnant fragments associated with the deleted
-                // product item.
-                popParentBackStack();
-                popParentBackStack();
+                if (getActivity() != null) {
+                    CustomImageUtils.deleteImage(getActivity(), String.valueOf(mProductItem.getId()));
+                    mViewModel.deleteSingleProduct(mProductItem);
+                    // popping the backstack twice to clear out remnant fragments associated with the deleted
+                    // product item.
+                    popParentBackStack();
+                    popParentBackStack();
+                }
             }
 
             @Override
             public void onCancel() {
+                // Do nothing.
             }
         };
 

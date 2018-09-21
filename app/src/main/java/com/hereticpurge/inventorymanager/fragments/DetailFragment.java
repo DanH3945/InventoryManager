@@ -97,10 +97,10 @@ public class DetailFragment extends Fragment {
 
                     // Load the product image into the toolbar parallax display if necessary.
                     if (!MainActivity.isTablet | !MainActivity.isLandscape) {
-                        String productName = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
+                        int productId = ((DetailDisplayFragment) mDetailPagerAdapter.getItem(i))
                                 .getDisplayProduct()
-                                .getName();
-                        CustomImageUtils.loadImage(getContext(), productName, mToolbarImageView);
+                                .getId();
+                        CustomImageUtils.loadImage(getContext(), String.valueOf(productId), mToolbarImageView);
                     }
 
                 } catch (NullPointerException npe) {
@@ -348,7 +348,7 @@ public class DetailFragment extends Fragment {
             }
 
             // load the image for the product into the small image view.
-            CustomImageUtils.loadImage(getContext(), mProductItem.getName(), mProductImageViewSmall);
+            CustomImageUtils.loadImage(getContext(), String.valueOf(mProductItem.getId()), mProductImageViewSmall);
 
         }
     }
