@@ -89,8 +89,14 @@ public class ProductItem implements Parcelable {
     public ArrayList<String> getSearchTerms() {
         ArrayList<String> searchTerms = new ArrayList<>();
         searchTerms.add(getBarcode());
-        searchTerms.add(customId);
+        searchTerms.add(getCustomId());
         searchTerms.add(getName());
+
+        // Split up the name.  If there are spaces each term should be searchable.
+        String[] nameTerms = getName().split(" ");
+        for (String term : nameTerms) {
+            searchTerms.add(term);
+        }
         return searchTerms;
     }
 

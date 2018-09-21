@@ -13,7 +13,10 @@
         android:layout_height="wrap_content"
         app:defaultQueryHint="@string/recycler_fragment_search_hint"
         app:queryHint="@string/recycler_fragment_search_hint"
-        android:contentDescription="@string/recycler_fragment_search_bar">
+        android:contentDescription="@string/recycler_fragment_search_bar"
+        android:focusable="true"
+        android:nextFocusForward="@id/recycler_view"
+        android:nextFocusDown="@id/recycler_view">
 
     </android.support.v7.widget.SearchView>
 
@@ -23,6 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
-        android:paddingBottom="56dp" />
+        android:paddingBottom="56dp"
+        android:focusable="true"
+        android:nextFocusUp="@id/recycler_search_view"
+        android:nextFocusForward="@id/recycler_search_view"/>
 
 </FrameLayout>

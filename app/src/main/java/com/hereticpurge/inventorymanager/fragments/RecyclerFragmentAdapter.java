@@ -1,5 +1,6 @@
 package com.hereticpurge.inventorymanager.fragments;
 
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.hereticpurge.inventorymanager.model.ProductItem;
 import com.hereticpurge.inventorymanager.model.ProductViewModel;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
+import com.hereticpurge.inventorymanager.utils.DebugAssistant;
 
 import java.util.ArrayList;
 import java.util.List;

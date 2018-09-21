@@ -15,7 +15,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:layout_weight="1"
-            android:importantForAccessibility="no">
+            android:focusable="true"
+            android:nextFocusForward="@id/fragment_container_tablet"
+            android:nextFocusRight="@id/fragment_container_tablet">
 
         </FrameLayout>
 
@@ -31,7 +33,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:importantForAccessibility="no">
+            android:focusable="true"
+            android:nextFocusForward="@id/fragment_container"
+            android:nextFocusLeft="@id/fragment_container">
 
         </FrameLayout>
 
