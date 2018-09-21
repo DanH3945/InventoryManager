@@ -54,7 +54,6 @@ public final class CustomImageUtils {
         }
 
         if (target != null) {
-            // Do the actual saving of the image off thread.
             new SaveImageTask(bitmap, target, prefImageQuality).execute();
         }
     }
@@ -72,7 +71,8 @@ public final class CustomImageUtils {
         }
     }
 
-    public static void deleteImage(Context context, String filename) {
+    public static void deleteImage(@Nullable Context context, String filename) {
+        if (context == null) return;
         File target = new File(context.getExternalFilesDir(null), filename);
         new DeleteImageTask(target).execute();
     }

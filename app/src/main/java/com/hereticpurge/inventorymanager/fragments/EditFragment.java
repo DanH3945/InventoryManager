@@ -38,12 +38,11 @@ import com.hereticpurge.inventorymanager.utils.BarcodeReader;
 import com.hereticpurge.inventorymanager.utils.CurrencyUtils;
 import com.hereticpurge.inventorymanager.utils.CustomImageUtils;
 
-import java.util.Objects;
-
 public class EditFragment extends Fragment {
 
     public static final String TAG = "EditFragment";
     private static final String PRODUCT_KEY = "productKey";
+    private static final String TEMP_IMAGE_FILENAME = "tempImage";
 
     private ProductViewModel mViewModel;
 
@@ -186,7 +185,9 @@ public class EditFragment extends Fragment {
             mCurrentStock.setText(String.valueOf(mProductItem.getCurrentStock()));
             mTargetStock.setText(String.valueOf(mProductItem.getTargetStock()));
             mTrackSwitch.setChecked(mProductItem.isTracked());
-            CustomImageUtils.loadImage(getContext(), String.valueOf(mProductItem.getId()), mMainImageView);
+            if (mTempImage == null) {
+                CustomImageUtils.loadImage(getContext(), String.valueOf(mProductItem.getId()), mMainImageView);
+            }
         }
     }
 
@@ -221,6 +222,7 @@ public class EditFragment extends Fragment {
                 if (dataObject instanceof Bitmap) {
                     mTempImage = (Bitmap) dataObject;
                     mMainImageView.setImageBitmap(mTempImage);
+                    CustomImageUtils.saveImage(getContext(), mTempImage, String.valueOf(mProductItem.getId()));
                     break;
                 }
 
